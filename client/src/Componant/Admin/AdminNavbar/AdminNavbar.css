@@ -1,0 +1,16 @@
+.background {
+    background-color: #104378;
+}
+.navbar {
+    font-family: 'K2D', sans-serif;
+	font-family: 'Pridi', serif;
+    font-size: 20px;
+    color: #ffffff;
+} 
+.active {
+    overflow:hidden;
+    border-bottom:3px solid rgb(255, 255, 255);
+    
+    padding:8px;
+    /* background-color:#0853a3; */
+}
