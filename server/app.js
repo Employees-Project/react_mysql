@@ -67,7 +67,15 @@ app.put("/upload/:id", upload.single("image"), (req, res, next) => {
   );
 });
 
-// app.get()
+app.get("/events", jsonParser, function (req, res, next) {
+  connection.execute(
+    "SELECT * FROM calendar order by CalendarID",
+    function (err, events, fields) {
+      if (err) throw err;
+      res.json(events);
+    }
+  );
+});
 
 app.post("/register", jsonParser, function (req, res, next) {
   bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
