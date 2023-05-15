@@ -26,7 +26,7 @@ export default function SignIn() {
       username: data.get("username"),
       password: data.get("password"),
     };
-    fetch("http://localhost:3333/login", {
+    fetch("http://localhost:3000/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

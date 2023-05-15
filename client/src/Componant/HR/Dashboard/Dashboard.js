@@ -28,7 +28,7 @@ export default function Dashboard() {
     const token = localStorage.getItem("Admin");
     const HR = localStorage.getItem("HR");
     if (token) {
-      fetch("http://localhost:3333/authen", {
+      fetch("http://localhost:3000/authen", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -54,7 +54,7 @@ export default function Dashboard() {
           console.log("Error:", error);
         });
     } else if (HR) {
-      fetch("http://localhost:3333/authen/hr", {
+      fetch("http://localhost:3000/authen/hr", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

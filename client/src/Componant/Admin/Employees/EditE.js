@@ -40,7 +40,7 @@ const EditE = () => {
   }, []);
 
   function getUsers() {
-    fetch(`http://localhost:3333/users/${id}`).then((result) => {
+    fetch(`http://localhost:3000/users/${id}`).then((result) => {
       result.json().then((resp) => {
         // console.warn(resp)
         // setData(resp);
@@ -101,7 +101,7 @@ const EditE = () => {
       email !== "" ||
       address !== ""
     ) {
-      fetch(`http://localhost:3333/update/users/${id}`, requestOptions).then(
+      fetch(`http://localhost:3000/update/users/${id}`, requestOptions).then(
         Swal.fire({
           position: "center",
           icon: "success",

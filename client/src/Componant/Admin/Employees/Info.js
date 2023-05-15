@@ -20,7 +20,7 @@ const Info = () => {
   }, []);
 
   function getUsers() {
-    fetch(`http://localhost:3333/users/${id}`).then((result) => {
+    fetch(`http://localhost:3000/users/${id}`).then((result) => {
       result.json().then((resp) => {
         // console.warn(resp)
         // setData(resp);

@@ -38,7 +38,7 @@ export default function SignUp() {
       certificatePic: data.get("certificatePic"),
     };
 
-    fetch("http://localhost:3333/register", {
+    fetch("http://localhost:3000/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

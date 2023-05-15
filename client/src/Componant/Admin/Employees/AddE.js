@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Add.css";
 import Swal from "sweetalert2";
+import axios from "axios";
 import AdminNavbar from "../AdminNavbar/AdminNavbar";
 
 export default function AddE() {
@@ -39,12 +40,11 @@ export default function AddE() {
   const [amphur, setAmphur] = useState("");
   const [province, setProvince] = useState("");
   const [zipCode, setZipCode] = useState("");
-  const [pic, setPic] = useState("");
+  // const [pic, setPic] = useState("");s
 
-  function handleImage(event) {
-    console.log(event.target.files);
-    setPic(event.target.files[0]);
-  }
+  // const handleFile = (e) => {
+  //   setPic(e.target.files[0]);
+  // };
 
   const addEmployee = (event) => {
     event.preventDefault();
@@ -56,12 +56,12 @@ export default function AddE() {
     // });
 
     try {
-      //   const data = new FormData(event.currentTarget);
+      // const formdata = new FormData();
+      // formdata.append("image", pic);
       const jsonData = {
         username: username,
         password: password,
         identityNo: identityNo,
-        // pic: pic,
         employeeName: employeeName,
         gender: gender,
         birthday: birthday,
@@ -77,28 +77,28 @@ export default function AddE() {
         // certificateName: certificateName,
         // certificatePic: certificatePic,
       };
-        fetch("http://localhost:3333/register", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(jsonData),
+      fetch("http://localhost:3000/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(jsonData),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.status === "ok") {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "เพิ่มข้อมูลสำเร็จ",
+              showConfirmButton: false,
+              timer: 2500,
+            }).then(navigate("/admin/employee"));
+          }
         })
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.status === "ok") {
-              Swal.fire({
-                position: "center",
-                icon: "success",
-                title: "เพิ่มข้อมูลสำเร็จ",
-                showConfirmButton: false,
-                timer: 2500,
-              }).then(navigate("/admin/employee"))
-            }
-          })
-          .catch((error) => {
-            console.log("Error:", error);
-          });
+        .catch((error) => {
+          console.log("Error:", error);
+        });
     } catch (error) {
       console.log(error);
     }
@@ -224,7 +224,7 @@ export default function AddE() {
                 setGender(event.target.value);
               }}
             >
-              <option hidden >กรุณาเลือก</option>
+              <option hidden>กรุณาเลือก</option>
               <option value={1}>ชาย</option>
               <option value={0}>หญิง</option>
             </select>
@@ -283,7 +283,7 @@ export default function AddE() {
                 setProvince(event.target.value);
               }}
             >
-              <option hidden >กรุณาเลือกจังหวัด</option>
+              <option hidden>กรุณาเลือกจังหวัด</option>
               {data.map((val) => {
                 // console.log(val.amphure[1].tambon[1].name_th);
                 return <option>{val.name_th}</option>;
@@ -351,7 +351,7 @@ export default function AddE() {
               className="form-control"
               htmlFor="pic"
               requires
-              onChange={handleImage}
+              onChange={handleFile}
             />
           </div> */}
           <button onClick={addEmployee} class="btn btn-success">

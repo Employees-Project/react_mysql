@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AdminNavbar from "../AdminNavbar/AdminNavbar";
 import { Link } from "react-router-dom";
 import "./Employees.css";
@@ -10,7 +10,7 @@ const Employees = () => {
     redirect: "follow",
   };
 
-  fetch("http://localhost:3333/users", requestOptions)
+  fetch("http://localhost:3000/users", requestOptions)
     .then((response) => response.json())
     .then((result) => setEmployeeList(result))
     .catch((error) => console.log("error", error));
@@ -53,7 +53,7 @@ const Employees = () => {
                 <tr>
                   {/* <th scope="row">{val.isadmin ? null : `${val.employeeid}`}</th> */}
                   <th scope="row">{val.employeeid}</th>
-                  <td>{val.pic}</td>
+                  <td><Link to={"/admin/employee/uploadpic/" + val.employeeid}>{val.pic ? <img src={`http://localhost:3000/image/`+val.pic} width="50" height="50"/> : <img src="https://www.finearts.cmu.ac.th/wp-content/uploads/2021/07/blank-profile-picture-973460_1280-1.png" width="50" height="50" />}</Link></td>
                   <td>{val.employeeName}</td>
                   {/* <td>{val.gender ? "ชาย" : "หญิง"}</td> */}
                   {/* <td input type={date}>{val.birthday.substring(0, 10)}</td> */}

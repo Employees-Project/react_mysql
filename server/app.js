@@ -1,5 +1,6 @@
 var express = require("express");
 var cors = require("cors");
+const multer = require("multer");
 var app = express();
 var bodyParser = require("body-parser");
 var jsonParser = bodyParser.json();
@@ -11,6 +12,8 @@ const secret = "Login";
 
 app.use(cors());
 
+app.use(express.static("public"))
+
 const mysql = require("mysql2");
 
 const connection = mysql.createConnection({
@@ -20,15 +23,60 @@ const connection = mysql.createConnection({
   database: "test",
 });
 
+var storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "public/image");
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}-image-${file.originalname}`);
+  },
+});
+
+var upload = multer({
+  storage: storage,
+});
+
+app.post("/upload", upload.single("image"), (req, res, next) => {
+  const image = req.file.filename;
+  connection.query(
+    "INSERT INTO employees (pic) VALUE (?)",
+    [image],
+    (err, result) => {
+      if (err) {
+        return res.json({ messeage: "Error" });
+      } else {
+        res.json({ status: "ok" });
+      }
+    }
+  );
+});
+
+app.put("/upload/:id", upload.single("image"), (req, res, next) => {
+  const id = req.params.id;
+  const image = req.file.filename;
+  connection.query(
+    "UPDATE employees SET pic = ? WHERE employeeid = ?",
+    [image, id],
+    (err, result) => {
+      if (err) {
+        return res.json({ messeage: err });
+      } else {
+        res.json({ status: "ok" });
+      }
+    }
+  );
+});
+
+// app.get()
+
 app.post("/register", jsonParser, function (req, res, next) {
   bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
     connection.query(
-      "INSERT INTO employees (username, password, identityNo, pic, employeeName, gender, birthday, jobPosition, position, phoneNo, email, address, province, amphur, disdrict, zipCode, certificateName, certificatePic) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      "INSERT INTO employees (username, password, identityNo, employeeName, gender, birthday, jobPosition, position, phoneNo, email, address, province, amphur, disdrict, zipCode, certificateName, certificatePic) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
       [
         req.body.username,
         hash,
         req.body.identityNo,
-        req.body.pic,
         req.body.employeeName,
         req.body.gender,
         req.body.birthday,
@@ -215,12 +263,7 @@ app.put("/update/leave/:id", jsonParser, function (req, res, next) {
   const id = req.params.id;
   connection.query(
     "UPDATE history SET l_subject = ?, l_limit_m = ?, l_limit_y = ? WHERE historyId = ?",
-    [
-      req.body.l_subject,
-      req.body.l_limit_m,
-      req.body.l_limit_y,
-      id,
-    ],
+    [req.body.l_subject, req.body.l_limit_m, req.body.l_limit_y, id],
     (err, results) => {
       if (err) {
         console.log(err);
@@ -272,6 +315,6 @@ app.post("/authen/hr", jsonParser, function (req, res, next) {
   }
 });
 
-app.listen(3333, function () {
-  console.log("CORS-enabled web server listening on port 3333");
+app.listen(3000, function () {
+  console.log("CORS-enabled web server listening on port 3000");
 });
