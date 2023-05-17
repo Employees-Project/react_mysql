@@ -284,7 +284,7 @@ export default function AddE() {
               }}
             />
           </div>
-          <div className="col-md-2">
+          <div className="col-md-4">
             <label className="form-label" htmlFor="address">
               ที่อยู่:
             </label>
@@ -361,7 +361,7 @@ export default function AddE() {
               })}
             </select>
           </div>
-          <div className="col-md-1">
+          <div className="col-md-2">
             <label className="form-label">รหัสไปรษณีย์:</label>
             <input
               type="text"

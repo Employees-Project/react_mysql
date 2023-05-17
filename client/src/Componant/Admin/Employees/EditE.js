@@ -99,6 +99,10 @@ const EditE = () => {
       phoneNo: phoneNo,
       email: email,
       address: address,
+      disdrict: disdrict,
+      amphur: amphur,
+      province: province,
+      zipCode: zipCode,
     });
 
     var requestOptions = {
@@ -114,7 +118,11 @@ const EditE = () => {
       employeeName === "" ||
       phoneNo === "" ||
       email === "" ||
-      address === ""
+      address === "" ||
+      disdrict === "" ||
+      amphur === "" ||
+      province === "" ||
+      zipCode === "" 
     ) {
       console.log("Enter all information");
       Swal.fire({
@@ -128,7 +136,11 @@ const EditE = () => {
       employeeName !== "" ||
       phoneNo !== "" ||
       email !== "" ||
-      address !== ""
+      address !== "" ||
+      disdrict !== "" ||
+      amphur !== "" ||
+      province !== "" ||
+      zipCode !== "" 
     ) {
       fetch(`http://localhost:3000/update/users/${id}`, requestOptions).then(
         Swal.fire({

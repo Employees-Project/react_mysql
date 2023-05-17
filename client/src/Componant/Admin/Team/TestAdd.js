@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import AdminNavbar from "../AdminNavbar/AdminNavbar";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const AddT = () => {
+const TestAdd = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [teamname, setTeamname] = useState("");
@@ -13,7 +13,10 @@ const AddT = () => {
   const [member3, setMember3] = useState("");
   const [member4, setMember4] = useState("");
   const [member5, setMember5] = useState("");
-  const [leader, setLeader] = useState("");
+  const [showMember2, setShowMember2] = useState(true);
+  const [showMember3, setShowMember3] = useState(true);
+  const [showMember4, setShowMember4] = useState(true);
+  const [showMember5, setShowMember5] = useState(true);
 
   var requestOptions = {
     method: "GET",
@@ -38,8 +41,7 @@ const AddT = () => {
       member2: member2,
       member3: member3,
       member4: member4,
-      member5: member5,
-      leader: leader,
+      member5: member5
     });
 
     var requestOptions = {
@@ -100,7 +102,7 @@ const AddT = () => {
       <div className="form-container1">
         <form className="form-signin row g-3">
           <div>
-            <h2>เพิ่มทีม</h2>
+            <h2>ทดสอบเพิ่มทีม</h2>
           </div>
           <div className="col-md-12">
             <label className="form-label" htmlFor="teamname">
@@ -133,28 +135,15 @@ const AddT = () => {
             </select>
           </div>
           <div className="col-md-6">
-            <label className="form-label">สมาชิกในทีม 3</label>
-            <select
-              className="form-select"
-              htmlFor="member3"
-              onChange={(event) => {
-                setMember3(event.target.value);
-              }}
-            >
-              <option hidden>กรุณาเลือกสมาชิกในทีม 3</option>
-              {data.map((val) => {
-                return <option>{val.employeeName}</option>;
-              })}
-            </select>
-          </div>
-          <div className="col-md-6">
             <label className="form-label">สมาชิกในทีม 1</label>
             <select
               className="form-select"
               htmlFor="member1"
-              required
               onChange={(event) => {
-                setMember1(event.target.value);
+                if (event.target.value) {
+                  setShowMember2(false);
+                  setMember1(event.target.value);
+                }
               }}
             >
               <option hidden>กรุณาเลือกสมาชิกในทีม 1</option>
@@ -163,29 +152,17 @@ const AddT = () => {
               })}
             </select>
           </div>
-          <div className="col-md-6">
-            <label className="form-label">สมาชิกในทีม 4</label>
-            <select
-              className="form-select"
-              htmlFor="member4"
-              onChange={(event) => {
-                setMember4(event.target.value);
-              }}
-            >
-              <option hidden>กรุณาเลือกสมาชิกในทีม 4</option>
-              {data.map((val) => {
-                return <option>{val.employeeName}</option>;
-              })}
-            </select>
-          </div>
-          <div className="col-md-6">
+          <div className="col-md-6" hidden={showMember2}>
             <label className="form-label">สมาชิกในทีม 2</label>
             <select
               className="form-select"
               htmlFor="member2"
               required
               onChange={(event) => {
-                setMember2(event.target.value);
+                if (event.target.value) {
+                  setShowMember3(false);
+                  setMember2(event.target.value);
+                }
               }}
             >
               <option hidden>กรุณาเลือกสมาชิกในทีม 2</option>
@@ -194,11 +171,50 @@ const AddT = () => {
               })}
             </select>
           </div>
-          <div className="col-md-6">
+          <div className="col-md-6" hidden={showMember3}>
+            <label className="form-label">สมาชิกในทีม 3</label>
+            <select
+              className="form-select"
+              htmlFor="member3"
+              required
+              onChange={(event) => {
+                if (event.target.value) {
+                  setShowMember4(false);
+                  setMember3(event.target.value);
+                }
+              }}
+            >
+              <option hidden>กรุณาเลือกสมาชิกในทีม 3</option>
+              {data.map((val) => {
+                return <option>{val.employeeName}</option>;
+              })}
+            </select>
+          </div>
+          <div className="col-md-6" hidden={showMember4}>
+            <label className="form-label">สมาชิกในทีม 4</label>
+            <select
+              className="form-select"
+              htmlFor="member4"
+              required
+              onChange={(event) => {
+                if (event.target.value) {
+                  setShowMember5(false);
+                  setMember4(event.target.value);
+                }
+              }}
+            >
+              <option hidden>กรุณาเลือกสมาชิกในทีม 4</option>
+              {data.map((val) => {
+                return <option>{val.employeeName}</option>;
+              })}
+            </select>
+          </div>
+          <div className="col-md-6" hidden={showMember5}>
             <label className="form-label">สมาชิกในทีม 5</label>
             <select
               className="form-select"
               htmlFor="member5"
+              required
               onChange={(event) => {
                 setMember5(event.target.value);
               }}
@@ -209,30 +225,16 @@ const AddT = () => {
               })}
             </select>
           </div>
-          <div className="col-md-12">
-            <label className="form-label">กรุณายืนยันชื่อหัวหน้าทีม</label>
-            <select
-              className="form-select"
-              htmlFor="leader"
-              required
-              onChange={(event) => {
-                setLeader(event.target.value);
-              }}
-            >
-              <option hidden>กรุณายืนยันชื่อหัวหน้าทีม</option>
-              {data.map((val) => {
-                return <option>{val.employeeName}</option>;
-              })}
-            </select>
-          </div>
-
           <button onClick={addTeam} class="btn btn-success">
             Add Team
           </button>
+          <Link to="/admin/team" className="btn btn-primary">
+            Back
+          </Link>
         </form>
       </div>
     </>
   );
 };
 
-export default AddT;
+export default TestAdd;

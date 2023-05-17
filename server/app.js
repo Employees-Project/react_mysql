@@ -188,7 +188,7 @@ app.get("/users/:id", jsonParser, function (req, res, next) {
 app.put("/update/users/:id", jsonParser, function (req, res, next) {
   const id = req.params.id;
   connection.query(
-    "UPDATE employees SET jobPosition = ?, position = ?, employeeName = ?, phoneNo = ?, email = ?, address = ?, disdrict = ?, amphur = ?, province = ?, zipCode = ?, pic = ? WHERE employeeid = ?",
+    "UPDATE employees SET jobPosition = ?, position = ?, employeeName = ?, phoneNo = ?, email = ?, address = ?, disdrict = ?, amphur = ?, province = ?, zipCode = ? WHERE employeeid = ?",
     [
       req.body.jobPosition,
       req.body.position,
@@ -200,7 +200,6 @@ app.put("/update/users/:id", jsonParser, function (req, res, next) {
       req.body.amphur,
       req.body.province,
       req.body.zipCode,
-      req.body.pic,
       id,
     ],
     (err, results) => {

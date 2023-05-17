@@ -17,6 +17,7 @@ import AddEvent from "./Componant/Admin/Calendar/AddEvent";
 import Team from "./Componant/Admin/Team/Team";
 import EditT from "./Componant/Admin/Team/EditT";
 import AddT from "./Componant/Admin/Team/AddT";
+import TestAdd from "./Componant/Admin/Team/TestAdd";
 
 function App() {
   const LoggedInAdmin = localStorage.getItem("Admin");
@@ -40,7 +41,8 @@ function App() {
             <Route path="calendar" element={<Calendar />} />
             <Route path="addevent" element={<AddEvent />} />
             <Route path="team" element={<Team />} />
-            <Route path="addteam" element={<AddT />} />
+            {/* <Route path="addteam" element={<AddT />} /> */}
+            <Route path="addteam" element={<TestAdd />} />
             <Route path="team/edit/:id" element={<EditT />} />
             <Route path="leave" element={<Leave />} />
             <Route path="addleave" element={<AddL />} />

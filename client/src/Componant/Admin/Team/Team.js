@@ -89,10 +89,10 @@ const Team = () => {
                     {val.member3 ? `3. ${val.member3}` : null}
                   </p>
                   <p className="card-text">
-                    {val.member4 ? `4. ${val.member3}` : null}
+                    {val.member4 ? `4. ${val.member4}` : null}
                   </p>
                   <p className="card-text">
-                    {val.member5 ? `5. ${val.member3}` : null}
+                    {val.member5 ? `5. ${val.member5}` : null}
                   </p>
                   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                     <button
