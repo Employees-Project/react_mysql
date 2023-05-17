@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 
 const EditL = () => {
   const navigate = useNavigate();
+  
 
   const { id } = useParams();
   const [l_subject, setSubject] = useState("");
@@ -12,11 +13,37 @@ const EditL = () => {
   const [l_limit_y, setLimit_y] = useState("");
 
   useEffect(() => {
+    const token = localStorage.getItem("Admin");
+    fetch("http://localhost:3000/authen", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === "ok") {
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "กรุณาลงชื่อก่อนเข้าใช้งาน",
+            text: "",
+            showConfirmButton: false,
+            timer: 3500,
+          });
+          localStorage.removeItem("Admin");
+          navigate("/Login");
+        }
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+      });
     getLeaves();
   }, []);
 
   function getLeaves() {
-    fetch(`http://localhost:3333/leave/${id}`).then((result) => {
+    fetch(`http://localhost:3000/leave/${id}`).then((result) => {
       result.json().then((resp) => {
         console.log("🚀 ~ file: EditL.js:22 ~ result.json ~ resp:", resp);
         // console.warn(resp)
@@ -68,7 +95,7 @@ const EditL = () => {
           title: "เพิ่มข้อมูลสำเร็จ",
           timer: 2500,
         });
-        fetch(`http://localhost:3333/update/leave/${id}`, requestOptions).then(
+        fetch(`http://localhost:3000/update/leave/${id}`, requestOptions).then(
           Swal.fire({
             position: "center",
             icon: "success",

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import AdminNavbar from "../AdminNavbar/AdminNavbar";
+import Swal from "sweetalert2";
 
 const Info = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [employeeName, setEmployeeName] = useState("");
   const [phoneNo, setPhoneNo] = useState("");
@@ -16,6 +18,32 @@ const Info = () => {
   const [zipCode, setZipCode] = useState("");
 
   useEffect(() => {
+      const token = localStorage.getItem("Admin");
+      fetch("http://localhost:3000/authen", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.status === "ok") {
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "กรุณาลงชื่อก่อนเข้าใช้งาน",
+              text: "",
+              showConfirmButton: false,
+              timer: 3500,
+            });
+            localStorage.removeItem("Admin");
+            navigate("/Login");
+          }
+        })
+        .catch((error) => {
+          console.log("Error:", error);
+        });
     getUsers();
   }, []);
 

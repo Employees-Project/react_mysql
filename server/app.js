@@ -12,7 +12,7 @@ const secret = "Login";
 
 app.use(cors());
 
-app.use(express.static("public"))
+app.use(express.static("public"));
 
 const mysql = require("mysql2");
 
@@ -298,6 +298,28 @@ app.delete("/leave/delete/:id", jsonParser, function (req, res, next) {
           status: `Leave Delete with ID: ${id}`,
           messeage: "Delete Success",
         });
+      }
+    }
+  );
+});
+
+app.post("/add/event", jsonParser, (req, res, next) => {
+  connection.query(
+    "INSERT INTO calendar (subject, date, s_time, e_time, detail, latitude, longitude)VALUES (?, ?, ?, ?, ?, ?, ?)",
+    [
+      req.body.subject,
+      req.body.date,
+      req.body.s_time,
+      req.body.e_time,
+      req.body.detail,
+      req.body.latitude,
+      req.body.longitude,
+    ],
+    (err, results) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.json({ status: "ok", messeage: "Success" });
       }
     }
   );

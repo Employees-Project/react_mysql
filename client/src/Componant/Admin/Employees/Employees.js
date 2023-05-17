@@ -1,8 +1,39 @@
 import React, { useEffect, useState } from "react";
 import AdminNavbar from "../AdminNavbar/AdminNavbar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Employees.css";
+import Swal from "sweetalert2";
 const Employees = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    const token = localStorage.getItem("Admin");
+    fetch("http://localhost:3000/authen", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === "ok") {
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "กรุณาลงชื่อก่อนเข้าใช้งาน",
+            text: "",
+            showConfirmButton: false,
+            timer: 3500,
+          });
+          localStorage.removeItem("Admin");
+          navigate("/Login");
+        }
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+      });
+  }, []);
+
   const [employeeList, setEmployeeList] = useState([]);
 
   var requestOptions = {
@@ -53,7 +84,23 @@ const Employees = () => {
                 <tr>
                   {/* <th scope="row">{val.isadmin ? null : `${val.employeeid}`}</th> */}
                   <th scope="row">{val.employeeid}</th>
-                  <td><Link to={"/admin/employee/uploadpic/" + val.employeeid}>{val.pic ? <img src={`http://localhost:3000/image/`+val.pic} width="50" height="50"/> : <img src="https://www.finearts.cmu.ac.th/wp-content/uploads/2021/07/blank-profile-picture-973460_1280-1.png" width="50" height="50" />}</Link></td>
+                  <td>
+                    <Link to={"/admin/employee/uploadpic/" + val.employeeid}>
+                      {val.pic ? (
+                        <img
+                          src={`http://localhost:3000/image/` + val.pic}
+                          width="50"
+                          height="50"
+                        />
+                      ) : (
+                        <img
+                          src="https://www.finearts.cmu.ac.th/wp-content/uploads/2021/07/blank-profile-picture-973460_1280-1.png"
+                          width="50"
+                          height="50"
+                        />
+                      )}
+                    </Link>
+                  </td>
                   <td>{val.employeeName}</td>
                   {/* <td>{val.gender ? "ชาย" : "หญิง"}</td> */}
                   {/* <td input type={date}>{val.birthday.substring(0, 10)}</td> */}

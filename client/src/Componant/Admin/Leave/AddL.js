@@ -1,10 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AdminNavbar from "../AdminNavbar/AdminNavbar";
 import Swal from "sweetalert2";
 
 const AddL = () => {
   const navigate = useNavigate();
+  useEffect(() => {
+    const token = localStorage.getItem("Admin");
+    fetch("http://localhost:3000/authen", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === "ok") {
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "กรุณาลงชื่อก่อนเข้าใช้งาน",
+            text: "",
+            showConfirmButton: false,
+            timer: 3500,
+          });
+          localStorage.removeItem("Admin");
+          navigate("/Login");
+        }
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+      });
+  }, []);
 
   const [subject, setSubject] = useState("");
   const [limit_m, setLimit_m] = useState("");
@@ -52,7 +80,7 @@ const AddL = () => {
           title: "เพิ่มข้อมูลสำเร็จ",
           timer: 2500,
         });
-        fetch("http://localhost:3333/add/leave", requestOptions)
+        fetch("http://localhost:3000/add/leave", requestOptions)
           .then((response) => response.json())
           .then((result) => {
             console.log(

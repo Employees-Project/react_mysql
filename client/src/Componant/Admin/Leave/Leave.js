@@ -1,9 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AdminNavbar from "../AdminNavbar/AdminNavbar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const Leave = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    const token = localStorage.getItem("Admin");
+    fetch("http://localhost:3000/authen", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === "ok") {
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "กรุณาลงชื่อก่อนเข้าใช้งาน",
+            text: "",
+            showConfirmButton: false,
+            timer: 3500,
+          });
+          localStorage.removeItem("Admin");
+          navigate("/Login");
+        }
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+      });
+  }, []);
   const [leave, setLeave] = useState([]);
   const [deleteL, setDeleteL] = useState([]);
 
@@ -12,7 +41,7 @@ const Leave = () => {
     redirect: "follow",
   };
 
-  fetch("http://localhost:3333/leave", requestOptions)
+  fetch("http://localhost:3000/leave", requestOptions)
     .then((response) => response.json())
     .then((result) => setLeave(result))
     .catch((error) => console.log("error", error));
@@ -23,7 +52,7 @@ const Leave = () => {
       redirect: "follow",
     };
 
-    fetch(`http://localhost:3333/leave/delete/${id}`, requestOptions)
+    fetch(`http://localhost:3000/leave/delete/${id}`, requestOptions)
       .then((response) => setDeleteL(response.data))
   };
   return (

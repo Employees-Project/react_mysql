@@ -24,69 +24,40 @@ const theme = createTheme();
 
 export default function Dashboard() {
   const navigate = useNavigate();
-  useEffect(() => {
-    const token = localStorage.getItem("Admin");
-    const HR = localStorage.getItem("HR");
-    if (token) {
-      fetch("http://localhost:3000/authen", {
-        method: "POST",
+    useEffect(() => {
+      const token = localStorage.getItem('HR')
+      fetch('http://localhost:3000/authen/hr', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer '+token
         },
       })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.status === "ok") {
-          } else {
-            Swal.fire({
-              icon: "error",
-              title: "กรุณาลงชื่อก่อนเข้าใช้งาน",
-              text: "",
-              showConfirmButton: false,
-              timer: 3500,
-            });
-            localStorage.removeItem("Admin");
-            navigate("/Login");
-          }
-        })
-        .catch((error) => {
-          console.log("Error:", error);
-        });
-    } else if (HR) {
-      fetch("http://localhost:3000/authen/hr", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + HR,
-        },
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'ok') {
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'กรุณาลงชื่อก่อนเข้าใช้งาน',
+            text: '',
+            showConfirmButton: false,
+            timer: 3500
+          })
+          localStorage.removeItem('HR');
+          navigate("/Login");
+        }
       })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.status === "ok") {
-          } else {
-            Swal.fire({
-              icon: "error",
-              title: "กรุณาลงชื่อก่อนเข้าใช้งาน",
-              text: "",
-              showConfirmButton: false,
-              timer: 3500,
-            });
-            localStorage.removeItem("HR");
-            navigate("/Login");
-          }
-        })
-        .catch((error) => {
-          console.log("Error:", error);
-        });
-    }
-  }, []);
+      .catch((error) => {
+        console.log('Error:', error);
+      });
+    }, [])
 
   const handleLogout = (event) => {
     event.preventDefault();
     localStorage.removeItem("Admin");
     localStorage.removeItem("HR");
-    window.location = "/Login";
+    navigate("/Login");
   };
   return (
     <>

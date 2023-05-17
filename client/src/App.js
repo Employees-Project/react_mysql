@@ -13,6 +13,7 @@ import AddL from "./Componant/Admin/Leave/AddL";
 import EditL from "./Componant/Admin/Leave/EditL";
 import UploadPic from "./Componant/Admin/Employees/UploadPic";
 import Calendar from "./Componant/Admin/Calendar/Calendar";
+import AddEvent from "./Componant/Admin/Calendar/AddEvent";
 
 function App() {
   const LoggedInAdmin = localStorage.getItem("Admin");
@@ -34,6 +35,7 @@ function App() {
             <Route path="employee/info/:id" element={<Info />} />
             <Route path="employee/uploadpic/:id" element={<UploadPic />} />
             <Route path="calendar" element={<Calendar />} />
+            <Route path="addevent" element={<AddEvent />} />
             <Route path="leave" element={<Leave />} />
             <Route path="addleave" element={<AddL />} />
             <Route path="leave/edit/:id" element={<EditL />} />
