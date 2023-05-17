@@ -325,6 +325,94 @@ app.post("/add/event", jsonParser, (req, res, next) => {
   );
 });
 
+app.get("/teams", jsonParser, function (req, res, next) {
+  connection.execute(
+    "SELECT * FROM teams order by teamID",
+    function (err, teams, fields) {
+      if (err) throw err;
+      res.json(teams);
+    }
+  );
+});
+
+app.get("/team/:id", jsonParser, function (req, res, next) {
+  const id = req.params.id;
+  connection.execute(
+    "SELECT * FROM teams WHERE teamID = ?",
+    [id],
+    function (err, team, fields) {
+      res.json(team);
+    }
+  );
+});
+
+app.post("/add/team", jsonParser, (req, res, next) => {
+  connection.query(
+    "SELECT * FROM teams WHERE teamname = ?",
+    [req.body.teamName],
+    (err, results) => {
+      if (results.length > 0) {
+        res.json({ status: "error", messeage: "Team Name is already used" });
+      } else {
+        connection.query("INSERT INTO teams (teamname, leadername, member1, member2, member3, member4, member5, leader )VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+        [
+          req.body.teamname,
+          req.body.leadername,
+          req.body.member1,
+          req.body.member2,
+          req.body.member3,
+          req.body.member4,
+          req.body.member5,
+          req.body.leader,
+        ],
+        (err, results) => {
+          if (err) {
+            console.log(err);
+          } else {
+            res.json({ status: "ok", messeage: "Team Added" });
+          }
+        })
+      }
+    }
+  );
+});
+
+app.delete("/team/delete/:id", jsonParser, function (req, res, next) {
+  const id = req.params.id;
+  connection.execute(
+    "DELETE FROM teams WHERE teamID = ?",
+    [id],
+    function (err, results, fields) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.json({
+          status: `Team Delete with ID: ${id}`,
+          messeage: "Delete Success",
+        });
+      }
+    }
+  );
+});
+
+app.put("/update/team/:id", jsonParser, function (req, res, next) {
+  const id = req.params.id;
+  connection.query(
+    "UPDATE teams SET teamname = ?, leadername = ?, member1 = ?, member2 = ?, member3 = ?, member4 = ?, member5 = ?, leader = ? WHERE teamid = ?",
+    [req.body.teamname, req.body.leadername, req.body.member1,req.body.member2, req.body.member3, req.body.member4, req.body.member5, req.body.leader, id],
+    (err, results) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.json({
+          status: "Success",
+          messeage: `Team modified with ID: ${id}`,
+        });
+      }
+    }
+  );
+});
+
 app.post("/authen", jsonParser, function (req, res, next) {
   try {
     const token = req.headers.authorization.split(" ")[1];

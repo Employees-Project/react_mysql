@@ -140,7 +140,7 @@ const EditL = () => {
             <input
               type="number"
               min="1"
-              max="5"
+              max="31"
               className="form-control"
               placeholder="Enter name"
               value={l_limit_m}
@@ -157,7 +157,7 @@ const EditL = () => {
             <input
               type="number"
               min="1"
-              max="5"
+              max="366"
               className="form-control"
               placeholder="Enter name"
               value={l_limit_y}

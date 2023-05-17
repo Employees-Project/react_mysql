@@ -32,28 +32,31 @@ const Leave = () => {
       .catch((error) => {
         console.log("Error:", error);
       });
+      getLeave()
   }, []);
   const [leave, setLeave] = useState([]);
   const [deleteL, setDeleteL] = useState([]);
 
-  var requestOptions = {
-    method: "GET",
-    redirect: "follow",
-  };
+  async function getLeave() {
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
 
-  fetch("http://localhost:3000/leave", requestOptions)
-    .then((response) => response.json())
-    .then((result) => setLeave(result))
-    .catch((error) => console.log("error", error));
+    await fetch("http://localhost:3000/leave", requestOptions)
+      .then((response) => response.json())
+      .then((result) => setLeave(result))
+      .catch((error) => console.log("error", error));
+  }
 
   const deleteLeave = (id) => {
     var requestOptions = {
       method: "DELETE",
       redirect: "follow",
     };
-
-    fetch(`http://localhost:3000/leave/delete/${id}`, requestOptions)
-      .then((response) => setDeleteL(response.data))
+    fetch(`http://localhost:3000/leave/delete/${id}`, requestOptions).then(
+      (response) => setDeleteL(response.data)
+    );
   };
   return (
     <>
@@ -82,25 +85,27 @@ const Leave = () => {
                     <p className="card-text">{val.l_limit_y}</p>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                       <button
-                        onClick={() => Swal.fire({
-                            title: 'คุณต้องการลบทีมใช่หรือไม่?',
+                        onClick={() =>
+                          Swal.fire({
+                            title: "คุณต้องการลบทีมใช่หรือไม่?",
                             // text: "You won't be able to revert this!",
-                            icon: 'warning',
+                            icon: "warning",
                             showCancelButton: true,
-                            confirmButtonColor: '#3085d6',
-                            cancelButtonColor: '#d33',
-                            confirmButtonText: 'ใช่! ฉันต้องการลบ',
-                            cancelButtonText: 'ยกเลิก'
+                            confirmButtonColor: "#3085d6",
+                            cancelButtonColor: "#d33",
+                            confirmButtonText: "ใช่! ฉันต้องการลบ",
+                            cancelButtonText: "ยกเลิก",
                           }).then((result) => {
                             if (result.isConfirmed) {
-                                deleteLeave(val.historyId)
+                              deleteLeave(val.historyId);
                               Swal.fire(
-                                'ลบสำเร็จ!',
-                                'คุณได้ลบทีมสำเร็จ',
-                                'success'
-                              )
+                                "ลบสำเร็จ!",
+                                "คุณได้ลบทีมสำเร็จ",
+                                "success"
+                              );
                             }
-                          })}
+                          })
+                        }
                         class="btn btn-danger"
                       >
                         ลบ
@@ -114,7 +119,7 @@ const Leave = () => {
                     </div>
                   </div>
                 </div>
-                <br/>
+                <br />
               </div>
             );
           })}
