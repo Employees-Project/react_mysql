@@ -353,24 +353,26 @@ app.post("/add/team", jsonParser, (req, res, next) => {
       if (results.length > 0) {
         res.json({ status: "error", messeage: "Team Name is already used" });
       } else {
-        connection.query("INSERT INTO teams (teamname, leadername, member1, member2, member3, member4, member5, leader )VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-        [
-          req.body.teamname,
-          req.body.leadername,
-          req.body.member1,
-          req.body.member2,
-          req.body.member3,
-          req.body.member4,
-          req.body.member5,
-          req.body.leader,
-        ],
-        (err, results) => {
-          if (err) {
-            console.log(err);
-          } else {
-            res.json({ status: "ok", messeage: "Team Added" });
+        connection.query(
+          "INSERT INTO teams (teamname, leadername, member1, member2, member3, member4, member5, leader )VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+          [
+            req.body.teamname,
+            req.body.leadername,
+            req.body.member1,
+            req.body.member2,
+            req.body.member3,
+            req.body.member4,
+            req.body.member5,
+            req.body.leader,
+          ],
+          (err, results) => {
+            if (err) {
+              console.log(err);
+            } else {
+              res.json({ status: "ok", messeage: "Team Added" });
+            }
           }
-        })
+        );
       }
     }
   );
@@ -398,7 +400,17 @@ app.put("/update/team/:id", jsonParser, function (req, res, next) {
   const id = req.params.id;
   connection.query(
     "UPDATE teams SET teamname = ?, leadername = ?, member1 = ?, member2 = ?, member3 = ?, member4 = ?, member5 = ?, leader = ? WHERE teamid = ?",
-    [req.body.teamname, req.body.leadername, req.body.member1,req.body.member2, req.body.member3, req.body.member4, req.body.member5, req.body.leader, id],
+    [
+      req.body.teamname,
+      req.body.leadername,
+      req.body.member1,
+      req.body.member2,
+      req.body.member3,
+      req.body.member4,
+      req.body.member5,
+      req.body.leader,
+      id,
+    ],
     (err, results) => {
       if (err) {
         console.log(err);
@@ -408,6 +420,45 @@ app.put("/update/team/:id", jsonParser, function (req, res, next) {
           messeage: `Team modified with ID: ${id}`,
         });
       }
+    }
+  );
+});
+
+app.get("/history", jsonParser, function (req, res, next) {
+  connection.execute(
+    "SELECT * FROM history order by historyId",
+    function (err, leave, fields) {
+      if (err) throw err;
+      res.json(leave);
+    }
+  );
+});
+
+app.put("/history/update/status/:id", jsonParser, function (req, res, next) {
+  const id = req.params.id;
+  connection.query(
+    "UPDATE history SET status = 'Read' WHERE historyId = ?",
+    [id],
+    (err, results) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.json({
+          status: "Success",
+          messeage: `Status modified with ID: ${id}`,
+        });
+      }
+    }
+  );
+});
+
+app.get("/history/:id", jsonParser, function (req, res, next) {
+  const id = req.params.id;
+  connection.execute(
+    "SELECT * FROM history WHERE historyId = ?",
+    [id],
+    function (err, history, fields) {
+      res.json(history);
     }
   );
 });

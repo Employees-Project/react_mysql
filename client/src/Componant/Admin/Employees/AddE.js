@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./Add.css";
 import Swal from "sweetalert2";
-import axios from "axios";
 import AdminNavbar from "../AdminNavbar/AdminNavbar";
 
 export default function AddE() {
@@ -35,22 +33,26 @@ export default function AddE() {
       .catch((error) => {
         console.log("Error:", error);
       });
+      thailand()
   }, []);
   const [data, setData] = useState([]);
   const [data2, setData2] = useState([]);
   const [data3, setData3] = useState([]);
-  var requestOptions = {
-    method: "GET",
-    redirect: "follow",
-  };
-
-  fetch(
-    "https://raw.githubusercontent.com/kongvut/thai-province-data/master/api_province_with_amphure_tambon.json",
-    requestOptions
-  )
-    .then((response) => response.json())
-    .then((result) => setData(result))
-    .catch((error) => console.log("error", error));
+  
+  async function thailand() {
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
+  
+    fetch(
+      "https://raw.githubusercontent.com/kongvut/thai-province-data/master/api_province_with_amphure_tambon.json",
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => setData(result))
+      .catch((error) => console.log("error", error));
+  }
 
   const navigate = useNavigate();
 
@@ -137,7 +139,7 @@ export default function AddE() {
     <>
       <AdminNavbar />
       <br />
-      <div className="form-container1">
+      <div className="form-container">
         <form className="form-signin row g-3" enctype="multipart/form-data">
           <div>
             <h2>เพิ่มพนักงาน</h2>
@@ -149,7 +151,6 @@ export default function AddE() {
             <input
               type="text"
               className="form-control"
-              placeholder="Enter name"
               required
               onChange={(event) => {
                 setUsername(event.target.value);
@@ -384,10 +385,10 @@ export default function AddE() {
             />
           </div> */}
           <button onClick={addEmployee} class="btn btn-success">
-            Add Employee
+            เพิ่มข้อมูลพนักงาน
           </button>
           <Link to="/admin/employee" className="btn btn-primary">
-            Back
+            ย้อนกลับ
           </Link>
         </form>
       </div>

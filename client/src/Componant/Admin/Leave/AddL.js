@@ -113,7 +113,7 @@ const AddL = () => {
     <>
       <AdminNavbar />
       <br />
-      <div className="form-container1">
+      <div className="form-container">
         <form className="form-signin row g-3">
           <div>
             <h2>เพิ่มหัวข้อการลา</h2>
@@ -165,10 +165,10 @@ const AddL = () => {
             />
           </div>
           <button onClick={addLeave} class="btn btn-success">
-            Add Leave
+            เพิ่มข้อมูลการลา
           </button>
           <Link to="/admin/leave" className="btn btn-primary">
-            Back
+            ย้อนกลับ
           </Link>
         </form>
       </div>

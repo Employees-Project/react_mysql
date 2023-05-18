@@ -1,0 +1,129 @@
+body {
+	background: url(https://static.vecteezy.com/system/resources/thumbnails/001/078/367/small/abstract-grey-white-simple-background.jpg) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;	
+  }
+  .log-form {
+	width: 100%;
+	min-width: 500px;
+	max-width: 650px;
+	background: #ffffff;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-o-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
+	border-radius: 10px;
+  }
+  .log-form h1 {
+	color: #000000;
+	font-family: 'K2D', sans-serif;
+	font-family: 'Pridi', serif;
+	display: block;
+	background: #98adf2;
+	text-transform: uppercase;
+	padding: 0.75em 0.5em 0.75em 0.5em;
+	box-shadow: inset 0px 1px 1px rgba(255, 255, 255, 0.05);
+	border-radius: 10px;
+	margin: 10px;
+	font-weight: 200;
+	text-align: center;
+
+  }
+  .log-form h2 {
+	color: #000000;
+	font-family: 'K2D', sans-serif;
+	font-family: 'Pridi', serif;
+	text-transform: uppercase;
+	padding: 0.75em 0.5em 0.75em 0.5em;
+    margin: 0px;
+	font-weight: 200;
+	text-align: center;
+  }
+  .log-form h3 {
+	color: #000000;
+	font-family: 'K2D', sans-serif;
+	font-family: 'Pridi', serif;
+	text-transform: uppercase;
+	padding: 0.75em 0.5em 0.75em 0.5em;
+	border-radius: 10px;
+    margin: 0px;
+	font-weight: 200;
+	text-align: center;
+  }
+  .log-form input {
+    font-size: 25px;
+	font-family: 'K2D', sans-serif;
+	font-family: 'Pridi', serif;
+	display: block;
+	margin: auto auto;
+	width: 100%;
+	color: #000000;
+  }
+  .log-form input:focus {
+	outline: none;
+  }
+  .log-form .btn {
+	display: inline-block;
+	background: #1fb5bf;
+	border: 1px solid #1ba0a9;
+	padding: 0.5em 2em;
+	color: white;
+	margin-right: 0.5em;
+	box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.2);
+	font-size: 23px; height: 60px; width: 100%; display:block; margin-bottom: 20px;
+	border-radius: 10px;
+	font-family: 'K2D', sans-serif;
+	font-family: 'Pridi', serif;
+  }
+  .log-form .btn:hover {
+	background: #23cad5;
+  }
+  .log-form .btn:active {
+	background: #3d9aa1;
+	box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.1);
+  }
+  .log-form .btn:focus {
+	outline: none;
+  }
+  .log-form .forgot {
+	color: #33d3de;
+	line-height: 0.5em;
+	position: relative;
+	top: 2.5em;
+	text-decoration: none;
+	font-size: 0.75em;
+	margin: 0;
+	padding: 0;
+	float: right;
+  }
+  .log-form .forgot:hover {
+	color: #1ba0a9;
+  }
+
+  .log-form .label {
+	
+	font-family: 'K2D', sans-serif;
+	font-family: 'Pridi', serif;	
+	font-size: 30px;
+	font-weight: 100;
+	display: block;
+	border-radius: 10px;
+	margin: 0;
+  	width: 100%;
+  	border: 3px solid #000000f0;
+  	padding: 10px;
+	margin-bottom: 20px;
+
+  }
+.log-form .sr-only{
+	font-family: 'K2D', sans-serif;
+	font-family: 'Pridi', serif;
+	color: #000000;
+}

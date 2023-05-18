@@ -1,0 +1,65 @@
+front1 {
+    font-family: 'K2D', sans-serif;
+	font-family: 'Pridi', serif;
+    margin-left: 5%;
+    font-size: 35px;
+    color: #ffffff;
+    display: block;
+    align-items: right;
+    text-align: right;
+
+}
+
+front2 {
+    font-family: 'K2D', sans-serif;
+	font-family: 'Pridi', serif;
+    margin-left: 35px;
+    font-size: 50px;
+    color: #ffffff;
+    display: block;
+    align-items: left;
+    text-align: left;
+
+}
+front3 {
+    font-family: 'K2D', sans-serif;
+	font-family: 'Pridi', serif;
+    margin: 50px;
+    font-size: 50px;
+    color: #ffffff;
+    display: block;
+    align-items: left;
+    text-align: left;
+
+}
+front4 {
+    font-family: 'K2D', sans-serif;
+	font-family: 'Pridi', serif;
+    text-align: left;
+    font-size: 50px;
+    color: #000000;
+    display: block;
+
+}
+.card1{
+    background-color: #329632;
+}
+.card2{
+    background-color: #c83232;
+}
+.card3{
+    background-color: #d0d0d0;
+}
+.card4{
+    background-color: #ffffff;
+}
+
+.item-lish{
+    list-style-type: none;
+    border:3px solid rgb(0, 0, 0);
+}
+
+.iconselect{
+    position: absolute;
+    
+}

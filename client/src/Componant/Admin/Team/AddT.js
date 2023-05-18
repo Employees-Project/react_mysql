@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import AdminNavbar from "../AdminNavbar/AdminNavbar";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const AddT = () => {
@@ -15,15 +15,17 @@ const AddT = () => {
   const [member5, setMember5] = useState("");
   const [leader, setLeader] = useState("");
 
-  var requestOptions = {
-    method: "GET",
-    redirect: "follow",
-  };
+  async function getUsers() {
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
 
-  fetch("http://localhost:3000/users", requestOptions)
-    .then((response) => response.json())
-    .then((result) => setData(result))
-    .catch((error) => console.log("error", error));
+    fetch("http://localhost:3000/users", requestOptions)
+      .then((response) => response.json())
+      .then((result) => setData(result))
+      .catch((error) => console.log("error", error));
+  }
 
   const addTeam = (event) => {
     event.preventDefault();
@@ -92,12 +94,13 @@ const AddT = () => {
       .catch((error) => {
         console.log("Error:", error);
       });
+    getUsers();
   }, []);
   return (
     <>
       <AdminNavbar />
       <br />
-      <div className="form-container1">
+      <div className="form-container">
         <form className="form-signin row g-3">
           <div>
             <h2>เพิ่มทีม</h2>
@@ -126,12 +129,13 @@ const AddT = () => {
                 setLeadername(event.target.value);
               }}
             >
-              <option hidden>กรุณาเลือกหัวหน้าทีม</option>
+              <option>กรุณาเลือกหัวหน้าทีม</option>
               {data.map((val) => {
                 return <option>{val.employeeName}</option>;
               })}
             </select>
           </div>
+
           <div className="col-md-6">
             <label className="form-label">สมาชิกในทีม 3</label>
             <select
@@ -141,7 +145,7 @@ const AddT = () => {
                 setMember3(event.target.value);
               }}
             >
-              <option hidden>กรุณาเลือกสมาชิกในทีม 3</option>
+              <option>กรุณาเลือกสมาชิกในทีม 3</option>
               {data.map((val) => {
                 return <option>{val.employeeName}</option>;
               })}
@@ -157,7 +161,7 @@ const AddT = () => {
                 setMember1(event.target.value);
               }}
             >
-              <option hidden>กรุณาเลือกสมาชิกในทีม 1</option>
+              <option>กรุณาเลือกสมาชิกในทีม 1</option>
               {data.map((val) => {
                 return <option>{val.employeeName}</option>;
               })}
@@ -172,7 +176,7 @@ const AddT = () => {
                 setMember4(event.target.value);
               }}
             >
-              <option hidden>กรุณาเลือกสมาชิกในทีม 4</option>
+              <option>กรุณาเลือกสมาชิกในทีม 4</option>
               {data.map((val) => {
                 return <option>{val.employeeName}</option>;
               })}
@@ -188,7 +192,7 @@ const AddT = () => {
                 setMember2(event.target.value);
               }}
             >
-              <option hidden>กรุณาเลือกสมาชิกในทีม 2</option>
+              <option>กรุณาเลือกสมาชิกในทีม 2</option>
               {data.map((val) => {
                 return <option>{val.employeeName}</option>;
               })}
@@ -203,7 +207,7 @@ const AddT = () => {
                 setMember5(event.target.value);
               }}
             >
-              <option hidden>กรุณาเลือกสมาชิกในทีม 5</option>
+              <option>กรุณาเลือกสมาชิกในทีม 5</option>
               {data.map((val) => {
                 return <option>{val.employeeName}</option>;
               })}
@@ -219,7 +223,7 @@ const AddT = () => {
                 setLeader(event.target.value);
               }}
             >
-              <option hidden>กรุณายืนยันชื่อหัวหน้าทีม</option>
+              <option>กรุณายืนยันชื่อหัวหน้าทีม</option>
               {data.map((val) => {
                 return <option>{val.employeeName}</option>;
               })}
@@ -227,8 +231,11 @@ const AddT = () => {
           </div>
 
           <button onClick={addTeam} class="btn btn-success">
-            Add Team
+            เพิ่มทีม
           </button>
+          <Link to="/admin/team" className="btn btn-primary">
+            ย้อนกลับ
+          </Link>
         </form>
       </div>
     </>

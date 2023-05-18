@@ -61,14 +61,16 @@ const Leave = () => {
   return (
     <>
       <AdminNavbar />
-      <div className="container">
-        <div className="d-flex flex-row-reverse bd-highlight">
-          <Link to="/admin/addleave" className="btn btn-primary">
+      
+        <div className="container d-flex flex-row-reverse bd-highlight">
+          <Link to="/admin/addleave" className="btn btn-primary form-container">
             เพิ่มหัวข้อการลา
           </Link>
         </div>
-        <hr />
+        <br />
+        <div className="container">
         <div className="row">
+          
           {leave.map((val) => {
             return (
               <div className="col-md-4">

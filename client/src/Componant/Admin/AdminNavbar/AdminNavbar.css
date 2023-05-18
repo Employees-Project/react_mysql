@@ -9,8 +9,11 @@
 } 
 .active {
     overflow:hidden;
-    border-bottom:3px solid rgb(255, 255, 255);
-    
-    padding:8px;
+    border-bottom:5px solid rgb(255, 255, 255);
+    padding:10px;
     /* background-color:#0853a3; */
 }
+.buttonlogout {
+    padding: 15px;
+    border-radius: 30px;
+  }

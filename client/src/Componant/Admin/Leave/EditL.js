@@ -113,7 +113,7 @@ const EditL = () => {
     <>
       <AdminNavbar />
       <br />
-      <div className="form-container1">
+      <div className="form-container">
         <form className="form-signin row g-3">
           <div>
             <h2>แก้ไขข้อการลา</h2>
@@ -168,10 +168,10 @@ const EditL = () => {
             />
           </div>
           <button onClick={updateLeave} class="btn btn-success">
-            Edit Leave
+            เพิ่มข้อมูลพนักงาน
           </button>
           <Link to="/admin/leave" className="btn btn-primary">
-            Back
+            ย้อนกลับ
           </Link>
         </form>
       </div>

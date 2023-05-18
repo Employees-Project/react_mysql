@@ -32,23 +32,27 @@ const EditE = () => {
       .catch((error) => {
         console.log("Error:", error);
       });
+      thailand()
   }, []);
 
   const [data, setData] = useState([]);
   const [data2, setData2] = useState([]);
   const [data3, setData3] = useState([]);
-  var requestOptions = {
-    method: "GET",
-    redirect: "follow",
-  };
-
-  fetch(
-    "https://raw.githubusercontent.com/kongvut/thai-province-data/master/api_province_with_amphure_tambon.json",
-    requestOptions
-  )
-    .then((response) => response.json())
-    .then((result) => setData(result))
-    .catch((error) => console.log("error", error));
+  
+  async function thailand() {
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
+  
+    fetch(
+      "https://raw.githubusercontent.com/kongvut/thai-province-data/master/api_province_with_amphure_tambon.json",
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => setData(result))
+      .catch((error) => console.log("error", error));
+  }
 
   const { id } = useParams();
   const [employeeName, setEmployeeName] = useState("");
@@ -102,7 +106,7 @@ const EditE = () => {
       disdrict: disdrict,
       amphur: amphur,
       province: province,
-      zipCode: zipCode,
+      zipCode: zipCode
     });
 
     var requestOptions = {
@@ -118,11 +122,11 @@ const EditE = () => {
       employeeName === "" ||
       phoneNo === "" ||
       email === "" ||
-      address === "" ||
-      disdrict === "" ||
-      amphur === "" ||
-      province === "" ||
-      zipCode === "" 
+      address === ""||
+      disdrict === ""||
+      amphur === ""||
+      province === ""||
+      zipCode === ""
     ) {
       console.log("Enter all information");
       Swal.fire({
@@ -137,10 +141,10 @@ const EditE = () => {
       phoneNo !== "" ||
       email !== "" ||
       address !== "" ||
-      disdrict !== "" ||
-      amphur !== "" ||
-      province !== "" ||
-      zipCode !== "" 
+      disdrict !== ""||
+      amphur !== ""||
+      province !== ""||
+      zipCode !== ""
     ) {
       fetch(`http://localhost:3000/update/users/${id}`, requestOptions).then(
         Swal.fire({
@@ -158,7 +162,7 @@ const EditE = () => {
     <>
       <AdminNavbar />
       <br />
-      <div className="form-container1">
+      <div className="form-container">
         <form className="form-signin row g-3">
           <div>
             <h2>แก้ไขพนักงาน</h2>
@@ -232,7 +236,7 @@ const EditE = () => {
               }}
             />
           </div>
-          <div className="col-md-2">
+          <div className="col-md-4">
             <label className="form-label" htmlFor="address">
               ที่อยู่:
             </label>
@@ -314,7 +318,7 @@ const EditE = () => {
               })}
             </select>
           </div>
-          <div className="col-md-1">
+          <div className="col-md-2">
             <label className="form-label">รหัสไปรษณีย์:</label>
             <input
               type="text"
@@ -325,10 +329,10 @@ const EditE = () => {
             />
           </div>
           <button onClick={updateEmployee} className="btn btn-success">
-            Update Employee
+          บันทึกข้อมูลพนักงาน
           </button>
           <Link to="/admin/employee" className="btn btn-primary">
-            Back
+            ย้อนกลับ
           </Link>
         </form>
       </div>

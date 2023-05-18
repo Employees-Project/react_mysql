@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import AdminNavbar from "../AdminNavbar/AdminNavbar";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import "./Calendar.css";
 
 const AddEvent = () => {
   const navigate = useNavigate();
@@ -84,7 +85,7 @@ const AddEvent = () => {
     <>
       <AdminNavbar />
       <br />
-      <div className="form-container1">
+      <div className="container">
         <form className="form-signin row g-3">
           <div>
             <h2>Add Event</h2>

@@ -1,20 +1,15 @@
 import * as React from "react";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-
+import "./Login.css";
 const theme = createTheme();
 
 export default function SignIn() {
@@ -41,7 +36,7 @@ export default function SignIn() {
             title: "ลงชื่อเข้าใช้งานสำเร็จ",
             text: "สวัสดี Admin",
             showConfirmButton: false,
-            timer: 3500,
+            timer: 2000,
           });
           localStorage.setItem("Admin", data.token);
           navigate("/admin/");
@@ -51,7 +46,7 @@ export default function SignIn() {
             title: "ลงชื่อเข้าใช้งานสำเร็จ",
             text: "สวัสดี HR",
             showConfirmButton: false,
-            timer: 3500,
+            timer: 2000,
           });
           localStorage.setItem("HR", data.token);
           navigate("/home");
@@ -61,16 +56,16 @@ export default function SignIn() {
             title: "รหัสผู้ใช้งานถูกระงับการใช้งาน",
             text: "โปรดติดต่อ Admin",
             showConfirmButton: false,
-            timer: 2500,
+            timer: 2000,
           });
         } else {
           Swal.fire({
             icon: "error",
-            title: `รหัสผู้ใช้งานหรือรหัสผ่าน
+            title : `รหัสผู้ใช้งานหรือรหัสผ่าน
             ไม่ถูกต้อง`,
-            text: "รหัสผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง!",
+            text: "โปรดกรอกข้อมูลใหม่อีกครั้ง!",
             showConfirmButton: false,
-            timer: 2500,
+            timer: 2000,
           });
         }
       })
@@ -80,72 +75,73 @@ export default function SignIn() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
+    <div className="log-form">
+      <h1>
+        ระบบจัดเก็บข้อมูลพนักงาน<br/>บริษัท โปรทอส เทคโนโลยีจำกัด</h1>
+          <br />
+      <ThemeProvider theme={theme}>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
           <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
           >
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="username"
-              label="Email Address"
-              name="username"
-              autoComplete="username"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+            <Typography component="" variant="h5">
+              <h2>ลงชื่อเข้าใช้งาน</h2>
+            </Typography>
+            <Box
+              component="form"
+              onSubmit={handleSubmit}
+              noValidate
+              sx={{ mt: 1 }}
             >
-              Sign In
-            </Button>
-            <Grid container>
-              <Grid item xs></Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="username"
+                label="รหัสผู้ใช้งาน"
+                name="username"
+                autoComplete="username"
+                autoFocus
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="รหัสผ่าน"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+              />
+              {/* <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
+              /> */}
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              ><h3>ลงชื่อเข้าใช้งาน</h3>
+              </Button>
+              <Grid container>
+                <Grid item xs></Grid>
+                {/* <Grid item>
+                  <Link href="#" variant="body2">
+                    {"Don't have an account? Sign Up"}
+                  </Link>
+                </Grid> */}
               </Grid>
-            </Grid>
+            </Box>
           </Box>
-        </Box>
-      </Container>
-    </ThemeProvider>
+        </Container>
+      </ThemeProvider>
+    </div>
+
   );
 }

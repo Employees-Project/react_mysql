@@ -70,7 +70,7 @@ const UploadPic = () => {
     <>
       <AdminNavbar />
       <br />
-      <div className="form-container1">
+      <div className="form-container">
         <form className="form-signin row g-3" enctype="multipart/form-data">
           <div>
             <h2>เพิ่มรูปพนักงาน</h2>

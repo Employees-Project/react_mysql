@@ -1,6 +1,13 @@
 .topright {
-    position: absolute;
-    top: 125px;
-    right: 485px;
-    font-size: 16px;
-  }
+  font-size: 20px;
+  margin: 13px;
+  font-family: 'K2D', sans-serif;
+  font-family: 'Pridi', serif;
+  color: #ffffff;
+}
+.calendar {
+  font-family: 'K2D', sans-serif;
+  font-family: 'Pridi', serif;
+  color: #000000;
+  font-size: 20px;
+}

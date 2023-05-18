@@ -69,12 +69,12 @@ const Info = () => {
     <>
       <AdminNavbar />
       <br />
-      <div className="form-container1">
+      <div className="form-container">
         <form className="form-signin row g-3">
           <div>
             <h2>ข้อมูลพนักงาน</h2>
           </div>
-          <div className="col-md-6">
+          <div className="col-md-4">
             <label className="form-label" htmlFor="employeeName">
               ชื่อ - นามสกุล:
             </label>
@@ -85,7 +85,8 @@ const Info = () => {
               value={employeeName}
             />
           </div>
-          <div className="col-md-6">
+          <div className="col-md-2"></div>
+          <div className="col-md-4">
             <label className="form-label" htmlFor="phoneNo">
               เบอร์โทร:
             </label>
@@ -96,7 +97,8 @@ const Info = () => {
               disabled
             />
           </div>
-          <div className="col-md-6">
+          <div className="col-md-2"></div>
+          <div className="col-md-4">
             <label className="form-label">ตำแหน่งงาน:</label>
             <input
               htmlFor="jobPosition"
@@ -105,7 +107,8 @@ const Info = () => {
               disabled
             />
           </div>
-          <div className="col-md-6">
+          <div className="col-md-2"></div>
+          <div className="col-md-4">
             <label className="form-label">ตำแหน่ง:</label>
             <input
               htmlFor="position"
@@ -114,7 +117,8 @@ const Info = () => {
               disabled
             />
           </div>
-          <div className="col-md-12">
+          <div className="col-md-2"></div>
+          <div className="col-md-4">
             <label className="form-label" htmlFor="email">
               อีเมล:
             </label>
@@ -125,7 +129,8 @@ const Info = () => {
               disabled
             />
           </div>
-          <div className="col-md-2">
+          <div className="col-md-6"></div>
+          <div className="col-md-4">
             <label className="form-label" htmlFor="address">
               ที่อยู่:
             </label>
@@ -169,7 +174,7 @@ const Info = () => {
               disabled
             />
           </div>
-          <div className="col-md-1">
+          <div className="col-md-2">
             <label className="form-label">รหัสไปรษณีย์:</label>
             <input
               type="text"
@@ -180,7 +185,7 @@ const Info = () => {
             />
           </div>
           <Link to="/admin/employee" className="btn btn-primary">
-            Back
+            ย้อนกลับ
           </Link>
         </form>
       </div>

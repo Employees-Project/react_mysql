@@ -8,6 +8,7 @@ const EditT = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [data2, setData2] = useState([]);
+  console.log("🚀 ~ file: EditT.js:11 ~ EditT ~ data2:", data2)
   const [teamname, setTeamname] = useState("");
   const [leadername, setLeadername] = useState("");
   const [member1, setMember1] = useState("");
@@ -56,7 +57,7 @@ const EditT = () => {
           .catch((error) => {
             console.log("Error:", error);
           });
-    getTeam();
+    getTeam()
     getUsers()
   }, []);
 
@@ -108,14 +109,13 @@ const EditT = () => {
         timer: 2500,
       }).then(navigate("/admin/team"))
     );
-    
   };
 
   return (
     <>
       <AdminNavbar />
       <br />
-      <div className="form-container1">
+      <div className="form-container">
         <form className="form-signin row g-3">
           <div>
             <h2>เพิ่มทีม</h2>

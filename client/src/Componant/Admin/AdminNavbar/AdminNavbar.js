@@ -34,8 +34,8 @@ const AdminNavbar = () => {
                         <input type="search" class="form-control" placeholder="Search" aria-label="Search"/>
                     </form> */}
                     <div>
-                        <button type="button" className="btn btn-primary navbar" data-bs-toggle="dropdown" aria-expanded="false" onClick={Logout}>
-                            Logout
+                        <button type="button" className="btn btn-primary navbar buttonlogout" data-bs-toggle="dropdown" aria-expanded="false" onClick={Logout}>
+                        ออกจากระบบ
                         </button>
                     </div>
                 </div>

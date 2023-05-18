@@ -3,13 +3,6 @@ import { Link } from "react-router-dom";
 import "./Calendar.css";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
-// import timeGridPlugin from "@fullcalendar/timegrid";
-
-// import "@fullcalendar/core";
-// import "@fullcalendar/daygrid";
-// import "@fullcalendar/timegrid/main.css";
-
-// import events from "./events";
 import AdminNavbar from "../AdminNavbar/AdminNavbar";
 
 export default function Calendar() {
@@ -57,15 +50,16 @@ export default function Calendar() {
   return (
     <>
       <AdminNavbar />
-      <br />
-      <div className="form-container1">
+      <div className="container">
+      <div className="d-flex flex-row-reverse bd-highlight">
         <Link
           to="/admin/addevent"
           className="btn btn-success btn-block topright"
         >
           เพิ่ม Event
         </Link>
-        <div className="container bottom">
+        </div>
+        <div className="container calendar">
           <FullCalendar
             defaultView="dayGridMonth"
             header={{

@@ -1,3 +1,40 @@
-.notibackground {
-    background-color: #e4e3e3;
+.leaveN {
+    border-top: 5px solid rgb(82, 183, 241);
+    border-left: 5px solid rgb(82, 183, 241);
+    border-bottom: 5px solid rgb(82, 183, 241);
+    padding: 10px;
+}
+
+.leaveR {
+    border-top: 5px solid rgb(150, 150, 150);
+    border-left: 5px solid rgb(150, 150, 150);
+    border-bottom: 5px solid rgb(150, 150, 150);
+    padding: 10px;
+}
+
+.approve1 {
+    border-top: 5px solid rgb(122, 243, 106);
+    border-left: 5px solid rgb(122, 243, 106);
+    border-bottom: 5px solid rgb(122, 243, 106);
+    padding: 10px;
+}
+
+.approve0 {
+    border-top: 5px solid rgb(228, 96, 96);
+    border-left: 5px solid rgb(228, 96, 96);
+    border-bottom: 5px solid rgb(228, 96, 96);
+    padding: 10px;
+}
+
+.rollcall-in {
+    border-top: 5px solid rgb(60, 116, 46);
+    border-left: 5px solid rgb(60, 116, 46);
+    border-bottom: 5px solid rgb(60, 116, 46);
+    padding: 10px;
+}
+.rollcall-out {
+    border-top: 5px solid rgb(150, 150, 150);
+    border-left: 5px solid rgb(150, 150, 150);
+    border-bottom: 5px solid rgb(150, 150, 150);
+    padding: 10px;
 }
