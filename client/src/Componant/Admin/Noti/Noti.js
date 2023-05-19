@@ -144,16 +144,16 @@ export default function Noti() {
                           <div className="card leaveR">
                             <div className="row g-3">
                               <h3 class="card-header col-md-6">
-                                <b>หัวข้อ:</b> {val.l_subject}
+                                <b>หัวข้อการลา:</b> {val.l_subject}
                               </h3>
                               <h5 class="card-header col-md-6 d-flex flex-row-reverse">
-                                ชื่อ: {val.employeeName} "ตรวจสอบแล้ว"
+                                ชื่อ: {val.employeeName} 
                               </h5>
                             </div>
                             <div className="card-body">
                               <h5 className="card-text">{val.l_detail}</h5>
                               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <Link
+                              ตรวจสอบแล้ว<Link
                                   to={"/admin/noti/info/" + val.historyId}
                                   class="btn btn-warning"
                                 >
@@ -173,16 +173,16 @@ export default function Noti() {
                           <div className="card leaveN">
                             <div className="row g-3">
                               <h3 class="card-header col-md-6">
-                                <b>หัวข้อ:</b> {val.l_subject}
+                                <b>หัวข้อการลา:</b> {val.l_subject}
                               </h3>
                               <h5 class="card-header col-md-6 d-flex flex-row-reverse">
-                                ชื่อ: {val.employeeName} "ยังไม่ได้ตรวจสอบ"
+                                ชื่อ: {val.employeeName} 
                               </h5>
                             </div>
                             <div className="card-body">
                               <h5 className="card-text">{val.l_detail}</h5>
                               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <Link
+                              ยังไม่ได้ตรวจสอบ<Link
                                   to={"/admin/noti/info/" + val.historyId}
                                   class="btn btn-warning"
                                   onClick={() => readStatus(val.historyId)}
@@ -203,16 +203,16 @@ export default function Noti() {
                           <div className="card approve1">
                             <div className="row g-3">
                               <h3 class="card-header col-md-6">
-                                <b>หัวข้อ:</b> {val.l_subject}
+                                <b>หัวข้อการลา:</b> {val.l_subject}
                               </h3>
                               <h5 class="card-header col-md-6 d-flex flex-row-reverse">
-                                ชื่อ: {val.employeeName} "ไม่อนุมัติ"
+                                ชื่อ: {val.employeeName} 
                               </h5>
                             </div>
                             <div className="card-body">
                               <h5 className="card-text">{val.l_detail}</h5>
                               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <Link
+                              ไม่อนุมัติ<Link
                                   to={"/admin/noti/info/" + val.historyId}
                                   class="btn btn-warning"
                                 >
@@ -232,16 +232,16 @@ export default function Noti() {
                           <div className="card approve0">
                             <div className="row g-3">
                               <h3 class="card-header col-md-6">
-                                <b>หัวข้อ:</b> {val.l_subject}
+                                <b>หัวข้อการลา:</b> {val.l_subject}
                               </h3>
                               <h5 class="card-header col-md-6 d-flex flex-row-reverse">
-                                ชื่อ: {val.employeeName} "อนุมัติ"
+                                ชื่อ: {val.employeeName} 
                               </h5>
                             </div>
                             <div className="card-body">
                               <h5 className="card-text">{val.l_detail}</h5>
                               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <Link
+                              อนุมัติ<Link
                                   to={"/admin/noti/info/" + val.historyId}
                                   class="btn btn-warning"
                                 >
@@ -308,7 +308,6 @@ export default function Noti() {
                     );
                   }
                 }
-                
               })}
             </TabPanel>
             <TabPanel value={value} index={1}>
@@ -321,16 +320,16 @@ export default function Noti() {
                           <div className="card leaveR">
                             <div className="row g-3">
                               <h3 class="card-header col-md-6">
-                                <b>หัวข้อ:</b> {leave.l_subject}
+                                <b>หัวข้อการลา:</b> {leave.l_subject}
                               </h3>
                               <h5 class="card-header col-md-6 d-flex flex-row-reverse">
-                                ชื่อ: {leave.employeeName} "ตรวจสอบแล้ว"
+                                ชื่อ: {leave.employeeName} 
                               </h5>
                             </div>
                             <div className="card-body">
                               <h5 className="card-text">{leave.l_detail}</h5>
                               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <Link
+                              ตรวจสอบแล้ว<Link
                                   to={"/admin/noti/info/" + leave.historyId}
                                   class="btn btn-warning"
                                 >
@@ -350,16 +349,16 @@ export default function Noti() {
                           <div className="card leaveN">
                             <div className="row g-3">
                               <h3 class="card-header col-md-6">
-                                <b>หัวข้อ:</b> {leave.l_subject}
+                                <b>หัวข้อการลา:</b> {leave.l_subject}
                               </h3>
                               <h5 class="card-header col-md-6 d-flex flex-row-reverse">
-                                ชื่อ: {leave.employeeName} "ยังไม่ได้ตรวจสอบ"
+                                ชื่อ: {leave.employeeName} 
                               </h5>
                             </div>
                             <div className="card-body">
                               <h5 className="card-text">{leave.l_detail}</h5>
                               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <Link
+                              ยังไม่ได้ตรวจสอบ<Link
                                   to={"/admin/noti/info/" + leave.historyId}
                                   class="btn btn-warning"
                                   onClick={() => readStatus(leave.historyId)}
@@ -380,16 +379,16 @@ export default function Noti() {
                           <div className="card approve1">
                             <div className="row g-3">
                               <h3 class="card-header col-md-6">
-                                <b>หัวข้อ:</b> {leave.l_subject}
+                                <b>หัวข้อการลา:</b> {leave.l_subject}
                               </h3>
                               <h5 class="card-header col-md-6 d-flex flex-row-reverse">
-                                ชื่อ: {leave.employeeName} "อนุมัติ"
+                                ชื่อ: {leave.employeeName} 
                               </h5>
                             </div>
                             <div className="card-body">
                               <h5 className="card-text">{leave.l_detail}</h5>
                               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <Link
+                              อนุมัติ<Link
                                   to={"/admin/noti/info/" + leave.historyId}
                                   class="btn btn-warning"
                                 >
@@ -409,16 +408,16 @@ export default function Noti() {
                           <div className="card approve0">
                             <div className="row g-3">
                               <h3 class="card-header col-md-6">
-                                <b>หัวข้อ:</b> {leave.l_subject}
+                                <b>หัวข้อการลา:</b> {leave.l_subject}
                               </h3>
                               <h5 class="card-header col-md-6 d-flex flex-row-reverse">
-                                ชื่อ: {leave.employeeName} "ไม่อนุมัติ"
+                                ชื่อ: {leave.employeeName} 
                               </h5>
                             </div>
                             <div className="card-body">
                               <h5 className="card-text">{leave.l_detail}</h5>
                               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <Link
+                              ไม่อนุมัติ<Link
                                   to={"/admin/noti/info/" + leave.historyId}
                                   class="btn btn-warning"
                                 >
