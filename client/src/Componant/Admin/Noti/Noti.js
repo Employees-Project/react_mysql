@@ -147,7 +147,7 @@ export default function Noti() {
                                 <b>หัวข้อ:</b> {val.l_subject}
                               </h3>
                               <h5 class="card-header col-md-6 d-flex flex-row-reverse">
-                                ชื่อ: {val.employeeName}
+                                ชื่อ: {val.employeeName} "ตรวจสอบแล้ว"
                               </h5>
                             </div>
                             <div className="card-body">
@@ -176,7 +176,7 @@ export default function Noti() {
                                 <b>หัวข้อ:</b> {val.l_subject}
                               </h3>
                               <h5 class="card-header col-md-6 d-flex flex-row-reverse">
-                                ชื่อ: {val.employeeName}
+                                ชื่อ: {val.employeeName} "ยังไม่ได้ตรวจสอบ"
                               </h5>
                             </div>
                             <div className="card-body">
@@ -206,7 +206,7 @@ export default function Noti() {
                                 <b>หัวข้อ:</b> {val.l_subject}
                               </h3>
                               <h5 class="card-header col-md-6 d-flex flex-row-reverse">
-                                ชื่อ: {val.employeeName}
+                                ชื่อ: {val.employeeName} "ไม่อนุมัติ"
                               </h5>
                             </div>
                             <div className="card-body">
@@ -215,7 +215,6 @@ export default function Noti() {
                                 <Link
                                   to={"/admin/noti/info/" + val.historyId}
                                   class="btn btn-warning"
-                                  onClick={() => readStatus(val.historyId)}
                                 >
                                   ดูข้อมูล
                                 </Link>
@@ -236,7 +235,7 @@ export default function Noti() {
                                 <b>หัวข้อ:</b> {val.l_subject}
                               </h3>
                               <h5 class="card-header col-md-6 d-flex flex-row-reverse">
-                                ชื่อ: {val.employeeName}
+                                ชื่อ: {val.employeeName} "อนุมัติ"
                               </h5>
                             </div>
                             <div className="card-body">
@@ -245,7 +244,6 @@ export default function Noti() {
                                 <Link
                                   to={"/admin/noti/info/" + val.historyId}
                                   class="btn btn-warning"
-                                  onClick={() => readStatus(val.historyId)}
                                 >
                                   ดูข้อมูล
                                 </Link>
@@ -326,7 +324,7 @@ export default function Noti() {
                                 <b>หัวข้อ:</b> {leave.l_subject}
                               </h3>
                               <h5 class="card-header col-md-6 d-flex flex-row-reverse">
-                                ชื่อ: {leave.employeeName}
+                                ชื่อ: {leave.employeeName} "ตรวจสอบแล้ว"
                               </h5>
                             </div>
                             <div className="card-body">
@@ -355,7 +353,7 @@ export default function Noti() {
                                 <b>หัวข้อ:</b> {leave.l_subject}
                               </h3>
                               <h5 class="card-header col-md-6 d-flex flex-row-reverse">
-                                ชื่อ: {leave.employeeName}
+                                ชื่อ: {leave.employeeName} "ยังไม่ได้ตรวจสอบ"
                               </h5>
                             </div>
                             <div className="card-body">
@@ -385,7 +383,7 @@ export default function Noti() {
                                 <b>หัวข้อ:</b> {leave.l_subject}
                               </h3>
                               <h5 class="card-header col-md-6 d-flex flex-row-reverse">
-                                ชื่อ: {leave.employeeName}
+                                ชื่อ: {leave.employeeName} "อนุมัติ"
                               </h5>
                             </div>
                             <div className="card-body">
@@ -394,7 +392,6 @@ export default function Noti() {
                                 <Link
                                   to={"/admin/noti/info/" + leave.historyId}
                                   class="btn btn-warning"
-                                  onClick={() => readStatus(leave.historyId)}
                                 >
                                   ดูข้อมูล
                                 </Link>
@@ -415,7 +412,7 @@ export default function Noti() {
                                 <b>หัวข้อ:</b> {leave.l_subject}
                               </h3>
                               <h5 class="card-header col-md-6 d-flex flex-row-reverse">
-                                ชื่อ: {leave.employeeName}
+                                ชื่อ: {leave.employeeName} "ไม่อนุมัติ"
                               </h5>
                             </div>
                             <div className="card-body">
@@ -424,7 +421,6 @@ export default function Noti() {
                                 <Link
                                   to={"/admin/noti/info/" + leave.historyId}
                                   class="btn btn-warning"
-                                  onClick={() => readStatus(leave.historyId)}
                                 >
                                   ดูข้อมูล
                                 </Link>
@@ -457,7 +453,6 @@ export default function Noti() {
                                 <Link
                                   to={"/admin/noti/info/" + rollcall.historyId}
                                   className="btn btn-warning gap-2"
-                                  onClick={() => readStatus(rollcall.historyId)}
                                 >
                                   ดูข้อมูล
                                 </Link>
@@ -484,7 +479,6 @@ export default function Noti() {
                                 <Link
                                   to={"/admin/noti/info/" + rollcall.historyId}
                                   className="btn btn-warning gap-2"
-                                  onClick={() => readStatus(rollcall.historyId)}
                                 >
                                   ดูข้อมูล
                                 </Link>

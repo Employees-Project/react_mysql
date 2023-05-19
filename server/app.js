@@ -426,7 +426,7 @@ app.put("/update/team/:id", jsonParser, function (req, res, next) {
 
 app.get("/history", jsonParser, function (req, res, next) {
   connection.execute(
-    "SELECT * FROM history order by historyId",
+    "SELECT * FROM history ORDER BY date DESC",
     function (err, leave, fields) {
       if (err) throw err;
       res.json(leave);
@@ -446,6 +446,42 @@ app.put("/history/update/status/:id", jsonParser, function (req, res, next) {
         res.json({
           status: "Success",
           messeage: `Status modified with ID: ${id}`,
+        });
+      }
+    }
+  );
+});
+
+app.put("/history/update/approve1/:id", jsonParser, function (req, res, next) {
+  const id = req.params.id;
+  connection.query(
+    "UPDATE history SET approve = 1, status = 'Approve' WHERE historyId = ?",
+    [id],
+    (err, results) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.json({
+          status: "Success",
+          messeage: `Approve modified with ID: ${id}`,
+        });
+      }
+    }
+  );
+});
+
+app.put("/history/update/approve0/:id", jsonParser, function (req, res, next) {
+  const id = req.params.id;
+  connection.query(
+    "UPDATE history SET approve = 0, status = 'Not Approve' WHERE historyId = ?",
+    [id],
+    (err, results) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.json({
+          status: "Success",
+          messeage: `Approve modified with ID: ${id}`,
         });
       }
     }

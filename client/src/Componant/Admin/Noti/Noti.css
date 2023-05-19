@@ -38,3 +38,13 @@
     border-bottom: 5px solid rgb(150, 150, 150);
     padding: 10px;
 }
+
+.approve0-in {
+    border-top: 5px solid rgb(228, 96, 96);
+    padding: 10px;
+}
+
+.approve1-in {
+    border-top: 5px solid rgb(122, 243, 106);
+    padding: 10px;
+}
