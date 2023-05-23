@@ -7,7 +7,7 @@ const Leave = () => {
   const navigate = useNavigate();
   useEffect(() => {
     const token = localStorage.getItem("Admin");
-    fetch("http://localhost:3000/authen", {
+    fetch("https://long-teal-cormorant-garb.cyclic.app/authen", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -43,7 +43,7 @@ const Leave = () => {
       redirect: "follow",
     };
 
-    await fetch("http://localhost:3000/leave", requestOptions)
+    await fetch("https://long-teal-cormorant-garb.cyclic.app/leave", requestOptions)
       .then((response) => response.json())
       .then((result) => setLeave(result))
       .catch((error) => console.log("error", error));
@@ -54,7 +54,7 @@ const Leave = () => {
       method: "DELETE",
       redirect: "follow",
     };
-    fetch(`http://localhost:3000/leave/delete/${id}`, requestOptions).then(
+    fetch(`https://long-teal-cormorant-garb.cyclic.app/leave/delete/${id}`, requestOptions).then(
       (response) => setDeleteL(response.data)
     );
   };

@@ -8,7 +8,7 @@ export default function AddE() {
 
   useEffect(() => {
     const token = localStorage.getItem("Admin");
-    fetch("http://localhost:3000/authen", {
+    fetch("https://long-teal-cormorant-garb.cyclic.app/authen", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -108,7 +108,7 @@ export default function AddE() {
         // certificateName: certificateName,
         // certificatePic: certificatePic,
       };
-      fetch("http://localhost:3000/register", {
+      fetch("https://long-teal-cormorant-garb.cyclic.app/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

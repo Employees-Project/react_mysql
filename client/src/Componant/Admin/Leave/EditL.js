@@ -14,7 +14,7 @@ const EditL = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("Admin");
-    fetch("http://localhost:3000/authen", {
+    fetch("https://long-teal-cormorant-garb.cyclic.app/authen", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -43,7 +43,7 @@ const EditL = () => {
   }, []);
 
   function getLeaves() {
-    fetch(`http://localhost:3000/leave/${id}`).then((result) => {
+    fetch(`https://long-teal-cormorant-garb.cyclic.app/leave/${id}`).then((result) => {
       result.json().then((resp) => {
         console.log("🚀 ~ file: EditL.js:22 ~ result.json ~ resp:", resp);
         // console.warn(resp)
@@ -80,7 +80,7 @@ const EditL = () => {
         text: "กรุณากรอกข้อมูลให้ครบ",
       });
     } else if (l_subject !== "" || l_limit_m !== "" || l_limit_y !== "") {
-      if (l_limit_m > "31" || l_limit_y > "366") {
+      if (l_limit_m > 31 || l_limit_y > 366) {
         Swal.fire({
           position: "center",
           icon: "error",
@@ -95,7 +95,7 @@ const EditL = () => {
           title: "เพิ่มข้อมูลสำเร็จ",
           timer: 2500,
         });
-        fetch(`http://localhost:3000/update/leave/${id}`, requestOptions).then(
+        fetch(`https://long-teal-cormorant-garb.cyclic.app/update/leave/${id}`, requestOptions).then(
           Swal.fire({
             position: "center",
             icon: "success",

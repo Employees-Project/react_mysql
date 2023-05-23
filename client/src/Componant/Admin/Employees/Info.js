@@ -19,7 +19,7 @@ const Info = () => {
 
   useEffect(() => {
       const token = localStorage.getItem("Admin");
-      fetch("http://localhost:3000/authen", {
+      fetch("https://long-teal-cormorant-garb.cyclic.app/authen", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -48,7 +48,7 @@ const Info = () => {
   }, []);
 
   function getUsers() {
-    fetch(`http://localhost:3000/users/${id}`).then((result) => {
+    fetch(`https://long-teal-cormorant-garb.cyclic.app/users/${id}`).then((result) => {
       result.json().then((resp) => {
         // console.warn(resp)
         // setData(resp);

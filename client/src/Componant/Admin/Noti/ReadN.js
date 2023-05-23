@@ -15,7 +15,7 @@ const ReadN = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("Admin");
-    fetch("http://localhost:3000/authen", {
+    fetch("https://long-teal-cormorant-garb.cyclic.app/authen", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -50,7 +50,7 @@ const ReadN = () => {
       redirect: 'follow'
     };
     
-    fetch(`http://localhost:3000/history/update/approve1/${id}`, requestOptions)
+    fetch(`https://long-teal-cormorant-garb.cyclic.app/history/update/approve1/${id}`, requestOptions)
       .then(navigate("/admin/noti"))
       .catch(error => console.log('error', error));
   };
@@ -62,13 +62,13 @@ const ReadN = () => {
       redirect: 'follow'
     };
     
-    fetch(`http://localhost:3000/history/update/approve0/${id}`, requestOptions)
+    fetch(`https://long-teal-cormorant-garb.cyclic.app/history/update/approve0/${id}`, requestOptions)
       .then(navigate("/admin/noti"))
       .catch(error => console.log('error', error));
   };
 
   function getHistory() {
-    fetch(`http://localhost:3000/history/${id}`).then((result) => {
+    fetch(`https://long-teal-cormorant-garb.cyclic.app/history/${id}`).then((result) => {
       result.json().then((resp) => {
         // console.warn(resp)
         setHistory(resp);

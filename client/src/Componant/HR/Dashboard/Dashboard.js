@@ -26,7 +26,7 @@ export default function Dashboard() {
   const navigate = useNavigate();
     useEffect(() => {
       const token = localStorage.getItem('HR')
-      fetch('http://localhost:3000/authen/hr', {
+      fetch('https://long-teal-cormorant-garb.cyclic.app/authen/hr', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

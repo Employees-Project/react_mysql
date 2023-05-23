@@ -7,7 +7,7 @@ const EditE = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("Admin");
-    fetch("http://localhost:3000/authen", {
+    fetch("https://long-teal-cormorant-garb.cyclic.app/authen", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -73,7 +73,7 @@ const EditE = () => {
   }, []);
 
   function getUsers() {
-    fetch(`http://localhost:3000/users/${id}`).then((result) => {
+    fetch(`https://long-teal-cormorant-garb.cyclic.app/users/${id}`).then((result) => {
       result.json().then((resp) => {
         // console.warn(resp)
         // setData(resp);
@@ -146,7 +146,7 @@ const EditE = () => {
       province !== ""||
       zipCode !== ""
     ) {
-      fetch(`http://localhost:3000/update/users/${id}`, requestOptions).then(
+      fetch(`https://long-teal-cormorant-garb.cyclic.app/update/users/${id}`, requestOptions).then(
         Swal.fire({
           position: "center",
           icon: "success",

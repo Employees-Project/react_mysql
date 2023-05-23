@@ -7,7 +7,7 @@ const AddL = () => {
   const navigate = useNavigate();
   useEffect(() => {
     const token = localStorage.getItem("Admin");
-    fetch("http://localhost:3000/authen", {
+    fetch("https://long-teal-cormorant-garb.cyclic.app/authen", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -65,7 +65,7 @@ const AddL = () => {
         text: "กรุณากรอกข้อมูลให้ครบ",
       });
     } else if (subject !== "" || limit_m !== "" || limit_y !== "") {
-      if (limit_m > "31" || limit_y > "366") {
+      if (limit_m > 31 || limit_y > 366) {
         Swal.fire({
           position: "center",
           icon: "error",
@@ -74,13 +74,7 @@ const AddL = () => {
           showConfirmButton: true,
         });
       } else {
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "เพิ่มข้อมูลสำเร็จ",
-          timer: 2500,
-        });
-        fetch("http://localhost:3000/add/leave", requestOptions)
+        fetch("https://long-teal-cormorant-garb.cyclic.app/add/leave", requestOptions)
           .then((response) => response.json())
           .then((result) => {
             console.log(
@@ -125,7 +119,6 @@ const AddL = () => {
             <input
               type="text"
               className="form-control"
-              placeholder="Enter name"
               required
               onChange={(event) => {
                 setSubject(event.target.value);
@@ -139,7 +132,6 @@ const AddL = () => {
             <input
               type="number"
               className="form-control"
-              placeholder="Enter name"
               min="1"
               max="31"
               required
@@ -155,7 +147,6 @@ const AddL = () => {
             <input
               type="number"
               className="form-control"
-              placeholder="Enter name"
               min="1"
               max="366"
               required

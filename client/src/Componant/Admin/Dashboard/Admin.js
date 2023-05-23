@@ -118,7 +118,7 @@ export default function Admin() {
   const [employeeList, setEmployeeList] = useState([]);
 
   async function getUsers() {
-    fetch('http://localhost:3000/users')
+    fetch('https://long-teal-cormorant-garb.cyclic.app/users')
     .then((data) => data.json())
     .then((result) => {
       setEmployeeList(result)
@@ -129,7 +129,7 @@ export default function Admin() {
   const navigate = useNavigate();
   useEffect(() => {
     const token = localStorage.getItem('Admin')
-    fetch('http://localhost:3000/authen', {
+    fetch('https://long-teal-cormorant-garb.cyclic.app/authen', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

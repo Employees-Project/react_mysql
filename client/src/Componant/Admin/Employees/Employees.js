@@ -7,7 +7,7 @@ const Employees = () => {
   const navigate = useNavigate();
   useEffect(() => {
     const token = localStorage.getItem("Admin");
-    fetch("http://localhost:3000/authen", {
+    fetch("https://long-teal-cormorant-garb.cyclic.app/authen", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -43,7 +43,7 @@ const Employees = () => {
       redirect: "follow",
     };
   
-    fetch("http://localhost:3000/users", requestOptions)
+    await fetch("https://long-teal-cormorant-garb.cyclic.app/users", requestOptions)
       .then((response) => response.json())
       .then((result) => setEmployeeList(result))
       .catch((error) => console.log("error", error));
@@ -90,7 +90,7 @@ const Employees = () => {
                       <Link to={"/admin/employee/uploadpic/" + val.employeeid}>
                         {val.pic ? (
                           <img
-                            src={`http://localhost:3000/image/` + val.pic}
+                            src={`https://long-teal-cormorant-garb.cyclic.app/image/` + val.pic}
                             width="50"
                             height="50"
                           />

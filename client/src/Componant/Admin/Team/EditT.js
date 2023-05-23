@@ -16,15 +16,18 @@ const EditT = () => {
   const [member3, setMember3] = useState("");
   const [member4, setMember4] = useState("");
   const [member5, setMember5] = useState("");
-  const [leader, setLeader] = useState("");
+  const [selectMember1, setSelectMember1] = useState(true);
+  const [selectMember2, setSelectMember2] = useState(true);
+  const [selectMember3, setSelectMember3] = useState(true);
+  const [selectMember4, setSelectMember4] = useState(true);
 
-  function getUsers() {
+  async function getUsers() {
     var requestOptions = {
         method: "GET",
         redirect: "follow",
       };
     
-      fetch("http://localhost:3000/users", requestOptions)
+      await fetch("https://long-teal-cormorant-garb.cyclic.app/users", requestOptions)
         .then((response) => response.json())
         .then((result) => setData(result))
         .catch((error) => console.log("error", error));
@@ -32,7 +35,7 @@ const EditT = () => {
 
   useEffect(() => {
         const token = localStorage.getItem("Admin");
-        fetch("http://localhost:3000/authen", {
+        fetch("https://long-teal-cormorant-garb.cyclic.app/authen", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -61,8 +64,8 @@ const EditT = () => {
     getUsers()
   }, []);
 
-  function getTeam() {
-    fetch(`http://localhost:3000/team/${id}`).then((result) => {
+  async function getTeam() {
+    await fetch(`https://long-teal-cormorant-garb.cyclic.app/team/${id}`).then((result) => {
       result.json().then((resp) => {
         // console.warn(resp)
         setData2(resp);
@@ -73,7 +76,6 @@ const EditT = () => {
         setMember3(resp[0].member3);
         setMember4(resp[0].member4);
         setMember5(resp[0].member5);
-        setLeader(resp[0].leader);
       });
     });
   }
@@ -88,8 +90,7 @@ const EditT = () => {
     member2: member2,
     member3: member3,
     member4: member4,
-    member5: member5,
-    leader: leader,
+    member5: member5
   });
 
   var requestOptions = {
@@ -101,7 +102,7 @@ const EditT = () => {
 
   const updateTeam = (event) => {
     event.preventDefault();
-    fetch(`http://localhost:3000/update/team/${id}`, requestOptions).then(
+    fetch(`https://long-teal-cormorant-garb.cyclic.app/update/team/${id}`, requestOptions).then(
       Swal.fire({
         position: "center",
         icon: "success",
@@ -154,62 +155,31 @@ const EditT = () => {
           </div>
 
           <div className="col-md-6">
-            <label className="form-label">สมาชิกในทีม 3</label>
-            <select
-              className="form-select"
-              htmlFor="member3"
-              value={member3}
-              onChange={(event) => {
-                setMember3(event.target.value);
-              }}
-            >
-              <option value={""}>กรุณาเลือกสมาชิกในทีม 3</option>
-              {data.map((val) => {
-                return <option>{val.employeeName}</option>;
-              })}
-            </select>
-          </div>
-          <div className="col-md-6">
             <label className="form-label">สมาชิกในทีม 1</label>
             <select
               className="form-select"
               htmlFor="member1"
               value={member1}
-              required
               onChange={(event) => {
+                setSelectMember1(false)
                 setMember1(event.target.value);
               }}
             >
-              <option>กรุณาเลือกสมาชิกในทีม 1</option>
+              <option value={""}>กรุณาเลือกสมาชิกในทีม 1</option>
               {data.map((val) => {
                 return <option>{val.employeeName}</option>;
               })}
             </select>
           </div>
-          <div className="col-md-6">
-            <label className="form-label">สมาชิกในทีม 4</label>
-            <select
-              className="form-select"
-              htmlFor="member4"
-              value={member4}
-              onChange={(event) => {
-                setMember4(event.target.value);
-              }}
-            >
-              <option>กรุณาเลือกสมาชิกในทีม 4</option>
-              {data.map((val) => {
-                return <option>{val.employeeName}</option>;
-              })}
-            </select>
-          </div>
-          <div className="col-md-6">
+          <div className="col-md-6" hidden={selectMember1}>
             <label className="form-label">สมาชิกในทีม 2</label>
             <select
               className="form-select"
-              htmlFor="member2"
+              htmlFor="member1"
               value={member2}
               required
               onChange={(event) => {
+                setSelectMember2(false)
                 setMember2(event.target.value);
               }}
             >
@@ -219,7 +189,42 @@ const EditT = () => {
               })}
             </select>
           </div>
-          <div className="col-md-6">
+          <div className="col-md-6" hidden={selectMember2}>
+            <label className="form-label">สมาชิกในทีม 3</label>
+            <select
+              className="form-select"
+              htmlFor="member3"
+              value={member3}
+              onChange={(event) => {
+                setSelectMember3(false)
+                setMember3(event.target.value);
+              }}
+            >
+              <option>กรุณาเลือกสมาชิกในทีม 3</option>
+              {data.map((val) => {
+                return <option>{val.employeeName}</option>;
+              })}
+            </select>
+          </div>
+          <div className="col-md-6" hidden={selectMember3}>
+            <label className="form-label">สมาชิกในทีม 4</label>
+            <select
+              className="form-select"
+              htmlFor="member4"
+              value={member4}
+              required
+              onChange={(event) => {
+                setSelectMember4(false)
+                setMember4(event.target.value);
+              }}
+            >
+              <option>กรุณาเลือกสมาชิกในทีม 4</option>
+              {data.map((val) => {
+                return <option>{val.employeeName}</option>;
+              })}
+            </select>
+          </div>
+          <div className="col-md-6" hidden={selectMember4}>
             <label className="form-label">สมาชิกในทีม 5</label>
             <select
               className="form-select"
@@ -230,22 +235,6 @@ const EditT = () => {
               }}
             >
               <option>กรุณาเลือกสมาชิกในทีม 5</option>
-              {data.map((val) => {
-                return <option>{val.employeeName}</option>;
-              })}
-            </select>
-          </div>
-          <div className="col-md-12">
-            <label className="form-label">กรุณายืนยันชื่อหัวหน้าทีม</label>
-            <select
-              className="form-select"
-              htmlFor="leader"
-              required
-              onChange={(event) => {
-                setLeader(event.target.value);
-              }}
-            >
-              <option>กรุณายืนยันชื่อหัวหน้าทีม</option>
               {data.map((val) => {
                 return <option>{val.employeeName}</option>;
               })}

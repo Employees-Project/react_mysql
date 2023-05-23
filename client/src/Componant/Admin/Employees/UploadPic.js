@@ -16,7 +16,7 @@ const UploadPic = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("Admin");
-    fetch("http://localhost:3000/authen", {
+    fetch("https://long-teal-cormorant-garb.cyclic.app/authen", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -48,7 +48,7 @@ const UploadPic = () => {
     const formdata = new FormData();
     formdata.append("image", pic);
     axios
-      .put(`http://localhost:3000/upload/${id}`, formdata)
+      .put(`https://long-teal-cormorant-garb.cyclic.app/upload/${id}`, formdata)
       .then((res) => {
         if (res.data.status === "ok") {
           Swal.fire({

@@ -21,7 +21,7 @@ export default function SignIn() {
       username: data.get("username"),
       password: data.get("password"),
     };
-    fetch("http://localhost:3000/login", {
+    fetch("https://long-teal-cormorant-garb.cyclic.app/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
