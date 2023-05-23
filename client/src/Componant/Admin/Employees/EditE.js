@@ -45,7 +45,7 @@ const EditE = () => {
       redirect: "follow",
     };
   
-    fetch(
+    await fetch(
       "https://raw.githubusercontent.com/kongvut/thai-province-data/master/api_province_with_amphure_tambon.json",
       requestOptions
     )
@@ -65,6 +65,7 @@ const EditE = () => {
   const [amphur, setAmphur] = useState("");
   const [province, setProvince] = useState("");
   const [zipCode, setZipCode] = useState("");
+  const [active, setActive] = useState("");
 
   const navigate = useNavigate();
 
@@ -72,8 +73,8 @@ const EditE = () => {
     getUsers();
   }, []);
 
-  function getUsers() {
-    fetch(`https://long-teal-cormorant-garb.cyclic.app/users/${id}`).then((result) => {
+  async function getUsers() {
+    await fetch(`https://long-teal-cormorant-garb.cyclic.app/users/${id}`).then((result) => {
       result.json().then((resp) => {
         // console.warn(resp)
         // setData(resp);
@@ -87,6 +88,7 @@ const EditE = () => {
         setAmphur(resp[0].amphur);
         setProvince(resp[0].province);
         setZipCode(resp[0].zipCode);
+        setActive(resp[0].active);
       });
     });
   }
@@ -106,7 +108,8 @@ const EditE = () => {
       disdrict: disdrict,
       amphur: amphur,
       province: province,
-      zipCode: zipCode
+      zipCode: zipCode,
+      active: active,
     });
 
     var requestOptions = {
@@ -236,7 +239,7 @@ const EditE = () => {
               }}
             />
           </div>
-          <div className="col-md-4">
+          <div className="col-md-2">
             <label className="form-label" htmlFor="address">
               ที่อยู่:
             </label>
@@ -327,6 +330,21 @@ const EditE = () => {
               disabled
               required
             />
+          </div>
+          <div className="col-md-2">
+            <label className="form-label">สิทธิการใช้งาน</label>
+            <select
+              className="form-select"
+              htmlFor="gender"
+              value={active}
+              onChange={(event) => {
+                setActive(event.target.value);
+              }}
+            >
+              <option hidden>กรุณาเลือก</option>
+              <option value={1}>เปิดใช้งาน</option>
+              <option value={0}>ปิดใช้งาน</option>
+            </select>
           </div>
           <button onClick={updateEmployee} className="btn btn-success">
           บันทึกข้อมูลพนักงาน

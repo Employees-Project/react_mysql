@@ -118,7 +118,7 @@ export default function Admin() {
   const [employeeList, setEmployeeList] = useState([]);
 
   async function getUsers() {
-    fetch('https://long-teal-cormorant-garb.cyclic.app/users')
+    await fetch('https://long-teal-cormorant-garb.cyclic.app/users')
     .then((data) => data.json())
     .then((result) => {
       setEmployeeList(result)

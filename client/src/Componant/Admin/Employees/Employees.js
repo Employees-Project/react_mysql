@@ -69,6 +69,7 @@ const Employees = () => {
                 <th scope="col">ตำแหน่ง</th>
                 <th scope="col">เบอร์โทร</th>
                 <th scope="col">อีเมล</th>
+                <th scope="col">สถานะ</th>
                 <th scope="col"> </th>
               </tr>
             </thead>
@@ -111,6 +112,7 @@ const Employees = () => {
                     <td>{val.position}</td>
                     <td>{val.phoneNo}</td>
                     <td>{val.email}</td>
+                    <td>{val.active ? "เปิดใช้งาน" : "ปิดใช้งาน"}</td>
                     <td>
                       <Link
                         className="btn btn-success me-2"
