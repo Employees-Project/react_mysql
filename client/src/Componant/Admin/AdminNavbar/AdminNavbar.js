@@ -30,9 +30,9 @@ const AdminNavbar = () => {
                         <li><NavLink to="/admin/leave"activeClassName="active" className="nav-link px-2 text-white ">ข้อมูลการลา</NavLink></li>
                         <li><NavLink to="/admin/noti"activeClassName="active" className="nav-link px-2 text-white">การแจ้งเตือน</NavLink></li>
                     </ul>
-                    {/* <form className="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                        <input type="search" class="form-control" placeholder="Search" aria-label="Search"/>
-                    </form> */}
+                    <div className="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 navbar">
+                        <Link to="/admin/employee/info/admin/1" style={{ textDecoration: 'none' }} className="text-light">ผู้ดูแลระบบ</Link>
+                    </div>
                     <div>
                         <button type="button" className="btn btn-primary navbar buttonlogout" data-bs-toggle="dropdown" aria-expanded="false" onClick={Logout}>
                         ออกจากระบบ

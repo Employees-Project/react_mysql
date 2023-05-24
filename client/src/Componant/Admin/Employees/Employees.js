@@ -3,7 +3,6 @@ import AdminNavbar from "../AdminNavbar/AdminNavbar";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import "./Employees.css"
-import { green } from "@mui/material/colors";
 const Employees = () => {
   const navigate = useNavigate();
   useEffect(() => {
@@ -84,53 +83,55 @@ const Employees = () => {
                 //     month: "long",
                 //     day: "numeric",
                 //   });
-
-                return (
-                  <tr>
-                    {/* <th scope="row">{val.isadmin ? null : `${val.employeeid}`}</th> */}
-                    <th scope="row">{val.employeeid}</th>
-                    <td>
-                      <Link to={"/admin/employee/uploadpic/" + val.employeeid}>
-                        {val.pic ? (
-                          <img
-                            src={`https://project-test-1.herokuapp.com/image/` + val.pic}
-                            width="50"
-                            height="50"
-                          />
-                        ) : (
-                          <img
-                            src="https://www.finearts.cmu.ac.th/wp-content/uploads/2021/07/blank-profile-picture-973460_1280-1.png"
-                            width="50"
-                            height="50"
-                          />
-                        )}
-                      </Link>
-                    </td>
-                    <td>{val.employeeName}</td>
-                    {/* <td>{val.gender ? "ชาย" : "หญิง"}</td> */}
-                    {/* <td input type={date}>{val.birthday.substring(0, 10)}</td> */}
-                    {/* <td>{result}</td> */}
-                    <td>{val.jobPosition}</td>
-                    <td>{val.position}</td>
-                    <td>{val.phoneNo}</td>
-                    <td>{val.email}</td>
-                    <td><span className={status}>{val.active ? "เปิดใช้งาน" : "ปิดใช้งาน"}</span></td>
-                    <td>
-                      <Link
-                        className="btn btn-success me-2"
-                        to={"/admin/employee/info/" + val.employeeid}
-                      >
-                        ดูข้อมูล
-                      </Link>
-                      <Link
-                        className="btn btn-warning"
-                        to={"/admin/employee/edit/" + val.employeeid}
-                      >
-                        แก้ไข
-                      </Link>
-                    </td>
-                  </tr>
-                );
+                if(val.isadmin !== 1) {
+                  return (
+                    <tr>
+                      {/* <th scope="row">{val.isadmin ? null : `${val.employeeid}`}</th> */}
+                      <th scope="row">{val.employeeid - 1}</th>
+                      <td>
+                        <Link to={"/admin/employee/uploadpic/" + val.employeeid}>
+                          {val.pic ? (
+                            <img
+                              src={`https://project-test-1.herokuapp.com/image/` + val.pic}
+                              width="50"
+                              height="50"
+                            />
+                          ) : (
+                            <img
+                              src="https://www.finearts.cmu.ac.th/wp-content/uploads/2021/07/blank-profile-picture-973460_1280-1.png"
+                              width="50"
+                              height="50"
+                            />
+                          )}
+                        </Link>
+                      </td>
+                      <td>{val.employeeName}</td>
+                      {/* <td>{val.gender ? "ชาย" : "หญิง"}</td> */}
+                      {/* <td input type={date}>{val.birthday.substring(0, 10)}</td> */}
+                      {/* <td>{result}</td> */}
+                      <td>{val.jobPosition}</td>
+                      <td>{val.position}</td>
+                      <td>{val.phoneNo}</td>
+                      <td>{val.email}</td>
+                      <td><span className={status}>{val.active ? "เปิดใช้งาน" : "ปิดใช้งาน"}</span></td>
+                      <td>
+                        <Link
+                          className="btn btn-success me-2"
+                          to={"/admin/employee/info/" + val.employeeid}
+                        >
+                          ดูข้อมูล
+                        </Link>
+                        <Link
+                          className="btn btn-warning"
+                          to={"/admin/employee/edit/" + val.employeeid}
+                        >
+                          แก้ไข
+                        </Link>
+                      </td>
+                    </tr>
+                  );
+                }
+                
               })}
             </tbody>
           </table>
