@@ -1,0 +1,33 @@
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  font-family: 'K2D', sans-serif;
+  font-family: 'Pridi', serif;
+  font-size: 25px;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 80%;
+  padding: 2rem;
+  border-radius: 2rem;
+  /* margin: auto; */
+  background-color: #f3f3f3;
+}
+
+.card {
+  padding: 2rem;
+  border-radius: 2rem;
+  font-family: 'K2D', sans-serif;
+  font-family: 'Pridi', serif;
+}
+
+.greenDot {
+  border-bottom: 5px solid rgb(0, 128, 55);
+}
+
+.redDot {
+  border-bottom: 5px solid rgb(228, 96, 96);
+}

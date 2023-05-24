@@ -18,6 +18,11 @@ import Team from "./Componant/Admin/Team/Team";
 import EditT from "./Componant/Admin/Team/EditT";
 import AddT from "./Componant/Admin/Team/AddT";
 import ReadN from "./Componant/Admin/Noti/ReadN";
+import HREmployees from "./Componant/HR/Employees/HREmployees";
+import HRAddE from "./Componant/HR/Employees/HRAddE";
+import HREditE from "./Componant/HR/Employees/HREditE";
+import HRInfo from "./Componant/HR/Employees/HRInfo";
+import HRUploadPic from "./Componant/HR/Employees/HRUploadPic";
 
 function App() {
   const LoggedInAdmin = localStorage.getItem("Admin");
@@ -31,6 +36,11 @@ function App() {
           <Route path="login" element={<SignIn />} />
           <Route path="register" element={<Register />} />
           <Route path="home" element={<Dashboard />} />
+          <Route path="employee" element={<HREmployees />} />
+          <Route path="addemployee" element={<HRAddE />} />
+          <Route path="employee/edit/:id" element={<HREditE />} />
+          <Route path="employee/info/:id" element={<HRInfo />} />
+          <Route path="employee/uploadpic/:id" element={<HRUploadPic />} />
           <Route path="/admin">
             <Route index element={<Admin />} />
             <Route path="employee" element={<Employees />} />
@@ -45,7 +55,8 @@ function App() {
             <Route path="team/edit/:id" element={<EditT />} />
             <Route path="leave" element={<Leave />} />
             <Route path="addleave" element={<AddL />} />
-            <Route path="leave/edit/:id" element={<EditL />} />edit/team/undefined
+            <Route path="leave/edit/:id" element={<EditL />} />
+            edit/team/undefined
             <Route path="noti" element={<Noti />} />
             <Route path="noti/info/:id" element={<ReadN />} />
           </Route>
