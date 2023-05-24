@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import AdminNavbar from "../AdminNavbar/AdminNavbar";
 import Swal from "sweetalert2";
+import "./Info.css";
 
 const Info = () => {
   const navigate = useNavigate();
@@ -16,34 +17,38 @@ const Info = () => {
   const [amphur, setAmphur] = useState("");
   const [province, setProvince] = useState("");
   const [zipCode, setZipCode] = useState("");
+  const [pic, setPic] = useState("");
+  const [gender, setGender] = useState("");
+  const [rawIdentityNo, setRawIdentityNo] = useState("");
+  const [rawBirthday, setRawBirthday] = useState("");
 
   useEffect(() => {
-      const token = localStorage.getItem("Admin");
-      fetch("https://project-test-1.herokuapp.com/authen", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
-        },
+    const token = localStorage.getItem("Admin");
+    fetch("https://project-test-1.herokuapp.com/authen", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === "ok") {
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "กรุณาลงชื่อก่อนเข้าใช้งาน",
+            text: "",
+            showConfirmButton: false,
+            timer: 3500,
+          });
+          localStorage.removeItem("Admin");
+          navigate("/Login");
+        }
       })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.status === "ok") {
-          } else {
-            Swal.fire({
-              icon: "error",
-              title: "กรุณาลงชื่อก่อนเข้าใช้งาน",
-              text: "",
-              showConfirmButton: false,
-              timer: 3500,
-            });
-            localStorage.removeItem("Admin");
-            navigate("/Login");
-          }
-        })
-        .catch((error) => {
-          console.log("Error:", error);
-        });
+      .catch((error) => {
+        console.log("Error:", error);
+      });
     getUsers();
   }, []);
 
@@ -62,9 +67,27 @@ const Info = () => {
         setAmphur(resp[0].amphur);
         setProvince(resp[0].province);
         setZipCode(resp[0].zipCode);
+        setPic(resp[0].pic);
+        setGender(resp[0].gender);
+        setRawIdentityNo(resp[0].identityNo);
+        setRawBirthday(resp[0].birthday);
       });
     });
   }
+
+  var date = new Date(rawBirthday);
+
+  const birthday = date.toLocaleDateString("th-TH", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
+  const identityNo = rawIdentityNo.replace(
+    /(\d{1})(\d{4})(\d{4})(\d{1})(\d{3})/,
+    "$1-$2-xxxx-x-$5"
+  );
+
   return (
     <>
       <AdminNavbar />
@@ -73,10 +96,29 @@ const Info = () => {
         <form className="form-signin row g-3">
           <div>
             <h2>ข้อมูลพนักงาน</h2>
+            <br />
+          </div>
+          <div>
+            {pic ? (
+              <img
+                src={`https://project-test-1.herokuapp.com/image/` + pic}
+                className="rounded mx-auto d-block"
+                width="250"
+                height="250"
+              />
+            ) : (
+              <img
+                src="https://www.finearts.cmu.ac.th/wp-content/uploads/2021/07/blank-profile-picture-973460_1280-1.png"
+                className="rounded mx-auto d-block"
+                width="250"
+                height="250"
+              />
+            )}
+            <br />
           </div>
           <div className="col-md-4">
             <label className="form-label" htmlFor="employeeName">
-              ชื่อ - นามสกุล:
+              ชื่อ - นามสกุล
             </label>
             <input
               type="text"
@@ -85,10 +127,20 @@ const Info = () => {
               value={employeeName}
             />
           </div>
-          <div className="col-md-2"></div>
-          <div className="col-md-4">
+          <div className="col-md-2">
             <label className="form-label" htmlFor="phoneNo">
-              เบอร์โทร:
+              รหัสบัตรประชาชน
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              value={identityNo}
+              disabled
+            />
+          </div>
+          <div className="col-md-2">
+            <label className="form-label" htmlFor="phoneNo">
+              เบอร์โทร
             </label>
             <input
               type="text"
@@ -97,7 +149,28 @@ const Info = () => {
               disabled
             />
           </div>
-          <div className="col-md-2"></div>
+          <div className="col-md-2">
+            <label className="form-label" htmlFor="phoneNo">
+              เพศ
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              value={gender ? "ชาย" : "หญิง"}
+              disabled
+            />
+          </div>
+          <div className="col-md-2">
+            <label className="form-label" htmlFor="phoneNo">
+              วันเกิด
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              value={birthday}
+              disabled
+            />
+          </div>
           <div className="col-md-4">
             <label className="form-label">ตำแหน่งงาน:</label>
             <input
@@ -107,7 +180,6 @@ const Info = () => {
               disabled
             />
           </div>
-          <div className="col-md-2"></div>
           <div className="col-md-4">
             <label className="form-label">ตำแหน่ง:</label>
             <input
@@ -117,7 +189,6 @@ const Info = () => {
               disabled
             />
           </div>
-          <div className="col-md-2"></div>
           <div className="col-md-4">
             <label className="form-label" htmlFor="email">
               อีเมล:
@@ -129,7 +200,6 @@ const Info = () => {
               disabled
             />
           </div>
-          <div className="col-md-6"></div>
           <div className="col-md-4">
             <label className="form-label" htmlFor="address">
               ที่อยู่:
@@ -183,6 +253,24 @@ const Info = () => {
               disabled
               required
             />
+            <br />
+          </div>
+          <hr />
+          <br />
+          <div>
+            ข้อมูลใบประกาศนียบัตร
+            <br />
+          </div>
+          <div className="card w">
+            <img
+              className="card-img-top"
+              src={`https://project-test-1.herokuapp.com/image/` + pic}
+              width="400"
+              height="170"
+            />
+            <div className="card-body">
+              <p className="card-text f-size">ข้อแตกต่างระหว่างใบประกาศนียบัตร อนุปริญญา และปริญญา เลือกเรียนแบบไหนให้เหมาะเอาใบไปใช้จริง</p>
+            </div>
           </div>
           <Link to="/admin/employee" className="btn btn-primary">
             ย้อนกลับ

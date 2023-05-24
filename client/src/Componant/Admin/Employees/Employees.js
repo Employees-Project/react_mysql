@@ -76,13 +76,13 @@ const Employees = () => {
             <tbody>
               {employeeList.map((val) => {
                 const status = val.active ? "greenDot" : "redDot"
-                //   var date = new Date(val.birthday);
+                  // var date = new Date(val.birthday);
 
-                //   const result = date.toLocaleDateString("th-TH", {
-                //     year: "numeric",
-                //     month: "long",
-                //     day: "numeric",
-                //   });
+                  // const result = date.toLocaleDateString("th-TH", {
+                  //   year: "numeric",
+                  //   month: "long",
+                  //   day: "numeric",
+                  // });
                 if(val.isadmin !== 1) {
                   return (
                     <tr>

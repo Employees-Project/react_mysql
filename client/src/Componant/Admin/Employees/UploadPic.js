@@ -87,10 +87,10 @@ const UploadPic = () => {
             />
           </div>
           <button onClick={handleUpload} class="btn btn-success">
-            Uploadl Picture
+            อัปโหลดรูปภาพ
           </button>
           <Link to="/admin/employee" className="btn btn-primary">
-            Back
+            ย้อนกลับ
           </Link>
         </form>
       </div>

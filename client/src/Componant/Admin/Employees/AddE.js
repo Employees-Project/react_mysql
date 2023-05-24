@@ -177,6 +177,7 @@ export default function AddE() {
             <input
               type="text"
               className="form-control"
+              maxLength={13}
               required
               onChange={(event) => {
                 setIdentityNo(event.target.value);
@@ -266,6 +267,7 @@ export default function AddE() {
             <input
               type="text"
               className="form-control"
+              maxLength={10}
               required
               onChange={(event) => {
                 setPhoneNo(event.target.value);
