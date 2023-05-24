@@ -27,7 +27,7 @@ const EditT = () => {
         redirect: "follow",
       };
     
-      await fetch("https://long-teal-cormorant-garb.cyclic.app/users", requestOptions)
+      await fetch("https://project-test-1.herokuapp.com/users", requestOptions)
         .then((response) => response.json())
         .then((result) => setData(result))
         .catch((error) => console.log("error", error));
@@ -35,7 +35,7 @@ const EditT = () => {
 
   useEffect(() => {
         const token = localStorage.getItem("Admin");
-        fetch("https://long-teal-cormorant-garb.cyclic.app/authen", {
+        fetch("https://project-test-1.herokuapp.com/authen", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -65,7 +65,7 @@ const EditT = () => {
   }, []);
 
   async function getTeam() {
-    await fetch(`https://long-teal-cormorant-garb.cyclic.app/team/${id}`).then((result) => {
+    await fetch(`https://project-test-1.herokuapp.com/team/${id}`).then((result) => {
       result.json().then((resp) => {
         // console.warn(resp)
         setData2(resp);
@@ -102,7 +102,7 @@ const EditT = () => {
 
   const updateTeam = (event) => {
     event.preventDefault();
-    fetch(`https://long-teal-cormorant-garb.cyclic.app/update/team/${id}`, requestOptions).then(
+    fetch(`https://project-test-1.herokuapp.com/update/team/${id}`, requestOptions).then(
       Swal.fire({
         position: "center",
         icon: "success",

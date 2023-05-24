@@ -26,7 +26,7 @@ export default function Dashboard() {
   const navigate = useNavigate();
     useEffect(() => {
       const token = localStorage.getItem('HR')
-      fetch('https://long-teal-cormorant-garb.cyclic.app/authen/hr', {
+      fetch('https://project-test-1.herokuapp.com/authen/hr', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

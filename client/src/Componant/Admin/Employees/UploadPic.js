@@ -16,7 +16,7 @@ const UploadPic = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("Admin");
-    fetch("https://long-teal-cormorant-garb.cyclic.app/authen", {
+    fetch("https://project-test-1.herokuapp.com/authen", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -48,7 +48,7 @@ const UploadPic = () => {
     const formdata = new FormData();
     formdata.append("image", pic);
     axios
-      .put(`https://long-teal-cormorant-garb.cyclic.app/upload/${id}`, formdata)
+      .put(`https://project-test-1.herokuapp.com/upload/${id}`, formdata)
       .then((res) => {
         if (res.data.status === "ok") {
           Swal.fire({

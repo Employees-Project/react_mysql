@@ -118,7 +118,7 @@ export default function Admin() {
   const [employeeList, setEmployeeList] = useState([]);
 
   async function getUsers() {
-    await fetch('https://long-teal-cormorant-garb.cyclic.app/users')
+    await fetch('https://project-test-1.herokuapp.com/users')
     .then((data) => data.json())
     .then((result) => {
       setEmployeeList(result)
@@ -129,7 +129,7 @@ export default function Admin() {
   const navigate = useNavigate();
   useEffect(() => {
     const token = localStorage.getItem('Admin')
-    fetch('https://long-teal-cormorant-garb.cyclic.app/authen', {
+    fetch('https://project-test-1.herokuapp.com/authen', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

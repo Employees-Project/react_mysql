@@ -15,7 +15,7 @@ const ReadN = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("Admin");
-    fetch("https://long-teal-cormorant-garb.cyclic.app/authen", {
+    fetch("https://project-test-1.herokuapp.com/authen", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -50,7 +50,7 @@ const ReadN = () => {
       redirect: 'follow'
     };
     
-    fetch(`https://long-teal-cormorant-garb.cyclic.app/history/update/approve1/${id}`, requestOptions)
+    fetch(`https://project-test-1.herokuapp.com/history/update/approve1/${id}`, requestOptions)
       .then(navigate("/admin/noti"))
       .catch(error => console.log('error', error));
   };
@@ -62,13 +62,13 @@ const ReadN = () => {
       redirect: 'follow'
     };
     
-    fetch(`https://long-teal-cormorant-garb.cyclic.app/history/update/approve0/${id}`, requestOptions)
+    fetch(`https://project-test-1.herokuapp.com/history/update/approve0/${id}`, requestOptions)
       .then(navigate("/admin/noti"))
       .catch(error => console.log('error', error));
   };
 
   function getHistory() {
-    fetch(`https://long-teal-cormorant-garb.cyclic.app/history/${id}`).then((result) => {
+    fetch(`https://project-test-1.herokuapp.com/history/${id}`).then((result) => {
       result.json().then((resp) => {
         // console.warn(resp)
         setHistory(resp);

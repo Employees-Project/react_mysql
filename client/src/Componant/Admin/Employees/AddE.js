@@ -8,7 +8,7 @@ export default function AddE() {
 
   useEffect(() => {
     const token = localStorage.getItem("Admin");
-    fetch("https://long-teal-cormorant-garb.cyclic.app/authen", {
+    fetch("https://project-test-1.herokuapp.com/authen", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -108,7 +108,7 @@ export default function AddE() {
         // certificateName: certificateName,
         // certificatePic: certificatePic,
       };
-      fetch("https://long-teal-cormorant-garb.cyclic.app/register", {
+      fetch("https://project-test-1.herokuapp.com/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -7,7 +7,7 @@ const AddL = () => {
   const navigate = useNavigate();
   useEffect(() => {
     const token = localStorage.getItem("Admin");
-    fetch("https://long-teal-cormorant-garb.cyclic.app/authen", {
+    fetch("https://project-test-1.herokuapp.com/authen", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -74,7 +74,7 @@ const AddL = () => {
           showConfirmButton: true,
         });
       } else {
-        fetch("https://long-teal-cormorant-garb.cyclic.app/add/leave", requestOptions)
+        fetch("https://project-test-1.herokuapp.com/add/leave", requestOptions)
           .then((response) => response.json())
           .then((result) => {
             console.log(

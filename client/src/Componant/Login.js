@@ -21,7 +21,7 @@ export default function SignIn() {
       username: data.get("username"),
       password: data.get("password"),
     };
-    fetch("https://long-teal-cormorant-garb.cyclic.app/login", {
+    fetch("https://project-test-1.herokuapp.com/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

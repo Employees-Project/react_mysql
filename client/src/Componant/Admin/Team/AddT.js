@@ -25,7 +25,7 @@ const AddT = () => {
     };
 
     await fetch(
-      "https://long-teal-cormorant-garb.cyclic.app/users",
+      "https://project-test-1.herokuapp.com/users",
       requestOptions
     )
       .then((response) => response.json())
@@ -57,7 +57,7 @@ const AddT = () => {
     };
 
     fetch(
-      "https://long-teal-cormorant-garb.cyclic.app/add/team",
+      "https://project-test-1.herokuapp.com/add/team",
       requestOptions
     )
       .then((response) => response.json())
@@ -77,7 +77,7 @@ const AddT = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("Admin");
-    fetch("https://long-teal-cormorant-garb.cyclic.app/authen", {
+    fetch("https://project-test-1.herokuapp.com/authen", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

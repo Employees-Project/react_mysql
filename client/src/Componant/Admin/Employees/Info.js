@@ -19,7 +19,7 @@ const Info = () => {
 
   useEffect(() => {
       const token = localStorage.getItem("Admin");
-      fetch("https://long-teal-cormorant-garb.cyclic.app/authen", {
+      fetch("https://project-test-1.herokuapp.com/authen", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -48,7 +48,7 @@ const Info = () => {
   }, []);
 
   function getUsers() {
-    fetch(`https://long-teal-cormorant-garb.cyclic.app/users/${id}`).then((result) => {
+    fetch(`https://project-test-1.herokuapp.com/users/${id}`).then((result) => {
       result.json().then((resp) => {
         // console.warn(resp)
         // setData(resp);

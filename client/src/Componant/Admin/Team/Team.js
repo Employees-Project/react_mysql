@@ -14,7 +14,7 @@ const Team = () => {
       redirect: "follow",
     };
 
-    fetch(`https://long-teal-cormorant-garb.cyclic.app/team/delete/${id}`, requestOptions).then(
+    fetch(`https://project-test-1.herokuapp.com/team/delete/${id}`, requestOptions).then(
       getTeam()
     );
   };
@@ -25,14 +25,14 @@ const Team = () => {
       redirect: "follow",
     };
 
-    await fetch("https://long-teal-cormorant-garb.cyclic.app/teams", requestOptions)
+    await fetch("https://project-test-1.herokuapp.com/teams", requestOptions)
       .then((response) => response.json())
       .then((result) => setTeamList(result))
       .catch((error) => console.log("error", error));
   }
   useEffect(() => {
     const token = localStorage.getItem("Admin");
-    fetch("https://long-teal-cormorant-garb.cyclic.app/authen", {
+    fetch("https://project-test-1.herokuapp.com/authen", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

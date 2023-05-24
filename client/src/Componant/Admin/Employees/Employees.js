@@ -3,11 +3,12 @@ import AdminNavbar from "../AdminNavbar/AdminNavbar";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import "./Employees.css"
+import { green } from "@mui/material/colors";
 const Employees = () => {
   const navigate = useNavigate();
   useEffect(() => {
     const token = localStorage.getItem("Admin");
-    fetch("https://long-teal-cormorant-garb.cyclic.app/authen", {
+    fetch("https://project-test-1.herokuapp.com/authen", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -43,7 +44,7 @@ const Employees = () => {
       redirect: "follow",
     };
   
-    await fetch("https://long-teal-cormorant-garb.cyclic.app/users", requestOptions)
+    await fetch("https://project-test-1.herokuapp.com/users", requestOptions)
       .then((response) => response.json())
       .then((result) => setEmployeeList(result))
       .catch((error) => console.log("error", error));
@@ -75,6 +76,7 @@ const Employees = () => {
             </thead>
             <tbody>
               {employeeList.map((val) => {
+                const status = val.active ? "greenDot" : "redDot"
                 //   var date = new Date(val.birthday);
 
                 //   const result = date.toLocaleDateString("th-TH", {
@@ -91,7 +93,7 @@ const Employees = () => {
                       <Link to={"/admin/employee/uploadpic/" + val.employeeid}>
                         {val.pic ? (
                           <img
-                            src={`https://long-teal-cormorant-garb.cyclic.app/image/` + val.pic}
+                            src={`https://project-test-1.herokuapp.com/image/` + val.pic}
                             width="50"
                             height="50"
                           />
@@ -112,7 +114,7 @@ const Employees = () => {
                     <td>{val.position}</td>
                     <td>{val.phoneNo}</td>
                     <td>{val.email}</td>
-                    <td>{val.active ? "เปิดใช้งาน" : "ปิดใช้งาน"}</td>
+                    <td><span className={status}>{val.active ? "เปิดใช้งาน" : "ปิดใช้งาน"}</span></td>
                     <td>
                       <Link
                         className="btn btn-success me-2"

@@ -62,7 +62,7 @@ export default function Noti() {
     };
 
     fetch(
-      `https://long-teal-cormorant-garb.cyclic.app/history/update/status/${id}`,
+      `https://project-test-1.herokuapp.com/history/update/status/${id}`,
       requestOptions
     ).catch((error) => console.log("error", error));
     getHistoryStatus0();
@@ -78,7 +78,7 @@ export default function Noti() {
       redirect: "follow",
     };
 
-    fetch("https://long-teal-cormorant-garb.cyclic.app/history", requestOptions)
+    fetch("https://project-test-1.herokuapp.com/history", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         setHistory(result);
@@ -88,7 +88,7 @@ export default function Noti() {
 
   useEffect(() => {
     const token = localStorage.getItem("Admin");
-    fetch("https://long-teal-cormorant-garb.cyclic.app/authen", {
+    fetch("https://project-test-1.herokuapp.com/authen", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

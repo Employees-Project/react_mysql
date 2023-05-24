@@ -7,7 +7,7 @@ const EditE = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("Admin");
-    fetch("https://long-teal-cormorant-garb.cyclic.app/authen", {
+    fetch("https://project-test-1.herokuapp.com/authen", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -74,7 +74,7 @@ const EditE = () => {
   }, []);
 
   async function getUsers() {
-    await fetch(`https://long-teal-cormorant-garb.cyclic.app/users/${id}`).then((result) => {
+    await fetch(`https://project-test-1.herokuapp.com/users/${id}`).then((result) => {
       result.json().then((resp) => {
         // console.warn(resp)
         // setData(resp);
@@ -149,7 +149,7 @@ const EditE = () => {
       province !== ""||
       zipCode !== ""
     ) {
-      fetch(`https://long-teal-cormorant-garb.cyclic.app/update/users/${id}`, requestOptions).then(
+      fetch(`https://project-test-1.herokuapp.com/update/users/${id}`, requestOptions).then(
         Swal.fire({
           position: "center",
           icon: "success",
