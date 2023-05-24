@@ -138,6 +138,15 @@ export default function Noti() {
               {history.map((val) => {
                 if (val.employeeName !== null) {
                   if (val.status === "Read") {
+                    var rawDate = new Date(val.date);
+
+                    const date = rawDate.toLocaleDateString("th-TH", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit",
+                      timeZone: "GMT"
+                    });
+
                     return (
                       <div className="form-container">
                         <div className="col-sm">
@@ -147,13 +156,14 @@ export default function Noti() {
                                 <b>หัวข้อการลา:</b> {val.l_subject}
                               </h3>
                               <h5 class="card-header col-md-6 d-flex flex-row-reverse">
-                                ชื่อ: {val.employeeName} 
+                                ชื่อ: {val.employeeName} เวลา: {date}
                               </h5>
                             </div>
                             <div className="card-body">
                               <h5 className="card-text">{val.l_detail}</h5>
                               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                              ตรวจสอบแล้ว<Link
+                                ตรวจสอบแล้ว
+                                <Link
                                   to={"/admin/noti/info/" + val.historyId}
                                   class="btn btn-warning"
                                 >
@@ -167,6 +177,14 @@ export default function Noti() {
                       </div>
                     );
                   } else if (val.status === "Not Read") {
+                    var rawDate = new Date(val.date);
+
+                    const date = rawDate.toLocaleDateString("th-TH", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit",
+                      timeZone: "GMT"
+                    });
                     return (
                       <div className="form-container">
                         <div className="col-sm">
@@ -176,13 +194,14 @@ export default function Noti() {
                                 <b>หัวข้อการลา:</b> {val.l_subject}
                               </h3>
                               <h5 class="card-header col-md-6 d-flex flex-row-reverse">
-                                ชื่อ: {val.employeeName} 
+                                ชื่อ: {val.employeeName} {date}
                               </h5>
                             </div>
                             <div className="card-body">
                               <h5 className="card-text">{val.l_detail}</h5>
                               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                              ยังไม่ได้ตรวจสอบ<Link
+                                ยังไม่ได้ตรวจสอบ
+                                <Link
                                   to={"/admin/noti/info/" + val.historyId}
                                   class="btn btn-warning"
                                   onClick={() => readStatus(val.historyId)}
@@ -197,6 +216,14 @@ export default function Noti() {
                       </div>
                     );
                   } else if (val.status === "Approve") {
+                    var rawDate = new Date(val.date);
+
+                    const date = rawDate.toLocaleDateString("th-TH", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit",
+                      timeZone: "GMT"
+                    });
                     return (
                       <div className="form-container">
                         <div className="col-sm">
@@ -206,13 +233,14 @@ export default function Noti() {
                                 <b>หัวข้อการลา:</b> {val.l_subject}
                               </h3>
                               <h5 class="card-header col-md-6 d-flex flex-row-reverse">
-                                ชื่อ: {val.employeeName} 
+                                ชื่อ: {val.employeeName} {date}
                               </h5>
                             </div>
                             <div className="card-body">
                               <h5 className="card-text">{val.l_detail}</h5>
                               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                              ไม่อนุมัติ<Link
+                                อนุมัติ
+                                <Link
                                   to={"/admin/noti/info/" + val.historyId}
                                   class="btn btn-warning"
                                 >
@@ -226,6 +254,14 @@ export default function Noti() {
                       </div>
                     );
                   } else if (val.status === "Not Approve") {
+                    var rawDate = new Date(val.date);
+
+                    const date = rawDate.toLocaleDateString("th-TH", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit",
+                      timeZone: "GMT"
+                    });
                     return (
                       <div className="form-container">
                         <div className="col-sm">
@@ -235,13 +271,14 @@ export default function Noti() {
                                 <b>หัวข้อการลา:</b> {val.l_subject}
                               </h3>
                               <h5 class="card-header col-md-6 d-flex flex-row-reverse">
-                                ชื่อ: {val.employeeName} 
+                                ชื่อ: {val.employeeName} {date}
                               </h5>
                             </div>
                             <div className="card-body">
                               <h5 className="card-text">{val.l_detail}</h5>
                               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                              อนุมัติ<Link
+                                ไม่อนุมัติ
+                                <Link
                                   to={"/admin/noti/info/" + val.historyId}
                                   class="btn btn-warning"
                                 >
@@ -255,6 +292,14 @@ export default function Noti() {
                       </div>
                     );
                   } else if (val.r_subject === "เข้างาน") {
+                    var rawDate = new Date(val.date);
+
+                    const date = rawDate.toLocaleDateString("th-TH", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit",
+                      timeZone: "GMT"
+                    });
                     return (
                       <div className="form-container">
                         <div className="col-sm">
@@ -273,7 +318,7 @@ export default function Noti() {
                               </div>
                             </div>
                             <h5 className="card-body">
-                              ชื่อ: {val.employeeName}
+                              ชื่อ: {val.employeeName} <p className="d-flex flex-row-reverse"> {date} </p>
                             </h5>
                           </div>
                           <br />
@@ -281,6 +326,14 @@ export default function Noti() {
                       </div>
                     );
                   } else if (val.r_subject === "ออกงาน") {
+                    var rawDate = new Date(val.date);
+
+                    const date = rawDate.toLocaleDateString("th-TH", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit",
+                      timeZone: "GMT"
+                    });
                     return (
                       <div className="form-container">
                         <div className="col-sm">
@@ -299,7 +352,7 @@ export default function Noti() {
                               </div>
                             </div>
                             <h5 className="card-body">
-                              ชื่อ: {val.employeeName}
+                            ชื่อ: {val.employeeName} <p className="d-flex flex-row-reverse"> {date} </p>
                             </h5>
                           </div>
                           <br />
@@ -314,6 +367,14 @@ export default function Noti() {
               {history.map((leave) => {
                 if (leave.l_subject !== null) {
                   if (leave.status === "Read") {
+                    var rawDate = new Date(leave.date);
+
+                    const date = rawDate.toLocaleDateString("th-TH", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit",
+                      timeZone: "GMT"
+                    });
                     return (
                       <div className="form-container">
                         <div className="col-sm">
@@ -323,13 +384,14 @@ export default function Noti() {
                                 <b>หัวข้อการลา:</b> {leave.l_subject}
                               </h3>
                               <h5 class="card-header col-md-6 d-flex flex-row-reverse">
-                                ชื่อ: {leave.employeeName} 
+                                ชื่อ: {leave.employeeName} {date}
                               </h5>
                             </div>
                             <div className="card-body">
                               <h5 className="card-text">{leave.l_detail}</h5>
                               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                              ตรวจสอบแล้ว<Link
+                                ตรวจสอบแล้ว
+                                <Link
                                   to={"/admin/noti/info/" + leave.historyId}
                                   class="btn btn-warning"
                                 >
@@ -343,6 +405,14 @@ export default function Noti() {
                       </div>
                     );
                   } else if (leave.status === "Not Read") {
+                    var rawDate = new Date(leave.date);
+
+                    const date = rawDate.toLocaleDateString("th-TH", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit",
+                      timeZone: "GMT"
+                    });
                     return (
                       <div className="form-container">
                         <div className="col-sm">
@@ -352,13 +422,14 @@ export default function Noti() {
                                 <b>หัวข้อการลา:</b> {leave.l_subject}
                               </h3>
                               <h5 class="card-header col-md-6 d-flex flex-row-reverse">
-                                ชื่อ: {leave.employeeName} 
+                                ชื่อ: {leave.employeeName} {date}
                               </h5>
                             </div>
                             <div className="card-body">
                               <h5 className="card-text">{leave.l_detail}</h5>
                               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                              ยังไม่ได้ตรวจสอบ<Link
+                                ยังไม่ได้ตรวจสอบ
+                                <Link
                                   to={"/admin/noti/info/" + leave.historyId}
                                   class="btn btn-warning"
                                   onClick={() => readStatus(leave.historyId)}
@@ -373,6 +444,14 @@ export default function Noti() {
                       </div>
                     );
                   } else if (leave.status === "Approve") {
+                    var rawDate = new Date(leave.date);
+
+                    const date = rawDate.toLocaleDateString("th-TH", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit",
+                      timeZone: "GMT"
+                    });
                     return (
                       <div className="form-container">
                         <div className="col-sm">
@@ -382,13 +461,14 @@ export default function Noti() {
                                 <b>หัวข้อการลา:</b> {leave.l_subject}
                               </h3>
                               <h5 class="card-header col-md-6 d-flex flex-row-reverse">
-                                ชื่อ: {leave.employeeName} 
+                                ชื่อ: {leave.employeeName} {date}
                               </h5>
                             </div>
                             <div className="card-body">
                               <h5 className="card-text">{leave.l_detail}</h5>
                               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                              อนุมัติ<Link
+                                อนุมัติ
+                                <Link
                                   to={"/admin/noti/info/" + leave.historyId}
                                   class="btn btn-warning"
                                 >
@@ -402,6 +482,14 @@ export default function Noti() {
                       </div>
                     );
                   } else if (leave.status === "Not Approve") {
+                    var rawDate = new Date(leave.date);
+
+                    const date = rawDate.toLocaleDateString("th-TH", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit",
+                      timeZone: "GMT"
+                    });
                     return (
                       <div className="form-container">
                         <div className="col-sm">
@@ -411,13 +499,14 @@ export default function Noti() {
                                 <b>หัวข้อการลา:</b> {leave.l_subject}
                               </h3>
                               <h5 class="card-header col-md-6 d-flex flex-row-reverse">
-                                ชื่อ: {leave.employeeName} 
+                                ชื่อ: {leave.employeeName} {date}
                               </h5>
                             </div>
                             <div className="card-body">
                               <h5 className="card-text">{leave.l_detail}</h5>
                               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                              ไม่อนุมัติ<Link
+                                ไม่อนุมัติ
+                                <Link
                                   to={"/admin/noti/info/" + leave.historyId}
                                   class="btn btn-warning"
                                 >
@@ -440,6 +529,14 @@ export default function Noti() {
               {history.map((rollcall) => {
                 if (rollcall.r_subject !== null) {
                   if (rollcall.r_subject === "เข้างาน") {
+                    var rawDate = new Date(rollcall.date);
+
+                    const date = rawDate.toLocaleDateString("th-TH", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit",
+                      timeZone: "GMT"
+                    });
                     return (
                       <div className="form-container">
                         <div className="col-sm">
@@ -458,7 +555,7 @@ export default function Noti() {
                               </div>
                             </div>
                             <h5 className="card-body">
-                              ชื่อ: {rollcall.employeeName}
+                              ชื่อ: {rollcall.employeeName} <p className="d-flex flex-row-reverse"> {date} </p>
                             </h5>
                           </div>
                           <br />
@@ -466,6 +563,14 @@ export default function Noti() {
                       </div>
                     );
                   } else if (rollcall.r_subject === "ออกงาน") {
+                    var rawDate = new Date(rollcall.date);
+
+                    const date = rawDate.toLocaleDateString("th-TH", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit",
+                      timeZone: "GMT"
+                    });
                     return (
                       <div className="form-container">
                         <div className="col-sm">
@@ -484,7 +589,7 @@ export default function Noti() {
                               </div>
                             </div>
                             <h5 className="card-body">
-                              ชื่อ: {rollcall.employeeName}
+                              ชื่อ: {rollcall.employeeName} <p className="d-flex flex-row-reverse"> {date} </p>
                             </h5>
                           </div>
                           <br />
