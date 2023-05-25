@@ -42,7 +42,7 @@ function a11yProps(index) {
   };
 }
 
-export default function Noti() {
+export default function Noti1() {
   const navigate = useNavigate();
 
   const [value, setValue] = useState(0);
@@ -152,20 +152,20 @@ export default function Noti() {
                         <div className="col-sm">
                           <div className="card leaveR">
                             <div className="row g-3">
-                              <h3 class="card-header col-md-6">
+                              <h3 className="card-header col-md-6">
                                 <b>หัวข้อการลา:</b> {val.l_subject}
                               </h3>
-                              <h5 class="card-header col-md-6 d-flex flex-row-reverse">
-                                ชื่อ: {val.employeeName} เวลา: {date}
+                              <h5 className="card-header col-md-6 d-flex flex-row-reverse">
+                                ชื่อ: {val.employeeName} {date}
                               </h5>
                             </div>
                             <div className="card-body">
                               <h5 className="card-text">{val.l_detail}</h5>
-                              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                              <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                                 ตรวจสอบแล้ว
                                 <Link
                                   to={"/admin/noti/info/" + val.historyId}
-                                  class="btn btn-warning"
+                                  className="btn btn-warning"
                                 >
                                   ดูข้อมูล
                                 </Link>
@@ -190,20 +190,20 @@ export default function Noti() {
                         <div className="col-sm">
                           <div className="card leaveN">
                             <div className="row g-3">
-                              <h3 class="card-header col-md-6">
+                              <h3 className="card-header col-md-6">
                                 <b>หัวข้อการลา:</b> {val.l_subject}
                               </h3>
-                              <h5 class="card-header col-md-6 d-flex flex-row-reverse">
+                              <h5 className="card-header col-md-6 d-flex flex-row-reverse">
                                 ชื่อ: {val.employeeName} {date}
                               </h5>
                             </div>
                             <div className="card-body">
                               <h5 className="card-text">{val.l_detail}</h5>
-                              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                              <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                                 ยังไม่ได้ตรวจสอบ
                                 <Link
                                   to={"/admin/noti/info/" + val.historyId}
-                                  class="btn btn-warning"
+                                  className="btn btn-warning"
                                   onClick={() => readStatus(val.historyId)}
                                 >
                                   ดูข้อมูล
@@ -229,20 +229,20 @@ export default function Noti() {
                         <div className="col-sm">
                           <div className="card approve1">
                             <div className="row g-3">
-                              <h3 class="card-header col-md-6">
+                              <h3 className="card-header col-md-6">
                                 <b>หัวข้อการลา:</b> {val.l_subject}
                               </h3>
-                              <h5 class="card-header col-md-6 d-flex flex-row-reverse">
+                              <h5 className="card-header col-md-6 d-flex flex-row-reverse">
                                 ชื่อ: {val.employeeName} {date}
                               </h5>
                             </div>
                             <div className="card-body">
                               <h5 className="card-text">{val.l_detail}</h5>
-                              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                              <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                                 อนุมัติ
                                 <Link
                                   to={"/admin/noti/info/" + val.historyId}
-                                  class="btn btn-warning"
+                                  className="btn btn-warning"
                                 >
                                   ดูข้อมูล
                                 </Link>
@@ -267,20 +267,20 @@ export default function Noti() {
                         <div className="col-sm">
                           <div className="card approve0">
                             <div className="row g-3">
-                              <h3 class="card-header col-md-6">
+                              <h3 className="card-header col-md-6">
                                 <b>หัวข้อการลา:</b> {val.l_subject}
                               </h3>
-                              <h5 class="card-header col-md-6 d-flex flex-row-reverse">
+                              <h5 className="card-header col-md-6 d-flex flex-row-reverse">
                                 ชื่อ: {val.employeeName} {date}
                               </h5>
                             </div>
                             <div className="card-body">
                               <h5 className="card-text">{val.l_detail}</h5>
-                              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                              <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                                 ไม่อนุมัติ
                                 <Link
                                   to={"/admin/noti/info/" + val.historyId}
-                                  class="btn btn-warning"
+                                  className="btn btn-warning"
                                 >
                                   ดูข้อมูล
                                 </Link>
@@ -308,7 +308,7 @@ export default function Noti() {
                               <h3 className="card-body col-md-6">
                                 <b>หัวข้อ:</b> {val.r_subject}
                               </h3>
-                              <div class="col-md-1 flex-row-reverse">
+                              <div className="col-md-1 flex-row-reverse">
                                 <Link
                                   to={"/admin/noti/info/" + val.historyId}
                                   className="btn btn-warning gap-2"
@@ -342,7 +342,7 @@ export default function Noti() {
                               <h3 className="card-body col-md-6">
                                 <b>หัวข้อ:</b> {val.r_subject}
                               </h3>
-                              <div class="col-md-1 flex-row-reverse">
+                              <div className="col-md-1 flex-row-reverse">
                                 <Link
                                   to={"/admin/noti/info/" + val.historyId}
                                   className="btn btn-warning gap-2"
@@ -380,20 +380,20 @@ export default function Noti() {
                         <div className="col-sm">
                           <div className="card leaveR">
                             <div className="row g-3">
-                              <h3 class="card-header col-md-6">
+                              <h3 className="card-header col-md-6">
                                 <b>หัวข้อการลา:</b> {leave.l_subject}
                               </h3>
-                              <h5 class="card-header col-md-6 d-flex flex-row-reverse">
+                              <h5 className="card-header col-md-6 d-flex flex-row-reverse">
                                 ชื่อ: {leave.employeeName} {date}
                               </h5>
                             </div>
                             <div className="card-body">
                               <h5 className="card-text">{leave.l_detail}</h5>
-                              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                              <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                                 ตรวจสอบแล้ว
                                 <Link
                                   to={"/admin/noti/info/" + leave.historyId}
-                                  class="btn btn-warning"
+                                  className="btn btn-warning"
                                 >
                                   ดูข้อมูล
                                 </Link>
@@ -418,20 +418,20 @@ export default function Noti() {
                         <div className="col-sm">
                           <div className="card leaveN">
                             <div className="row g-3">
-                              <h3 class="card-header col-md-6">
+                              <h3 className="card-header col-md-6">
                                 <b>หัวข้อการลา:</b> {leave.l_subject}
                               </h3>
-                              <h5 class="card-header col-md-6 d-flex flex-row-reverse">
+                              <h5 className="card-header col-md-6 d-flex flex-row-reverse">
                                 ชื่อ: {leave.employeeName} {date}
                               </h5>
                             </div>
                             <div className="card-body">
                               <h5 className="card-text">{leave.l_detail}</h5>
-                              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                              <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                                 ยังไม่ได้ตรวจสอบ
                                 <Link
                                   to={"/admin/noti/info/" + leave.historyId}
-                                  class="btn btn-warning"
+                                  className="btn btn-warning"
                                   onClick={() => readStatus(leave.historyId)}
                                 >
                                   ดูข้อมูล
@@ -457,20 +457,20 @@ export default function Noti() {
                         <div className="col-sm">
                           <div className="card approve1">
                             <div className="row g-3">
-                              <h3 class="card-header col-md-6">
+                              <h3 className="card-header col-md-6">
                                 <b>หัวข้อการลา:</b> {leave.l_subject}
                               </h3>
-                              <h5 class="card-header col-md-6 d-flex flex-row-reverse">
+                              <h5 className="card-header col-md-6 d-flex flex-row-reverse">
                                 ชื่อ: {leave.employeeName} {date}
                               </h5>
                             </div>
                             <div className="card-body">
                               <h5 className="card-text">{leave.l_detail}</h5>
-                              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                              <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                                 อนุมัติ
                                 <Link
                                   to={"/admin/noti/info/" + leave.historyId}
-                                  class="btn btn-warning"
+                                  className="btn btn-warning"
                                 >
                                   ดูข้อมูล
                                 </Link>
@@ -495,20 +495,20 @@ export default function Noti() {
                         <div className="col-sm">
                           <div className="card approve0">
                             <div className="row g-3">
-                              <h3 class="card-header col-md-6">
+                              <h3 className="card-header col-md-6">
                                 <b>หัวข้อการลา:</b> {leave.l_subject}
                               </h3>
-                              <h5 class="card-header col-md-6 d-flex flex-row-reverse">
+                              <h5 className="card-header col-md-6 d-flex flex-row-reverse">
                                 ชื่อ: {leave.employeeName} {date}
                               </h5>
                             </div>
                             <div className="card-body">
                               <h5 className="card-text">{leave.l_detail}</h5>
-                              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                              <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                                 ไม่อนุมัติ
                                 <Link
                                   to={"/admin/noti/info/" + leave.historyId}
-                                  class="btn btn-warning"
+                                  className="btn btn-warning"
                                 >
                                   ดูข้อมูล
                                 </Link>
@@ -545,7 +545,7 @@ export default function Noti() {
                               <h3 className="card-body col-md-6">
                                 <b>หัวข้อ:</b> {rollcall.r_subject}
                               </h3>
-                              <div class="col-md-1 flex-row-reverse">
+                              <div className="col-md-1 flex-row-reverse">
                                 <Link
                                   to={"/admin/noti/info/" + rollcall.historyId}
                                   className="btn btn-warning gap-2"
@@ -579,7 +579,7 @@ export default function Noti() {
                               <h3 className="card-body col-md-6">
                                 <b>หัวข้อ:</b> {rollcall.r_subject}
                               </h3>
-                              <div class="col-md-1 flex-row-reverse">
+                              <div className="col-md-1 flex-row-reverse">
                                 <Link
                                   to={"/admin/noti/info/" + rollcall.historyId}
                                   className="btn btn-warning gap-2"

@@ -1,4 +1,4 @@
-front1 {
+.front1 {
     font-family: 'K2D', sans-serif;
 	font-family: 'Pridi', serif;
     margin-left: 5%;
@@ -10,7 +10,7 @@ front1 {
 
 }
 
-front2 {
+.front2 {
     font-family: 'K2D', sans-serif;
 	font-family: 'Pridi', serif;
     margin-left: 35px;
@@ -21,7 +21,7 @@ front2 {
     text-align: left;
 
 }
-front3 {
+.front3 {
     font-family: 'K2D', sans-serif;
 	font-family: 'Pridi', serif;
     margin: 50px;
@@ -32,7 +32,7 @@ front3 {
     text-align: left;
 
 }
-front4 {
+.front4 {
     font-family: 'K2D', sans-serif;
 	font-family: 'Pridi', serif;
     text-align: left;

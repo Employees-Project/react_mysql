@@ -273,7 +273,7 @@ const EditE = () => {
               <option hidden >กรุณาเลือกจังหวัด</option>
               {data.map((val) => {
                 // console.log(val.amphure[1].tambon[1].name_th);
-                return <option>{val.name_th}</option>;
+                return <option key={val.id} >{val.name_th}</option>;
               })}
             </select>
           </div>
@@ -295,7 +295,7 @@ const EditE = () => {
             >
               <option hidden>กรุณาเลือกอำเภอ/เขต</option>
               {data2.map((val) => {
-                return <option>{val.name_th}</option>;
+                return <option key={val.id}>{val.name_th}</option>;
               })}
             </select>
           </div>
@@ -317,7 +317,7 @@ const EditE = () => {
             >
               <option hidden>กรุณาเลือกตำบล/แขวง</option>
               {data3.map((val) => {
-                return <option>{val.name_th}</option>;
+                return <option key={val.id}>{val.name_th}</option>;
               })}
             </select>
           </div>

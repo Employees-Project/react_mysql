@@ -7,7 +7,6 @@ import AdminNavbar from "../AdminNavbar/AdminNavbar";
 
 export default function Calendar() {
   const [data, setData] = useState([]);
-  console.log("🚀 ~ file: Calendar.js:17 ~ Calendar ~ data:", data)
   const [subject, setSubject] = useState("");
   const [s_time, setS_time] = useState("");
   const [e_time, setE_time] = useState("");
@@ -16,7 +15,7 @@ export default function Calendar() {
     redirect: "follow",
   };
 
-  fetch("http://localhost:3000/events", requestOptions)
+  fetch("https://project-test-1.herokuapp.com/events", requestOptions)
     .then((response) => response.json())
     .then((result) => {
       setData(result);
@@ -51,13 +50,13 @@ export default function Calendar() {
     <>
       <AdminNavbar />
       <div className="container">
-      <div className="d-flex flex-row-reverse bd-highlight">
-        <Link
-          to="/admin/addevent"
-          className="btn btn-success btn-block topright"
-        >
-          เพิ่ม Event
-        </Link>
+        <div className="d-flex flex-row-reverse bd-highlight">
+          <Link
+            to="/admin/addevent"
+            className="btn btn-success btn-block topright"
+          >
+            เพิ่ม Event
+          </Link>
         </div>
         <div className="container calendar">
           <FullCalendar

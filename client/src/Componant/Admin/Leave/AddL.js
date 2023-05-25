@@ -155,7 +155,7 @@ const AddL = () => {
               }}
             />
           </div>
-          <button onClick={addLeave} class="btn btn-success">
+          <button onClick={addLeave} className="btn btn-success">
             เพิ่มข้อมูลการลา
           </button>
           <Link to="/admin/leave" className="btn btn-primary">

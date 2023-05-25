@@ -140,7 +140,7 @@ export default function AddE() {
       <AdminNavbar />
       <br />
       <div className="form-container">
-        <form className="form-signin row g-3" enctype="multipart/form-data">
+        <form className="form-signin row g-3" encType="multipart/form-data">
           <div>
             <h2>เพิ่มพนักงาน</h2>
           </div>
@@ -228,7 +228,7 @@ export default function AddE() {
             />
           </div>
           <div className="col-md-3">
-            <label htmlfor="" class="form-label">
+            <label htmlFor="" className="form-label">
               วันเกิด
             </label>
             <input
@@ -238,7 +238,7 @@ export default function AddE() {
               type="date"
               defaultValue="today"
               sx={{ width: 220 }}
-              InputLabelProps={{
+              inputlabelprops={{
                 shrink: true,
               }}
               onChange={(event) => {
@@ -318,7 +318,7 @@ export default function AddE() {
               <option hidden>กรุณาเลือกจังหวัด</option>
               {data.map((val) => {
                 // console.log(val.amphure[1].tambon[1].name_th);
-                return <option>{val.name_th}</option>;
+                return <option key={val.id}>{val.name_th}</option>;
               })}
             </select>
           </div>
@@ -339,7 +339,7 @@ export default function AddE() {
             >
               <option hidden>กรุณาเลือกอำเภอ/เขต</option>
               {data2.map((val) => {
-                return <option>{val.name_th}</option>;
+                return <option key={val.id}>{val.name_th}</option>;
               })}
             </select>
           </div>
@@ -360,7 +360,7 @@ export default function AddE() {
             >
               <option hidden>กรุณาเลือกตำบล/แขวง</option>
               {data3.map((val) => {
-                return <option>{val.name_th}</option>;
+                return <option key={val.id}>{val.name_th}</option>;
               })}
             </select>
           </div>
@@ -386,7 +386,7 @@ export default function AddE() {
               onChange={handleFile}
             />
           </div> */}
-          <button onClick={addEmployee} class="btn btn-success">
+          <button onClick={addEmployee} className="btn btn-success">
             เพิ่มข้อมูลพนักงาน
           </button>
           <Link to="/admin/employee" className="btn btn-primary">

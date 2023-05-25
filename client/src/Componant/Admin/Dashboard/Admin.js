@@ -122,7 +122,6 @@ export default function Admin() {
     .then((data) => data.json())
     .then((result) => {
       setEmployeeList(result)
-      console.log(employeeList)
     })
   }
 
@@ -167,10 +166,10 @@ export default function Admin() {
             <div className="card1">
               <div className="card-body">
                 <Link to="/admin/employee" className="iconselect"><img src="https://cosmotech.com.ph/wp-content/uploads/2021/11/Employee-self.png" alt="" width="250" height="145" /></Link>
-                <front1 className="card-title">จำนวนพนักงาน</front1>
+                <div className="card-title front1">จำนวนพนักงาน</div>
                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                  <front2 className="card-title">{"ค่าของ htr"} / {employeeList.length}
-                  </front2>
+                  <div className="card-title front2">{"ค่าของ htr"} / {employeeList.length}
+                  </div>
                 </div>
               </div>
             </div>
@@ -180,10 +179,10 @@ export default function Admin() {
           <div className="col-sm-4">
             <div className="card2">
               <div className="card-body">
-                <front1 className="card-title">จำนวนพนักงานขาดงาน</front1>
+                <div className="card-title">จำนวนพนักงานขาดงาน</div>
                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                  <front2 className="card-title">{"ค่าของ htr"} / {employeeList.length}
-                  </front2>
+                  <div className="card-title front2">{"ค่าของ htr"} / {employeeList.length}
+                  </div>
                 </div>
               </div>
             </div>
@@ -193,10 +192,10 @@ export default function Admin() {
           <div className="col-sm-4">
             <div className="card3">
               <div className="card-body">
-                <front1 className="card-title">จำนวนพนักงานที่ลางาน</front1>
+                <div className="card-title">จำนวนพนักงานที่ลางาน</div>
                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                  <front2 className="card-title">{"ค่าของ htr"} / {employeeList.length}
-                  </front2>
+                  <div className="card-title front2">{"ค่าของ htr"} / {employeeList.length}
+                  </div>
                 </div>
               </div>
             </div>
@@ -262,13 +261,13 @@ export default function Admin() {
           </div>
 
           <div className="card-body">
-            <front4 className="card-title">การผ่านการอบรมของพนักงาน</front4 >
+            <div className="card-title front4">การผ่านการอบรมของพนักงาน</div >
             <div className="card3">
-              <front3 className="card-title">รายชื่อพนักงาน</front3>
+              <div className="card-title front3">รายชื่อพนักงาน</div>
               <div className="d-grid gap-2 d-md-flex">
-                <front2 className="card-title">{employeeList.map((val) => {
+                <div className="card-title front2">{employeeList.map((val) => {
                   return (
-                    <div>
+                    <div key={val.employeeid}>
                       <ul className="item-lish">
                         <li>
                           <b>{val.username}</b>
@@ -278,7 +277,7 @@ export default function Admin() {
                   );
                 })}
 
-                </front2>
+                </div>
 
                 <ComposedChart
                   layout="vertical"

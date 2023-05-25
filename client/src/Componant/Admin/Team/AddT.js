@@ -139,7 +139,7 @@ const AddT = () => {
             >
               <option>กรุณาเลือกหัวหน้าทีม</option>
               {data.map((val) => {
-                return <option>{val.employeeName}</option>;
+                return <option key={val.employeeid}>{val.employeeName}</option>;
               })}
             </select>
           </div>
@@ -156,7 +156,7 @@ const AddT = () => {
             >
               <option>กรุณาเลือกสมาชิกในทีม 1</option>
               {data.map((val) => {
-                return <option>{val.employeeName}</option>;
+                return <option key={val.employeeid}>{val.employeeName}</option>;
               })}
             </select>
           </div>
@@ -172,7 +172,7 @@ const AddT = () => {
             >
               <option>กรุณาเลือกสมาชิกในทีม 2</option>
               {data.map((val) => {
-                return <option>{val.employeeName}</option>;
+                return <option key={val.employeeid}>{val.employeeName}</option>;
               })}
             </select>
           </div>
@@ -188,7 +188,7 @@ const AddT = () => {
             >
               <option>กรุณาเลือกสมาชิกในทีม 3</option>
               {data.map((val) => {
-                return <option>{val.employeeName}</option>;
+                return <option key={val.employeeid}>{val.employeeName}</option>;
               })}
             </select>
           </div>
@@ -205,7 +205,7 @@ const AddT = () => {
             >
               <option>กรุณาเลือกสมาชิกในทีม 4</option>
               {data.map((val) => {
-                return <option>{val.employeeName}</option>;
+                return <option key={val.employeeid}>{val.employeeName}</option>;
               })}
             </select>
           </div>
@@ -220,12 +220,12 @@ const AddT = () => {
             >
               <option>กรุณาเลือกสมาชิกในทีม 5</option>
               {data.map((val) => {
-                return <option>{val.employeeName}</option>;
+                return <option key={val.employeeid}>{val.employeeName}</option>;
               })}
             </select>
           </div>
 
-          <button onClick={addTeam} class="btn btn-success">
+          <button onClick={addTeam} className="btn btn-success">
             เพิ่มทีม
           </button>
           <Link to="/admin/team" className="btn btn-primary">

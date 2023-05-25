@@ -45,7 +45,6 @@ const EditL = () => {
   function getLeaves() {
     fetch(`https://project-test-1.herokuapp.com/leave/${id}`).then((result) => {
       result.json().then((resp) => {
-        console.log("🚀 ~ file: EditL.js:22 ~ result.json ~ resp:", resp);
         // console.warn(resp)
         setSubject(resp[0].l_subject);
         setLimit_m(resp[0].l_limit_m);
@@ -167,7 +166,7 @@ const EditL = () => {
               }}
             />
           </div>
-          <button onClick={updateLeave} class="btn btn-success">
+          <button onClick={updateLeave} className="btn btn-success">
             เพิ่มข้อมูลพนักงาน
           </button>
           <Link to="/admin/leave" className="btn btn-primary">

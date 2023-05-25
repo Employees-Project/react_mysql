@@ -74,9 +74,9 @@ const Leave = () => {
           {leave.map((val) => {
             if (val.l_limit_m && val.l_limit_l !== null) {
               return (
-                <div className="col-md-4">
+                <div className="col-md-4" key={val.historyId}>
                   <div className="card">
-                    <h3 class="card-header">{val.l_subject}</h3>
+                    <h3 className="card-header">{val.l_subject}</h3>
                     <div className="card-body">
                       <h4 className="card-title">
                         <b>เกณฑ์การลารายเดือน</b>
@@ -86,7 +86,7 @@ const Leave = () => {
                         <b>เกณฑ์การลารายปี</b>
                       </h4>
                       <p className="card-text">{val.l_limit_y}</p>
-                      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                      <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                         <button
                           onClick={() =>
                             Swal.fire({
@@ -109,13 +109,13 @@ const Leave = () => {
                               }
                             })
                           }
-                          class="btn btn-danger"
+                          className="btn btn-danger"
                         >
                           ลบ
                         </button>
                         <Link
                           to={"/admin/leave/edit/" + val.historyId}
-                          class="btn btn-warning "
+                          className="btn btn-warning "
                         >
                           แก้ไขเกณฑ์การลา
                         </Link>

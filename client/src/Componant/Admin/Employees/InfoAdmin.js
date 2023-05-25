@@ -101,7 +101,7 @@ const InfoAdmin = () => {
             {pic ? (
               <Link to={"/admin/employee/uploadpic/1"}>
                 <img
-                  src={`https://project-test-1.herokuapp.com/image/` + pic}
+                  src={`https://project-test-1.herokuapp.com/image/${pic}`}
                   className="rounded mx-auto d-block"
                   width="250"
                   height="250"

@@ -71,7 +71,7 @@ const UploadPic = () => {
       <AdminNavbar />
       <br />
       <div className="form-container">
-        <form className="form-signin row g-3" enctype="multipart/form-data">
+        <form className="form-signin row g-3" encType="multipart/form-data">
           <div>
             <h2>เพิ่มรูปพนักงาน</h2>
           </div>
@@ -86,7 +86,7 @@ const UploadPic = () => {
               onChange={handleFile}
             />
           </div>
-          <button onClick={handleUpload} class="btn btn-success">
+          <button onClick={handleUpload} className="btn btn-success">
             อัปโหลดรูปภาพ
           </button>
           <Link to="/admin/employee" className="btn btn-primary">

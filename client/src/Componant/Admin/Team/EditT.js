@@ -8,7 +8,6 @@ const EditT = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [data2, setData2] = useState([]);
-  console.log("🚀 ~ file: EditT.js:11 ~ EditT ~ data2:", data2)
   const [teamname, setTeamname] = useState("");
   const [leadername, setLeadername] = useState("");
   const [member1, setMember1] = useState("");
@@ -147,9 +146,9 @@ const EditT = () => {
                 setLeadername(event.target.value);
               }}
             >
-              <option>กรุณาเลือกหัวหน้าทีม</option>
+              <option hidden>กรุณาเลือกหัวหน้าทีม</option>
               {data.map((val) => {
-                return <option>{val.employeeName}</option>;
+                return <option key={val.employeeid}>{val.employeeName}</option>;
               })}
             </select>
           </div>
@@ -165,13 +164,13 @@ const EditT = () => {
                 setMember1(event.target.value);
               }}
             >
-              <option value={""}>กรุณาเลือกสมาชิกในทีม 1</option>
+              <option hidden>กรุณาเลือกสมาชิกในทีม 1</option>
               {data.map((val) => {
-                return <option>{val.employeeName}</option>;
+                return <option key={val.employeeid}>{val.employeeName}</option>;
               })}
             </select>
           </div>
-          <div className="col-md-6" hidden={selectMember1}>
+          <div className="col-md-6" hidden={selectMember1 ? setSelectMember1(false): null}>
             <label className="form-label">สมาชิกในทีม 2</label>
             <select
               className="form-select"
@@ -183,9 +182,9 @@ const EditT = () => {
                 setMember2(event.target.value);
               }}
             >
-              <option>กรุณาเลือกสมาชิกในทีม 2</option>
+              <option hidden>กรุณาเลือกสมาชิกในทีม 2</option>
               {data.map((val) => {
-                return <option>{val.employeeName}</option>;
+                return <option key={val.employeeid}>{val.employeeName}</option>;
               })}
             </select>
           </div>
@@ -200,9 +199,9 @@ const EditT = () => {
                 setMember3(event.target.value);
               }}
             >
-              <option>กรุณาเลือกสมาชิกในทีม 3</option>
+              <option hidden>กรุณาเลือกสมาชิกในทีม 3</option>
               {data.map((val) => {
-                return <option>{val.employeeName}</option>;
+                return <option key={val.employeeid}>{val.employeeName}</option>;
               })}
             </select>
           </div>
@@ -218,9 +217,9 @@ const EditT = () => {
                 setMember4(event.target.value);
               }}
             >
-              <option>กรุณาเลือกสมาชิกในทีม 4</option>
+              <option hidden>กรุณาเลือกสมาชิกในทีม 4</option>
               {data.map((val) => {
-                return <option>{val.employeeName}</option>;
+                return <option key={val.employeeid}>{val.employeeName}</option>;
               })}
             </select>
           </div>
@@ -234,14 +233,14 @@ const EditT = () => {
                 setMember5(event.target.value);
               }}
             >
-              <option>กรุณาเลือกสมาชิกในทีม 5</option>
+              <option hidden>กรุณาเลือกสมาชิกในทีม 5</option>
               {data.map((val) => {
-                return <option>{val.employeeName}</option>;
+                return <option key={val.employeeid}>{val.employeeName}</option>;
               })}
             </select>
           </div>
 
-          <button onClick={updateTeam} class="btn btn-success">
+          <button onClick={updateTeam} className="btn btn-success">
             Update Team
           </button>
           <Link to="/admin/team" className="btn btn-primary">

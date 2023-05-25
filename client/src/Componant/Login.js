@@ -89,8 +89,8 @@ export default function SignIn() {
               alignItems: "center",
             }}
           >
-            <Typography component="" variant="h5">
-              <h2>ลงชื่อเข้าใช้งาน</h2>
+            <Typography component="">
+              ลงชื่อเข้าใช้งาน
             </Typography>
             <Box
               component="form"

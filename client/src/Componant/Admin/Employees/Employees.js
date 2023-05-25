@@ -85,7 +85,7 @@ const Employees = () => {
                   // });
                 if(val.isadmin !== 1) {
                   return (
-                    <tr>
+                    <tr key={val.employeeid}>
                       {/* <th scope="row">{val.isadmin ? null : `${val.employeeid}`}</th> */}
                       <th scope="row">{val.employeeid - 1}</th>
                       <td>

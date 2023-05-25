@@ -6,7 +6,6 @@ import Swal from "sweetalert2";
 const Team = () => {
   const navigate = useNavigate();
   const [teamList, setTeamList] = useState([]);
-  console.log("🚀 ~ file: Team.js:8 ~ Team ~ teamList:", teamList);
 
   const deleteTeam = (id) => {
     var requestOptions = {
@@ -72,10 +71,10 @@ const Team = () => {
         <br />
         <div className="container">
         {teamList.map((val) => (
-          <div className="form-container">
+          <div className="form-container" key={val.teamID}>
             <div className="col-sm">
               <div className="card">
-                <h3 class="card-header">ทีม {val.teamname}</h3>
+                <h3 className="card-header">ทีม {val.teamname}</h3>
                 <div className="card-body">
                   <h4 className="card-title">
                     <b>หัวหน้าทีม</b>
@@ -96,7 +95,7 @@ const Team = () => {
                   <h4 className="card-text">
                     {val.member5 ? `5. ${val.member3}` : null}
                   </h4>
-                  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                  <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                     <button
                       onClick={() =>
                         Swal.fire({
@@ -120,13 +119,13 @@ const Team = () => {
                           }
                         })
                       }
-                      class="btn btn-danger"
+                      className="btn btn-danger"
                     >
                       ลบทีม
                     </button>
                     <Link
                       to={"/admin/team/edit/" + val.teamID}
-                      class="btn btn-warning "
+                      className="btn btn-warning "
                     >
                       แก้ไขทีม
                     </Link>
