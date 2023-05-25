@@ -113,7 +113,7 @@ const EditL = () => {
       <AdminNavbar />
       <br />
       <div className="form-container">
-        <form className="form-signin row g-3">
+        <form className="form-signin row g-3 shadow-lg p-3 mb-5 bg-white">
           <div>
             <h2>แก้ไขข้อการลา</h2>
           </div>

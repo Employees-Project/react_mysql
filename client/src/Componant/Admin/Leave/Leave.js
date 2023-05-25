@@ -75,7 +75,7 @@ const Leave = () => {
             if (val.l_limit_m && val.l_limit_l !== null) {
               return (
                 <div className="col-md-4" key={val.historyId}>
-                  <div className="card">
+                  <div className="card shadow-lg bg-white">
                     <h3 className="card-header">{val.l_subject}</h3>
                     <div className="card-body">
                       <h4 className="card-title">

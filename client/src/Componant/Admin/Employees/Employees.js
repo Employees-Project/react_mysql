@@ -58,7 +58,7 @@ const Employees = () => {
       </div>
       <br/>
       <div className="form-container">
-        <form className="form-signin">
+        <form className="form-signin shadow-lg p-3 mb-5 bg-white">
           <table className="table" key="table">
             <thead>
               <tr>
@@ -122,10 +122,16 @@ const Employees = () => {
                           ดูข้อมูล
                         </Link>
                         <Link
-                          className="btn btn-warning"
+                          className="btn btn-warning me-2"
                           to={"/admin/employee/edit/" + val.employeeid}
                         >
                           แก้ไข
+                        </Link>
+                        <Link
+                          className="btn btn-warning"
+                          to={"/admin/employee/edit/password/" + val.employeeid}
+                        >
+                          แก้ไขรหัสผ่าน
                         </Link>
                       </td>
                     </tr>

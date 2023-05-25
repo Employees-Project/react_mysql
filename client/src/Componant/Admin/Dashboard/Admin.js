@@ -3,98 +3,116 @@ import AdminNavbar from "../AdminNavbar/AdminNavbar";
 import "./Admin.css";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ComposedChart, BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line, PieChart, Pie, Sector } from 'recharts';
+import {
+  ComposedChart,
+  BarChart,
+  Bar,
+  Cell,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+  LineChart,
+  Line,
+  PieChart,
+  Pie,
+  Sector,
+} from "recharts";
 import Swal from "sweetalert2";
 
-
-const data = [{
-  name: 'Page A',
-  work: 4000,
-  miss: 2400,
-  late: 2400,
-}];
-
-const data01 = [{
-  value: 70
-},
-{
-  value: 10
-},
-{
-  value: 20
-},
+const data = [
+  {
+    name: "Page A",
+    work: 4000,
+    miss: 2400,
+    late: 2400,
+  },
 ];
-const COLORS = ['#008800', '#c83232', '#ffe100'];
+
+const data01 = [
+  {
+    value: 70,
+  },
+  {
+    value: 10,
+  },
+  {
+    value: 20,
+  },
+];
+const COLORS = ["#008800", "#c83232", "#ffe100"];
 
 const data02 = [
   {
-    name: 'มกราคม',
+    name: "มกราคม",
     A1: 40,
     A2: 20,
     A3: 20,
   },
   {
-    name: 'กุมภาพันธ์',
+    name: "กุมภาพันธ์",
     uv: 30,
     pv: 18,
     amt: 20,
   },
   {
-    name: 'มีนาคม',
+    name: "มีนาคม",
     uv: 40,
     pv: 20,
     amt: 20,
   },
   {
-    name: 'เมษายน',
+    name: "เมษายน",
     uv: 40,
     pv: 20,
     amt: 20,
   },
   {
-    name: 'พฤษภาคม',
+    name: "พฤษภาคม",
     uv: 30,
     pv: 18,
     amt: 20,
   },
   {
-    name: 'มิถุนายน',
+    name: "มิถุนายน",
     uv: 40,
     pv: 20,
     amt: 20,
   },
   {
-    name: 'กรกฎาคม',
+    name: "กรกฎาคม",
     uv: 40,
     pv: 20,
     amt: 20,
   },
   {
-    name: 'สิงหาคม',
+    name: "สิงหาคม",
     uv: 30,
     pv: 18,
     amt: 20,
   },
   {
-    name: 'กันยายน',
+    name: "กันยายน",
     uv: 40,
     pv: 20,
     amt: 30,
   },
   {
-    name: 'ตุลาคม',
+    name: "ตุลาคม",
     uv: 50,
     pv: 20,
     amt: 40,
   },
   {
-    name: 'พฤศจิกายน',
+    name: "พฤศจิกายน",
     uv: 30,
     pv: 13,
     amt: 20,
   },
   {
-    name: 'ธันวาคม',
+    name: "ธันวาคม",
     uv: 40,
     pv: 20,
     amt: 40,
@@ -102,13 +120,26 @@ const data02 = [
 ];
 
 const RADIAN = Math.PI / 180;
-function renderCustomizedLabel({ cx, cy, midAngle, innerRadius, outerRadius, percent }) {
+function renderCustomizedLabel({
+  cx,
+  cy,
+  midAngle,
+  innerRadius,
+  outerRadius,
+  percent,
+}) {
   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
   const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
   return (
-    <text x={x} y={y} fill="black" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+    <text
+      x={x}
+      y={y}
+      fill="black"
+      textAnchor={x > cx ? "start" : "end"}
+      dominantBaseline="central"
+    >
       {`${(percent * 100).toFixed(0)}%`}
     </text>
   );
@@ -118,43 +149,43 @@ export default function Admin() {
   const [employeeList, setEmployeeList] = useState([]);
 
   async function getUsers() {
-    await fetch('https://project-test-1.herokuapp.com/users')
-    .then((data) => data.json())
-    .then((result) => {
-      setEmployeeList(result)
-    })
+    await fetch("https://project-test-1.herokuapp.com/users")
+      .then((data) => data.json())
+      .then((result) => {
+        setEmployeeList(result);
+      });
   }
 
   const navigate = useNavigate();
   useEffect(() => {
-    const token = localStorage.getItem('Admin')
-    fetch('https://project-test-1.herokuapp.com/authen', {
-      method: 'POST',
+    const token = localStorage.getItem("Admin");
+    fetch("https://project-test-1.herokuapp.com/authen", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
       },
     })
-      .then(response => response.json())
-      .then(data => {
-        if (data.status === 'ok') {
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === "ok") {
         } else {
           Swal.fire({
-            icon: 'error',
-            title: 'ไม่สามารถเข้าใช้งานได้',
-            text: 'กรุณาลงชื่อก่อนเข้าใช้งาน',
+            icon: "error",
+            title: "ไม่สามารถเข้าใช้งานได้",
+            text: "กรุณาลงชื่อก่อนเข้าใช้งาน",
             showConfirmButton: false,
-            timer: 3500
-          })
-          localStorage.removeItem('Admin');
+            timer: 3500,
+          });
+          localStorage.removeItem("Admin");
           navigate("/Login");
         }
       })
       .catch((error) => {
-        console.log('Error:', error);
+        console.log("Error:", error);
       });
-      getUsers()
-  }, [])
+    getUsers();
+  }, []);
 
   return (
     <>
@@ -163,50 +194,56 @@ export default function Admin() {
       <div className="row mx-5">
         <div className="row">
           <div className="col-sm-4">
-            <div className="card1">
+            <div className="card1 shadow-lg p-3 mb-5 rounded">
               <div className="card-body">
-                <Link to="/admin/employee" className="iconselect"><img src="https://cosmotech.com.ph/wp-content/uploads/2021/11/Employee-self.png" alt="" width="250" height="145" /></Link>
+                <Link to="/admin/employee" className="iconselect">
+                  <img
+                    src="https://cosmotech.com.ph/wp-content/uploads/2021/11/Employee-self.png"
+                    alt=""
+                    width="250"
+                    height="145"
+                  />
+                </Link>
                 <div className="card-title front1">จำนวนพนักงาน</div>
                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                  <div className="card-title front2">{"ค่าของ htr"} / {employeeList.length}
+                  <div className="card-title front2">
+                    {"ค่าของ htr"} / {employeeList.length}
                   </div>
                 </div>
               </div>
             </div>
-            <br />
           </div>
 
           <div className="col-sm-4">
-            <div className="card2">
+            <div className="card2 shadow-lg p-3 mb-5 rounded">
               <div className="card-body">
-                <div className="card-title">จำนวนพนักงานขาดงาน</div>
+                <div className="card-title front1">จำนวนพนักงานขาดงาน</div>
                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                  <div className="card-title front2">{"ค่าของ htr"} / {employeeList.length}
+                  <div className="card-title front2">
+                    {"ค่าของ htr"} / {employeeList.length}
                   </div>
                 </div>
               </div>
             </div>
-            <br />
           </div>
 
           <div className="col-sm-4">
-            <div className="card3">
+            <div className="card3 shadow-lg p-3 mb-5 rounded">
               <div className="card-body">
-                <div className="card-title">จำนวนพนักงานที่ลางาน</div>
+                <div className="card-title front1">จำนวนพนักงานที่ลางาน</div>
                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                  <div className="card-title front2">{"ค่าของ htr"} / {employeeList.length}
+                  <div className="card-title front2">
+                    {"ค่าของ htr"} / {employeeList.length}
                   </div>
                 </div>
               </div>
             </div>
-            <br />
           </div>
 
           <div className="col-sm-8 ">
-            <div className="card4">
+            <div className="card4 shadow-lg p-3 mb-5 rounded">
               <div className="card-body d-grid gap-2 d-md-flex">
                 <BarChart
-
                   width={1200}
                   height={300}
                   data={data02}
@@ -225,14 +262,12 @@ export default function Admin() {
                   <Bar dataKey="A1" fill="#329632" />
                   <Bar dataKey="A2" fill="#c83232" />
                   <Bar dataKey="A3" fill="#ffe100" />
-
                 </BarChart>
               </div>
             </div>
-            <br />
           </div>
           <div className="col-sm-4">
-            <div className="card4">
+            <div className="card4 shadow-lg p-3 mb-5 rounded">
               <div className="card-body">
                 <ComposedChart
                   width={600}
@@ -250,10 +285,24 @@ export default function Admin() {
                   <YAxis />
                   <Tooltip />
                   <Legend />
-                  <Line type="monotone" dataKey="work" stroke="#329632" activeDot={{ r: 8 }} />
-                  <Line type="monotone" dataKey="miss" stroke="#c83232" activeDot={{ r: 8 }} />
-                  <Line type="monotone" dataKey="late" stroke="#ffe100" activeDot={{ r: 8 }} />
-
+                  <Line
+                    type="monotone"
+                    dataKey="work"
+                    stroke="#329632"
+                    activeDot={{ r: 8 }}
+                  />
+                  <Line
+                    type="monotone"
+                    dataKey="miss"
+                    stroke="#c83232"
+                    activeDot={{ r: 8 }}
+                  />
+                  <Line
+                    type="monotone"
+                    dataKey="late"
+                    stroke="#ffe100"
+                    activeDot={{ r: 8 }}
+                  />
                 </ComposedChart>
               </div>
             </div>
@@ -261,22 +310,22 @@ export default function Admin() {
           </div>
 
           <div className="card-body">
-            <div className="card-title front4">การผ่านการอบรมของพนักงาน</div >
-            <div className="card3">
+            <div className="card-title front4">การผ่านการอบรมของพนักงาน</div>
+            <div className="card3 shadow-lg p-3 mb-5 rounded">
               <div className="card-title front3">รายชื่อพนักงาน</div>
               <div className="d-grid gap-2 d-md-flex">
-                <div className="card-title front2">{employeeList.map((val) => {
-                  return (
-                    <div key={val.employeeid}>
-                      <ul className="item-lish">
-                        <li>
-                          <b>{val.username}</b>
-                        </li>
-                      </ul>
-                    </div>
-                  );
-                })}
-
+                <div className="card-title front2">
+                  {employeeList.map((val) => {
+                    return (
+                      <div key={val.employeeid}>
+                        <ul className="item-lish">
+                          <li>
+                            <b>{val.username}</b>
+                          </li>
+                        </ul>
+                      </div>
+                    );
+                  })}
                 </div>
 
                 <ComposedChart
@@ -312,21 +361,19 @@ export default function Admin() {
                     dataKey="value"
                   >
                     {data.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                      <Cell
+                        key={`cell-${index}`}
+                        fill={COLORS[index % COLORS.length]}
+                      />
                     ))}
                   </Pie>
                 </PieChart>
               </div>
             </div>
-
           </div>
           <br />
-
-
-
         </div>
       </div>
-
     </>
   );
 }

@@ -86,7 +86,7 @@ const ReadN = () => {
       <AdminNavbar />
       <br />
       <div className="form-container">
-        <form className="form-signin row g-3 shadow-lg p-3 mb-5 bg-white rounded">
+        <form className="form-signin row g-3 shadow-lg p-3 mb-5 bg-white">
           <div>
             <h2>หัวข้อ: {l_subject ? `${l_subject}` : `${r_subject}`}</h2>
           </div>

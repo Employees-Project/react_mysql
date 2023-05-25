@@ -73,7 +73,7 @@ const Team = () => {
         {teamList.map((val) => (
           <div className="form-container" key={val.teamID}>
             <div className="col-sm">
-              <div className="card">
+              <div className="card shadow-lg p-3 mb-5 bg-white">
                 <h3 className="card-header">ทีม {val.teamname}</h3>
                 <div className="card-body">
                   <h4 className="card-title">
@@ -132,7 +132,6 @@ const Team = () => {
                   </div>
                 </div>
               </div>
-              <br />
             </div>
           </div>
         ))}

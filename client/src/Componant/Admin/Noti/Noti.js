@@ -49,6 +49,7 @@ export default function Noti1() {
 
   const [status, setStatus] = useState("Read");
   const [history, setHistory] = useState([]);
+  // const [filterAll, setFilterAll] = useState("");
 
   const readStatus = (id) => {
     var raw = JSON.stringify({
@@ -121,7 +122,7 @@ export default function Noti1() {
       <AdminNavbar />
       <br />
       <div className="form-container">
-        <div className="form-signin">
+        <div className="form-signin shadow-lg p-3 mb-5 bg-white">
           <Box sx={{ width: "100%" }}>
             <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
               <Tabs
@@ -129,12 +130,47 @@ export default function Noti1() {
                 onChange={handleChange}
                 aria-label="basic tabs example"
               >
-                <Tab label="การแจ้งเตือนทั้งหมด" {...a11yProps(0)} />
-                <Tab label="การแจ้งเตือนการลา" {...a11yProps(1)} />
-                <Tab label="การแจ้งพนักงานเข้าทำงาน" {...a11yProps(2)} />
+                <Tab
+                  style={{
+                    font: "25px solid blue",
+                    fontFamily: "Pridi, serif",
+                  }}
+                  label="การแจ้งเตือนทั้งหมด"
+                  {...a11yProps(0)}
+                />
+                <Tab
+                  style={{
+                    font: "25px solid blue",
+                    fontFamily: "Pridi, serif",
+                  }}
+                  label="การแจ้งเตือนการลา"
+                  {...a11yProps(1)}
+                />
+                <Tab
+                  style={{
+                    font: "25px solid blue",
+                    fontFamily: "Pridi, serif",
+                  }}
+                  label="การแจ้งพนักงานเข้าทำงาน"
+                  {...a11yProps(2)}
+                />
               </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
+              {/* <div className="container d-flex flex-row-reverse bd-highlight">
+                <select className="form-select" onChange={(event) => {
+                  setFilterAll(event.target.value)
+                }}>
+                  <option selected value="">ทั้งหมด</option>
+                  <option value="Not Read">ยังไม่ได้อ่าน</option>
+                  <option value="Read">อ่านแล้ว</option>
+                  <option value="Approve">อนุมัติแล้ว</option>
+                  <option value="Not Approve">ไม่อนุมัติ</option>
+                  <option value="เข้างาน">เข้างาน</option>
+                  <option value="ออกงาน">ออกงาน</option>
+                </select>
+              </div>
+              <br /> */}
               {history.map((val) => {
                 if (val.employeeName !== null) {
                   if (val.status === "Read") {
@@ -144,7 +180,7 @@ export default function Noti1() {
                       hour: "2-digit",
                       minute: "2-digit",
                       second: "2-digit",
-                      timeZone: "GMT"
+                      timeZone: "GMT",
                     });
 
                     return (
@@ -183,7 +219,7 @@ export default function Noti1() {
                       hour: "2-digit",
                       minute: "2-digit",
                       second: "2-digit",
-                      timeZone: "GMT"
+                      timeZone: "GMT",
                     });
                     return (
                       <div className="form-container">
@@ -222,7 +258,7 @@ export default function Noti1() {
                       hour: "2-digit",
                       minute: "2-digit",
                       second: "2-digit",
-                      timeZone: "GMT"
+                      timeZone: "GMT",
                     });
                     return (
                       <div className="form-container">
@@ -260,7 +296,7 @@ export default function Noti1() {
                       hour: "2-digit",
                       minute: "2-digit",
                       second: "2-digit",
-                      timeZone: "GMT"
+                      timeZone: "GMT",
                     });
                     return (
                       <div className="form-container">
@@ -298,7 +334,7 @@ export default function Noti1() {
                       hour: "2-digit",
                       minute: "2-digit",
                       second: "2-digit",
-                      timeZone: "GMT"
+                      timeZone: "GMT",
                     });
                     return (
                       <div className="form-container">
@@ -308,18 +344,10 @@ export default function Noti1() {
                               <h3 className="card-body col-md-6">
                                 <b>หัวข้อ:</b> {val.r_subject}
                               </h3>
-                              <div className="col-md-1 flex-row-reverse">
-                                <Link
-                                  to={"/admin/noti/info/" + val.historyId}
-                                  className="btn btn-warning gap-2"
-                                >
-                                  ดูข้อมูล
-                                </Link>
-                              </div>
+                              <h5 className="card-body col-md-6 d-flex flex-row-reverse">
+                                ชื่อ: {val.employeeName} {date}
+                              </h5>
                             </div>
-                            <h5 className="card-body">
-                              ชื่อ: {val.employeeName} <p className="d-flex flex-row-reverse"> {date} </p>
-                            </h5>
                           </div>
                           <br />
                         </div>
@@ -332,7 +360,7 @@ export default function Noti1() {
                       hour: "2-digit",
                       minute: "2-digit",
                       second: "2-digit",
-                      timeZone: "GMT"
+                      timeZone: "GMT",
                     });
                     return (
                       <div className="form-container">
@@ -342,18 +370,10 @@ export default function Noti1() {
                               <h3 className="card-body col-md-6">
                                 <b>หัวข้อ:</b> {val.r_subject}
                               </h3>
-                              <div className="col-md-1 flex-row-reverse">
-                                <Link
-                                  to={"/admin/noti/info/" + val.historyId}
-                                  className="btn btn-warning gap-2"
-                                >
-                                  ดูข้อมูล
-                                </Link>
-                              </div>
+                              <h5 className="card-body col-md-6 d-flex flex-row-reverse">
+                                ชื่อ: {val.employeeName} {date}
+                              </h5>
                             </div>
-                            <h5 className="card-body">
-                            ชื่อ: {val.employeeName} <p className="d-flex flex-row-reverse"> {date} </p>
-                            </h5>
                           </div>
                           <br />
                         </div>
@@ -373,7 +393,7 @@ export default function Noti1() {
                       hour: "2-digit",
                       minute: "2-digit",
                       second: "2-digit",
-                      timeZone: "GMT"
+                      timeZone: "GMT",
                     });
                     return (
                       <div className="form-container">
@@ -411,7 +431,7 @@ export default function Noti1() {
                       hour: "2-digit",
                       minute: "2-digit",
                       second: "2-digit",
-                      timeZone: "GMT"
+                      timeZone: "GMT",
                     });
                     return (
                       <div className="form-container">
@@ -450,7 +470,7 @@ export default function Noti1() {
                       hour: "2-digit",
                       minute: "2-digit",
                       second: "2-digit",
-                      timeZone: "GMT"
+                      timeZone: "GMT",
                     });
                     return (
                       <div className="form-container">
@@ -488,7 +508,7 @@ export default function Noti1() {
                       hour: "2-digit",
                       minute: "2-digit",
                       second: "2-digit",
-                      timeZone: "GMT"
+                      timeZone: "GMT",
                     });
                     return (
                       <div className="form-container">
@@ -535,7 +555,7 @@ export default function Noti1() {
                       hour: "2-digit",
                       minute: "2-digit",
                       second: "2-digit",
-                      timeZone: "GMT"
+                      timeZone: "GMT",
                     });
                     return (
                       <div className="form-container">
@@ -545,18 +565,10 @@ export default function Noti1() {
                               <h3 className="card-body col-md-6">
                                 <b>หัวข้อ:</b> {rollcall.r_subject}
                               </h3>
-                              <div className="col-md-1 flex-row-reverse">
-                                <Link
-                                  to={"/admin/noti/info/" + rollcall.historyId}
-                                  className="btn btn-warning gap-2"
-                                >
-                                  ดูข้อมูล
-                                </Link>
-                              </div>
+                              <h5 className="card-body col-md-6 d-flex flex-row-reverse">
+                                ชื่อ: {rollcall.employeeName} {date}
+                              </h5>
                             </div>
-                            <h5 className="card-body">
-                              ชื่อ: {rollcall.employeeName} <p className="d-flex flex-row-reverse"> {date} </p>
-                            </h5>
                           </div>
                           <br />
                         </div>
@@ -569,7 +581,7 @@ export default function Noti1() {
                       hour: "2-digit",
                       minute: "2-digit",
                       second: "2-digit",
-                      timeZone: "GMT"
+                      timeZone: "GMT",
                     });
                     return (
                       <div className="form-container">
@@ -579,18 +591,10 @@ export default function Noti1() {
                               <h3 className="card-body col-md-6">
                                 <b>หัวข้อ:</b> {rollcall.r_subject}
                               </h3>
-                              <div className="col-md-1 flex-row-reverse">
-                                <Link
-                                  to={"/admin/noti/info/" + rollcall.historyId}
-                                  className="btn btn-warning gap-2"
-                                >
-                                  ดูข้อมูล
-                                </Link>
-                              </div>
+                              <h5 className="card-body col-md-6 d-flex flex-row-reverse">
+                                ชื่อ: {rollcall.employeeName} {date}
+                              </h5>
                             </div>
-                            <h5 className="card-body">
-                              ชื่อ: {rollcall.employeeName} <p className="d-flex flex-row-reverse"> {date} </p>
-                            </h5>
                           </div>
                           <br />
                         </div>
