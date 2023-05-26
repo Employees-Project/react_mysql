@@ -9,12 +9,12 @@ const EditT = () => {
   const [data, setData] = useState([]);
   const [data2, setData2] = useState([]);
   const [teamname, setTeamname] = useState("");
-  const [leadername, setLeadername] = useState("");
-  const [member1, setMember1] = useState("");
-  const [member2, setMember2] = useState("");
-  const [member3, setMember3] = useState("");
-  const [member4, setMember4] = useState("");
-  const [member5, setMember5] = useState("");
+  const [leadername, setLeadername] = useState(0);
+  const [member1, setMember1] = useState(0);
+  const [member2, setMember2] = useState(0);
+  const [member3, setMember3] = useState(0);
+  const [member4, setMember4] = useState(0);
+  const [member5, setMember5] = useState(0);
   const [selectMember1, setSelectMember1] = useState(true);
   const [selectMember2, setSelectMember2] = useState(true);
   const [selectMember3, setSelectMember3] = useState(true);
@@ -22,61 +22,66 @@ const EditT = () => {
 
   async function getUsers() {
     var requestOptions = {
-        method: "GET",
-        redirect: "follow",
-      };
-    
-      await fetch("https://project-test-1.herokuapp.com/users", requestOptions)
-        .then((response) => response.json())
-        .then((result) => setData(result))
-        .catch((error) => console.log("error", error));
+      method: "GET",
+      redirect: "follow",
+    };
+
+    await fetch("https://project-test-1.herokuapp.com/users", requestOptions)
+      .then((response) => response.json())
+      .then((result) => setData(result))
+      .catch((error) => console.log("error", error));
   }
 
   useEffect(() => {
-        const token = localStorage.getItem("Admin");
-        fetch("https://project-test-1.herokuapp.com/authen", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
-          },
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.status === "ok") {
-            } else {
-              Swal.fire({
-                icon: "error",
-                title: "กรุณาลงชื่อก่อนเข้าใช้งาน",
-                text: "",
-                showConfirmButton: false,
-                timer: 3500,
-              });
-              localStorage.removeItem("Admin");
-              navigate("/Login");
-            }
-          })
-          .catch((error) => {
-            console.log("Error:", error);
+    const token = localStorage.getItem("Admin");
+    fetch("https://project-test-1.herokuapp.com/authen", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === "ok") {
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "กรุณาลงชื่อก่อนเข้าใช้งาน",
+            text: "",
+            showConfirmButton: false,
+            timer: 3500,
           });
-    getTeam()
-    getUsers()
+          localStorage.removeItem("Admin");
+          navigate("/Login");
+        }
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+      });
+    getTeam();
+    getUsers();
   }, []);
 
   async function getTeam() {
-    await fetch(`https://project-test-1.herokuapp.com/team/${id}`).then((result) => {
-      result.json().then((resp) => {
-        // console.warn(resp)
-        setData2(resp);
-        setTeamname(resp[0].teamname);
-        setLeadername(resp[0].leadername);
-        setMember1(resp[0].member1);
-        setMember2(resp[0].member2);
-        setMember3(resp[0].member3);
-        setMember4(resp[0].member4);
-        setMember5(resp[0].member5);
-      });
-    });
+    await fetch(`https://project-test-1.herokuapp.com/team/${id}`).then(
+      (result) => {
+        result.json().then((resp) => {
+          // console.warn(resp)
+          setData2(resp);
+          setTeamname(resp[0].teamname);
+          setLeadername(resp[0].leadername);
+          setMember1(resp[0].member1);
+          setMember2(resp[0].member2);
+          if (member2) {
+            setSelectMember2(false);
+          }
+          setMember3(resp[0].member3);
+          setMember4(resp[0].member4);
+          setMember5(resp[0].member5);
+        });
+      }
+    );
   }
 
   var myHeaders = new Headers();
@@ -89,7 +94,7 @@ const EditT = () => {
     member2: member2,
     member3: member3,
     member4: member4,
-    member5: member5
+    member5: member5,
   });
 
   var requestOptions = {
@@ -101,14 +106,16 @@ const EditT = () => {
 
   const updateTeam = (event) => {
     event.preventDefault();
-    fetch(`https://project-test-1.herokuapp.com/update/team/${id}`, requestOptions).then(
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "แก้ไขทีมสำเร็จ",
-        timer: 2500,
-      }).then(navigate("/admin/team"))
-    );
+    
+      fetch(`https://project-test-1.herokuapp.com/update/team/${id}`, requestOptions ).then(
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "แก้ไขทีมสำเร็จ",
+          timer: 2500,
+        }).then(navigate("/admin/team"))
+      );
+    
   };
 
   return (
@@ -148,7 +155,11 @@ const EditT = () => {
             >
               <option hidden>กรุณาเลือกหัวหน้าทีม</option>
               {data.map((val) => {
-                return <option key={val.employeeid}>{val.employeeName}</option>;
+                return (
+                  <option value={val.employeeid} key={val.employeeid}>
+                    {val.employeeName}
+                  </option>
+                );
               })}
             </select>
           </div>
@@ -160,17 +171,24 @@ const EditT = () => {
               htmlFor="member1"
               value={member1}
               onChange={(event) => {
-                setSelectMember1(false)
+                setSelectMember1(false);
                 setMember1(event.target.value);
               }}
             >
               <option hidden>กรุณาเลือกสมาชิกในทีม 1</option>
               {data.map((val) => {
-                return <option key={val.employeeid}>{val.employeeName}</option>;
+                return (
+                  <option value={val.employeeid} key={val.employeeid}>
+                    {val.employeeName}
+                  </option>
+                );
               })}
             </select>
           </div>
-          <div className="col-md-6" hidden={selectMember1 ? setSelectMember1(false): null}>
+          <div
+            className="col-md-6"
+            hidden={selectMember1 ? setSelectMember1(false) : null}
+          >
             <label className="form-label">สมาชิกในทีม 2</label>
             <select
               className="form-select"
@@ -178,13 +196,17 @@ const EditT = () => {
               value={member2}
               required
               onChange={(event) => {
-                setSelectMember2(false)
+                setSelectMember2(false);
                 setMember2(event.target.value);
               }}
             >
               <option hidden>กรุณาเลือกสมาชิกในทีม 2</option>
               {data.map((val) => {
-                return <option key={val.employeeid}>{val.employeeName}</option>;
+                return (
+                  <option value={val.employeeid} key={val.employeeid}>
+                    {val.employeeName}
+                  </option>
+                );
               })}
             </select>
           </div>
@@ -195,13 +217,17 @@ const EditT = () => {
               htmlFor="member3"
               value={member3}
               onChange={(event) => {
-                setSelectMember3(false)
+                setSelectMember3(false);
                 setMember3(event.target.value);
               }}
             >
               <option hidden>กรุณาเลือกสมาชิกในทีม 3</option>
               {data.map((val) => {
-                return <option key={val.employeeid}>{val.employeeName}</option>;
+                return (
+                  <option value={val.employeeid} key={val.employeeid}>
+                    {val.employeeName}
+                  </option>
+                );
               })}
             </select>
           </div>
@@ -213,13 +239,17 @@ const EditT = () => {
               value={member4}
               required
               onChange={(event) => {
-                setSelectMember4(false)
+                setSelectMember4(false);
                 setMember4(event.target.value);
               }}
             >
-              <option hidden>กรุณาเลือกสมาชิกในทีม 4</option>
+              <option value={0} hidden>กรุณาเลือกสมาชิกในทีม 4</option>
               {data.map((val) => {
-                return <option key={val.employeeid}>{val.employeeName}</option>;
+                return (
+                  <option value={val.employeeid} key={val.employeeid}>
+                    {val.employeeName}
+                  </option>
+                );
               })}
             </select>
           </div>
@@ -233,9 +263,13 @@ const EditT = () => {
                 setMember5(event.target.value);
               }}
             >
-              <option hidden>กรุณาเลือกสมาชิกในทีม 5</option>
+              <option value={0} hidden>กรุณาเลือกสมาชิกในทีม 5</option>
               {data.map((val) => {
-                return <option key={val.employeeid}>{val.employeeName}</option>;
+                return (
+                  <option value={val.employeeid} key={val.employeeid}>
+                    {val.employeeName}
+                  </option>
+                );
               })}
             </select>
           </div>

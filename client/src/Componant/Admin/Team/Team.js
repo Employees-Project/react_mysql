@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 const Team = () => {
   const navigate = useNavigate();
   const [teamList, setTeamList] = useState([]);
+  const [data, setData] = useState([]);
 
   const deleteTeam = (id) => {
     var requestOptions = {
@@ -13,9 +14,10 @@ const Team = () => {
       redirect: "follow",
     };
 
-    fetch(`https://project-test-1.herokuapp.com/team/delete/${id}`, requestOptions).then(
-      getTeam()
-    );
+    fetch(
+      `https://project-test-1.herokuapp.com/team/delete/${id}`,
+      requestOptions
+    ).then(getTeam());
   };
 
   async function getTeam() {
@@ -29,6 +31,19 @@ const Team = () => {
       .then((result) => setTeamList(result))
       .catch((error) => console.log("error", error));
   }
+
+  async function getUsers() {
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
+
+    await fetch("https://project-test-1.herokuapp.com/users", requestOptions)
+    .then((response) => response.json())
+    .then((result) => setData(result))
+    .catch((error) => console.log("error", error));
+  }
+  
   useEffect(() => {
     const token = localStorage.getItem("Admin");
     fetch("https://project-test-1.herokuapp.com/authen", {
@@ -57,19 +72,21 @@ const Team = () => {
         console.log("Error:", error);
       });
     getTeam();
+    getUsers();
   }, []);
 
   return (
     <>
+    
       <AdminNavbar />
-      
-        <div className="container d-flex flex-row-reverse bd-highlight">
-          <Link to="/admin/addteam" className="btn btn-primary form-container">
-            เพิ่มทีม
-          </Link>
-        </div>
-        <br />
-        <div className="container">
+      <div className="container d-flex flex-row-reverse bd-highlight">
+        <Link to="/admin/addteam" className="btn btn-primary form-container">
+          เพิ่มทีม
+        </Link>
+      </div>
+      <br />
+      <div className="container">
+        
         {teamList.map((val) => (
           <div className="form-container" key={val.teamID}>
             <div className="col-sm">
@@ -79,22 +96,28 @@ const Team = () => {
                   <h4 className="card-title">
                     <b>หัวหน้าทีม</b>
                   </h4>
-                  <h4 className="card-text">{val.leadername}</h4>
-                  <br/>
+                  {data.map((leader) => {
+                    return (<h4 className="card-text" key={leader.employeeid}>{val.leadername === leader.employeeid ? leader.employeeName : null }</h4>)
+                  })}
+                  <br />
                   <h4 className="card-title">
                     <b>สมาชิกในทีม</b>
                   </h4>
-                  <h4 className="card-text">1. {val.member1}</h4>
-                  <h4 className="card-text">2. {val.member2}</h4>
-                  <h4 className="card-text">
-                    {val.member3 ? `3. ${val.member3}` : null}
-                  </h4>
-                  <h4 className="card-text">
-                    {val.member4 ? `4. ${val.member3}` : null}
-                  </h4>
-                  <h4 className="card-text">
-                    {val.member5 ? `5. ${val.member3}` : null}
-                  </h4>
+                  {data.map((member1) => {
+                    return ( <h4 className="card-text" key={member1.employeeid}>{val.member1 === member1.employeeid ? `1. ${member1.employeeName}` : null}</h4> )
+                  })}
+                  {data.map((member2) => {
+                    return ( <h4 className="card-text" key={member2.employeeid}>{val.member2 === member2.employeeid ? `2. ${member2.employeeName}` : null}</h4> )
+                  })}
+                  {data.map((member3) => {
+                    return ( <h4 className="card-text" key={member3.employeeid}>{val.member3 === member3.employeeid ? `3. ${member3.employeeName}` : null}</h4> )
+                  })}
+                  {data.map((member4) => {
+                    return ( <h4 className="card-text" key={member4.employeeid}>{val.member4 === member4.employeeid ? `4. ${member4.employeeName}` : null}</h4> )
+                  })}
+                  {data.map((member5) => {
+                    return ( <h4 className="card-text" key={member5.employeeid}>{val.member5 === member5.employeeid ? `5. ${member5.employeeName}` : null}</h4> )
+                  })}
                   <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                     <button
                       onClick={() =>

@@ -7,12 +7,12 @@ const AddT = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [teamname, setTeamname] = useState("");
-  const [leadername, setLeadername] = useState("");
-  const [member1, setMember1] = useState("");
-  const [member2, setMember2] = useState("");
-  const [member3, setMember3] = useState("");
-  const [member4, setMember4] = useState("");
-  const [member5, setMember5] = useState("");
+  const [leadername, setLeadername] = useState(0);
+  const [member1, setMember1] = useState(0);
+  const [member2, setMember2] = useState(0);
+  const [member3, setMember3] = useState(0);
+  const [member4, setMember4] = useState(0);
+  const [member5, setMember5] = useState(0);
   const [selectMember1, setSelectMember1] = useState(true);
   const [selectMember2, setSelectMember2] = useState(true);
   const [selectMember3, setSelectMember3] = useState(true);
@@ -137,9 +137,9 @@ const AddT = () => {
                 setLeadername(event.target.value);
               }}
             >
-              <option>กรุณาเลือกหัวหน้าทีม</option>
+              <option hidden>กรุณาเลือกหัวหน้าทีม</option>
               {data.map((val) => {
-                return <option key={val.employeeid}>{val.employeeName}</option>;
+                return <option value={val.employeeid} key={val.employeeid}>{val.employeeName}</option>;
               })}
             </select>
           </div>
@@ -154,9 +154,9 @@ const AddT = () => {
                 setMember1(event.target.value);
               }}
             >
-              <option>กรุณาเลือกสมาชิกในทีม 1</option>
+              <option hidden>กรุณาเลือกสมาชิกในทีม 1</option>
               {data.map((val) => {
-                return <option key={val.employeeid}>{val.employeeName}</option>;
+                return <option value={val.employeeid} key={val.employeeid}>{val.employeeName}</option>;
               })}
             </select>
           </div>
@@ -170,9 +170,9 @@ const AddT = () => {
                 setMember2(event.target.value);
               }}
             >
-              <option>กรุณาเลือกสมาชิกในทีม 2</option>
+              <option hidden>กรุณาเลือกสมาชิกในทีม 2</option>
               {data.map((val) => {
-                return <option key={val.employeeid}>{val.employeeName}</option>;
+                return <option value={val.employeeid} key={val.employeeid}>{val.employeeName}</option>;
               })}
             </select>
           </div>
@@ -186,9 +186,9 @@ const AddT = () => {
                 setMember3(event.target.value);
               }}
             >
-              <option>กรุณาเลือกสมาชิกในทีม 3</option>
+              <option hidden>กรุณาเลือกสมาชิกในทีม 3</option>
               {data.map((val) => {
-                return <option key={val.employeeid}>{val.employeeName}</option>;
+                return <option value={val.employeeid} key={val.employeeid}>{val.employeeName}</option>;
               })}
             </select>
           </div>
@@ -203,9 +203,9 @@ const AddT = () => {
                 setMember4(event.target.value);
               }}
             >
-              <option>กรุณาเลือกสมาชิกในทีม 4</option>
+              <option hidden>กรุณาเลือกสมาชิกในทีม 4</option>
               {data.map((val) => {
-                return <option key={val.employeeid}>{val.employeeName}</option>;
+                return <option value={val.employeeid} key={val.employeeid}>{val.employeeName}</option>;
               })}
             </select>
           </div>
@@ -218,9 +218,9 @@ const AddT = () => {
                 setMember5(event.target.value);
               }}
             >
-              <option>กรุณาเลือกสมาชิกในทีม 5</option>
+              <option hidden>กรุณาเลือกสมาชิกในทีม 5</option>
               {data.map((val) => {
-                return <option key={val.employeeid}>{val.employeeName}</option>;
+                return <option value={val.employeeid} key={val.employeeid}>{val.employeeName}</option>;
               })}
             </select>
           </div>

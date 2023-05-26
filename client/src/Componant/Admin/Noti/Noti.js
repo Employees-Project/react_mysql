@@ -47,7 +47,7 @@ export default function Noti1() {
 
   const [value, setValue] = useState(0);
 
-  const [status, setStatus] = useState("Read");
+  const status = "Read"
   const [history, setHistory] = useState([]);
   // const [filterAll, setFilterAll] = useState("");
 
@@ -340,6 +340,32 @@ export default function Noti1() {
                       <div className="form-container">
                         <div className="col-sm">
                           <div className="card rollcall-in">
+                            <div className="row g-3">
+                              <h3 className="card-body col-md-6">
+                                <b>หัวข้อ:</b> {val.r_subject}
+                              </h3>
+                              <h5 className="card-body col-md-6 d-flex flex-row-reverse">
+                                ชื่อ: {val.employeeName} {date}
+                              </h5>
+                            </div>
+                          </div>
+                          <br />
+                        </div>
+                      </div>
+                    );
+                  } else if (val.r_subject === "เข้างาน(สาย)") {
+                    var rawDate = new Date(val.date);
+
+                    const date = rawDate.toLocaleDateString("th-TH", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit",
+                      timeZone: "GMT",
+                    });
+                    return (
+                      <div className="form-container">
+                        <div className="col-sm">
+                          <div className="card rollcall-in-l">
                             <div className="row g-3">
                               <h3 className="card-body col-md-6">
                                 <b>หัวข้อ:</b> {val.r_subject}
