@@ -47,9 +47,18 @@ export default function Noti1() {
 
   const [value, setValue] = useState(0);
 
-  const status = "Read"
+  const status = "Read";
   const [history, setHistory] = useState([]);
+  
   // const [filterAll, setFilterAll] = useState("");
+
+  const [page, setPage] = useState(1);
+  const recordsPerPage = 5
+  const lastIndex = page * recordsPerPage
+  const firstIndex = lastIndex - recordsPerPage
+  const records = history.slice(firstIndex, lastIndex)
+  const npage = Math.ceil(history.length / recordsPerPage)
+  const numbers = [...Array(npage).keys()].slice(1)
 
   const readStatus = (id) => {
     var raw = JSON.stringify({
@@ -117,6 +126,20 @@ export default function Noti1() {
     getHistoryStatus0();
   }, []);
 
+  function prePage() {
+    if (page !== firstIndex) {
+      if (page !== 1) {
+        setPage(page - 1)
+      }
+    }
+  }
+
+  function nextPage() {
+    if (page !== lastIndex) {
+      setPage(page + 1)
+    }
+  }
+
   return (
     <>
       <AdminNavbar />
@@ -171,7 +194,7 @@ export default function Noti1() {
                 </select>
               </div>
               <br /> */}
-              {history.map((val) => {
+              {records.map((val) => {
                 if (val.employeeName !== null) {
                   if (val.status === "Read") {
                     var rawDate = new Date(val.date);
@@ -408,6 +431,21 @@ export default function Noti1() {
                   }
                 }
               })}
+              <nav>
+                <ul className="pagination justify-content-end">
+                  <li className="page-item">
+                    <a href="#" className="page-link" onClick={prePage}>&laquo;</a>
+                  </li>
+                  { numbers.map((n, i) => (
+                    <li className={`page-item ${page === n ? "active" : ""}`} key={i}>
+                      <a href="#" className="page-link" onClick={() => setPage(n)}>{n}</a>
+                    </li>
+                  ))}
+                  <li className="page-item">
+                    <a href="#" className="page-link" onClick={nextPage}>&raquo;</a>
+                  </li>
+                </ul>
+              </nav>
             </TabPanel>
             <TabPanel value={value} index={1}>
               {history.map((leave) => {
@@ -587,6 +625,32 @@ export default function Noti1() {
                       <div className="form-container">
                         <div className="col-sm">
                           <div className="card rollcall-in">
+                            <div className="row g-3">
+                              <h3 className="card-body col-md-6">
+                                <b>หัวข้อ:</b> {rollcall.r_subject}
+                              </h3>
+                              <h5 className="card-body col-md-6 d-flex flex-row-reverse">
+                                ชื่อ: {rollcall.employeeName} {date}
+                              </h5>
+                            </div>
+                          </div>
+                          <br />
+                        </div>
+                      </div>
+                    );
+                  } else if (rollcall.r_subject === "เข้างาน(สาย)") {
+                    var rawDate = new Date(rollcall.date);
+
+                    const date = rawDate.toLocaleDateString("th-TH", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit",
+                      timeZone: "GMT",
+                    });
+                    return (
+                      <div className="form-container">
+                        <div className="col-sm">
+                          <div className="card rollcall-in-l">
                             <div className="row g-3">
                               <h3 className="card-body col-md-6">
                                 <b>หัวข้อ:</b> {rollcall.r_subject}

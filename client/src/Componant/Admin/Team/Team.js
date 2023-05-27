@@ -8,6 +8,14 @@ const Team = () => {
   const [teamList, setTeamList] = useState([]);
   const [data, setData] = useState([]);
 
+  const [page, setPage] = useState(1);
+  const recordsPerPage = 3;
+  const lastIndex = page * recordsPerPage;
+  const firstIndex = lastIndex - recordsPerPage;
+  const records = teamList.slice(firstIndex, lastIndex);
+  const npage = Math.ceil(teamList.length / recordsPerPage);
+  const numbers = [...Array(npage + 1).keys()].slice(1);
+
   const deleteTeam = (id) => {
     var requestOptions = {
       method: "DELETE",
@@ -39,11 +47,11 @@ const Team = () => {
     };
 
     await fetch("https://project-test-1.herokuapp.com/users", requestOptions)
-    .then((response) => response.json())
-    .then((result) => setData(result))
-    .catch((error) => console.log("error", error));
+      .then((response) => response.json())
+      .then((result) => setData(result))
+      .catch((error) => console.log("error", error));
   }
-  
+
   useEffect(() => {
     const token = localStorage.getItem("Admin");
     fetch("https://project-test-1.herokuapp.com/authen", {
@@ -75,9 +83,20 @@ const Team = () => {
     getUsers();
   }, []);
 
+  function prePage() {
+    if (page !== firstIndex) {
+      setPage(page - 1);
+    }
+  }
+
+  function nextPage() {
+    if (page !== lastIndex) {
+      setPage(page + 1);
+    }
+  }
+
   return (
     <>
-    
       <AdminNavbar />
       <div className="container d-flex flex-row-reverse bd-highlight">
         <Link to="/admin/addteam" className="btn btn-primary form-container">
@@ -86,8 +105,7 @@ const Team = () => {
       </div>
       <br />
       <div className="container">
-        
-        {teamList.map((val) => (
+        {records.map((val) => (
           <div className="form-container" key={val.teamID}>
             <div className="col-sm">
               <div className="card shadow-lg p-3 mb-5 bg-white">
@@ -97,26 +115,62 @@ const Team = () => {
                     <b>หัวหน้าทีม</b>
                   </h4>
                   {data.map((leader) => {
-                    return (<h4 className="card-text" key={leader.employeeid}>{val.leadername === leader.employeeid ? leader.employeeName : null }</h4>)
+                    return (
+                      <h4 className="card-text" key={leader.employeeid}>
+                        {val.leadername === leader.employeeid
+                          ? leader.employeeName
+                          : null}
+                      </h4>
+                    );
                   })}
                   <br />
                   <h4 className="card-title">
                     <b>สมาชิกในทีม</b>
                   </h4>
                   {data.map((member1) => {
-                    return ( <h4 className="card-text" key={member1.employeeid}>{val.member1 === member1.employeeid ? `1. ${member1.employeeName}` : null}</h4> )
+                    return (
+                      <h4 className="card-text" key={member1.employeeid}>
+                        {val.member1 === member1.employeeid
+                          ? `1. ${member1.employeeName}`
+                          : null}
+                      </h4>
+                    );
                   })}
                   {data.map((member2) => {
-                    return ( <h4 className="card-text" key={member2.employeeid}>{val.member2 === member2.employeeid ? `2. ${member2.employeeName}` : null}</h4> )
+                    return (
+                      <h4 className="card-text" key={member2.employeeid}>
+                        {val.member2 === member2.employeeid
+                          ? `2. ${member2.employeeName}`
+                          : null}
+                      </h4>
+                    );
                   })}
                   {data.map((member3) => {
-                    return ( <h4 className="card-text" key={member3.employeeid}>{val.member3 === member3.employeeid ? `3. ${member3.employeeName}` : null}</h4> )
+                    return (
+                      <h4 className="card-text" key={member3.employeeid}>
+                        {val.member3 === member3.employeeid
+                          ? `3. ${member3.employeeName}`
+                          : null}
+                      </h4>
+                    );
                   })}
                   {data.map((member4) => {
-                    return ( <h4 className="card-text" key={member4.employeeid}>{val.member4 === member4.employeeid ? `4. ${member4.employeeName}` : null}</h4> )
+                    return (
+                      <h4 className="card-text" key={member4.employeeid}>
+                        {val.member4 === member4.employeeid
+                          ? `4. ${member4.employeeName}`
+                          : null}
+                      </h4>
+                    );
                   })}
                   {data.map((member5) => {
-                    return ( <h4 className="card-text" key={member5.employeeid}>{val.member5 === member5.employeeid ? `5. ${member5.employeeName}` : null}</h4> )
+                    return (
+                      <h4 className="card-text" key={member5.employeeid}>
+                        {val.member5 === member5.employeeid
+                          ? `5. ${member5.employeeName}`
+                          : null}
+                      </h4>
+                    );
                   })}
                   <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                     <button
@@ -158,6 +212,27 @@ const Team = () => {
             </div>
           </div>
         ))}
+        <nav>
+          <ul className="pagination justify-content-end">
+            <li className="page-item">
+              <a href="#" className="page-link" onClick={prePage}>
+                &laquo;
+              </a>
+            </li>
+            {numbers.map((n, i) => (
+              <li className={`page-item ${page === n ? "active" : ""}`} key={i}>
+                <a href="#" className="page-link" onClick={() => setPage(n)}>
+                  {n}
+                </a>
+              </li>
+            ))}
+            <li className="page-item">
+              <a href="#" className="page-link" onClick={nextPage}>
+                &raquo;
+              </a>
+            </li>
+          </ul>
+        </nav>
       </div>
     </>
   );

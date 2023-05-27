@@ -37,6 +37,14 @@ const Leave = () => {
   const [leave, setLeave] = useState([]);
   const [deleteL, setDeleteL] = useState([]);
 
+  const [page, setPage] = useState(1);
+  const recordsPerPage = 15;
+  const lastIndex = page * recordsPerPage;
+  const firstIndex = lastIndex - recordsPerPage;
+  const records = leave.slice(firstIndex, lastIndex);
+  const npage = Math.ceil(leave.length / recordsPerPage);
+  const numbers = [...Array(npage + 1).keys()].slice(1);
+
   async function getLeave() {
     var requestOptions = {
       method: "GET",
@@ -58,6 +66,19 @@ const Leave = () => {
       (response) => setDeleteL(response.data)
     );
   };
+
+  function prePage() {
+    if (page !== firstIndex) {
+      setPage(page - 1);
+    }
+  }
+
+  function nextPage() {
+    if (page !== lastIndex) {
+      setPage(page + 1);
+    }
+  }
+
   return (
     <>
       <AdminNavbar />
@@ -71,7 +92,7 @@ const Leave = () => {
         <div className="container">
         <div className="row">
           
-          {leave.map((val) => {
+          {records.map((val) => {
             if (val.l_limit_m && val.l_limit_l !== null) {
               return (
                 <div className="col-md-4" key={val.historyId}>
@@ -125,8 +146,31 @@ const Leave = () => {
                   <br />
                 </div>
               );
+            } else {
+              return null
             }
           })}
+          <nav>
+          <ul className="pagination justify-content-end">
+            <li className="page-item">
+              <a href="#" className="page-link" onClick={prePage}>
+                &laquo;
+              </a>
+            </li>
+            {numbers.map((n, i) => (
+              <li className={`page-item ${page === n ? "active" : ""}`} key={i}>
+                <a href="#" className="page-link" onClick={() => setPage(n)}>
+                  {n}
+                </a>
+              </li>
+            ))}
+            <li className="page-item">
+              <a href="#" className="page-link" onClick={nextPage}>
+                &raquo;
+              </a>
+            </li>
+          </ul>
+        </nav>
         </div>
         <div />
       </div>

@@ -37,6 +37,14 @@ const Employees = () => {
 
   const [employeeList, setEmployeeList] = useState([]);
 
+  const [page, setPage] = useState(1);
+  const recordsPerPage = 10;
+  const lastIndex = page * recordsPerPage;
+  const firstIndex = lastIndex - recordsPerPage;
+  const records = employeeList.slice(firstIndex, lastIndex);
+  const npage = Math.ceil(employeeList.length / recordsPerPage);
+  const numbers = [...Array(npage + 1).keys()].slice(1);
+
   async function getUsers() {
     var requestOptions = {
       method: "GET",
@@ -48,6 +56,19 @@ const Employees = () => {
       .then((result) => setEmployeeList(result))
       .catch((error) => console.log("error", error));
   }
+
+  function prePage() {
+    if (page !== firstIndex) {
+      setPage(page - 1);
+    }
+  }
+
+  function nextPage() {
+    if (page !== lastIndex) {
+      setPage(page + 1);
+    }
+  }
+
   return (
     <>
       <AdminNavbar />
@@ -74,7 +95,7 @@ const Employees = () => {
               </tr>
             </thead>
             <tbody>
-              {employeeList.map((val) => {
+              {records.map((val) => {
                 const status = val.active ? "greenDot" : "redDot"
                   // var date = new Date(val.birthday);
 
@@ -141,6 +162,27 @@ const Employees = () => {
               })}
             </tbody>
           </table>
+          <nav>
+          <ul className="pagination justify-content-end">
+            <li className="page-item">
+              <a href="#" className="page-link" onClick={prePage}>
+                &laquo;
+              </a>
+            </li>
+            {numbers.map((n, i) => (
+              <li className={`page-item ${page === n ? "active" : ""}`} key={i}>
+                <a href="#" className="page-link" onClick={() => setPage(n)}>
+                  {n}
+                </a>
+              </li>
+            ))}
+            <li className="page-item">
+              <a href="#" className="page-link" onClick={nextPage}>
+                &raquo;
+              </a>
+            </li>
+          </ul>
+        </nav>
           </form>
         </div>
 
