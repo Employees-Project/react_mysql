@@ -26,6 +26,7 @@ import HRUploadPic from "./Componant/HR/Employees/HRUploadPic";
 import InfoAdmin from "./Componant/Admin/Employees/InfoAdmin";
 import EditAdmin from "./Componant/Admin/Employees/EditAdmin";
 import EditPassword from "./Componant/Admin/Employees/EditPassword";
+import InfoC from "./Componant/Admin/Noti/InfoC";
 
 function App() {
   const LoggedInAdmin = localStorage.getItem("Admin");
@@ -64,7 +65,8 @@ function App() {
             <Route path="leave/edit/:id" element={<EditL />} />
             edit/team/undefined
             <Route path="noti" element={<Noti />} />
-            <Route path="noti/info/:id" element={<ReadN />} />
+            <Route path="noti/info/leave/:id" element={<ReadN />} />
+            <Route path="noti/info/certificate/:id" element={<InfoC />} />
           </Route>
         </Route>
       </Routes>

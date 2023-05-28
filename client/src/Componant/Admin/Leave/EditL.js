@@ -43,7 +43,7 @@ const EditL = () => {
   }, []);
 
   function getLeaves() {
-    fetch(`https://project-test-1.herokuapp.com/leave/${id}`).then((result) => {
+    fetch(`https://project-test-1.herokuapp.com/leave/admin/${id}`).then((result) => {
       result.json().then((resp) => {
         // console.warn(resp)
         setSubject(resp[0].l_subject);
@@ -94,7 +94,7 @@ const EditL = () => {
           title: "เพิ่มข้อมูลสำเร็จ",
           timer: 2500,
         });
-        fetch(`https://project-test-1.herokuapp.com/update/leave/${id}`, requestOptions).then(
+        fetch(`https://project-test-1.herokuapp.com/update/leave/admin/${id}`, requestOptions).then(
           Swal.fire({
             position: "center",
             icon: "success",

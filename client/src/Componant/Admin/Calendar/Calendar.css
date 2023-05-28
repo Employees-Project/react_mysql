@@ -11,3 +11,7 @@
   color: #000000;
   font-size: 20px;
 }
+
+.form { 
+  border-radius: 1rem;
+}

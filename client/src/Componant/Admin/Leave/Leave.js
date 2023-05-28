@@ -35,10 +35,11 @@ const Leave = () => {
       getLeave()
   }, []);
   const [leave, setLeave] = useState([]);
+  console.log("🚀 ~ file: Leave.js:38 ~ Leave ~ leave:", leave)
   const [deleteL, setDeleteL] = useState([]);
 
   const [page, setPage] = useState(1);
-  const recordsPerPage = 15;
+  const recordsPerPage = 6;
   const lastIndex = page * recordsPerPage;
   const firstIndex = lastIndex - recordsPerPage;
   const records = leave.slice(firstIndex, lastIndex);
@@ -51,7 +52,7 @@ const Leave = () => {
       redirect: "follow",
     };
 
-    await fetch("https://project-test-1.herokuapp.com/leave", requestOptions)
+    await fetch("https://project-test-1.herokuapp.com/leave/admin", requestOptions)
       .then((response) => response.json())
       .then((result) => setLeave(result))
       .catch((error) => console.log("error", error));
@@ -62,7 +63,7 @@ const Leave = () => {
       method: "DELETE",
       redirect: "follow",
     };
-    fetch(`https://project-test-1.herokuapp.com/leave/delete/${id}`, requestOptions).then(
+    fetch(`https://project-test-1.herokuapp.com/leave/delete/admin/:id${id}`, requestOptions).then(
       (response) => setDeleteL(response.data)
     );
   };
@@ -153,19 +154,19 @@ const Leave = () => {
           <nav>
           <ul className="pagination justify-content-end">
             <li className="page-item">
-              <a href="#" className="page-link" onClick={prePage}>
+              <a className="page-link" onClick={prePage}>
                 &laquo;
               </a>
             </li>
             {numbers.map((n, i) => (
               <li className={`page-item ${page === n ? "active" : ""}`} key={i}>
-                <a href="#" className="page-link" onClick={() => setPage(n)}>
+                <a className="page-link" onClick={() => setPage(n)}>
                   {n}
                 </a>
               </li>
             ))}
             <li className="page-item">
-              <a href="#" className="page-link" onClick={nextPage}>
+              <a  className="page-link" onClick={nextPage}>
                 &raquo;
               </a>
             </li>

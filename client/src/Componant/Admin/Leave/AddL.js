@@ -74,7 +74,7 @@ const AddL = () => {
           showConfirmButton: true,
         });
       } else {
-        fetch("https://project-test-1.herokuapp.com/add/leave", requestOptions)
+        fetch("https://project-test-1.herokuapp.com/add/leave/admin", requestOptions)
           .then((response) => response.json())
           .then((result) => {
             console.log(

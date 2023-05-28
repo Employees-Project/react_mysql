@@ -59,7 +59,9 @@ const Employees = () => {
 
   function prePage() {
     if (page !== firstIndex) {
-      setPage(page - 1);
+      if (page !== 1) {
+        setPage(page - 1);
+      }
     }
   }
 
@@ -165,19 +167,19 @@ const Employees = () => {
           <nav>
           <ul className="pagination justify-content-end">
             <li className="page-item">
-              <a href="#" className="page-link" onClick={prePage}>
+              <a  className="page-link" onClick={prePage}>
                 &laquo;
               </a>
             </li>
             {numbers.map((n, i) => (
               <li className={`page-item ${page === n ? "active" : ""}`} key={i}>
-                <a href="#" className="page-link" onClick={() => setPage(n)}>
+                <a  className="page-link" onClick={() => setPage(n)}>
                   {n}
                 </a>
               </li>
             ))}
             <li className="page-item">
-              <a href="#" className="page-link" onClick={nextPage}>
+              <a  className="page-link" onClick={nextPage}>
                 &raquo;
               </a>
             </li>

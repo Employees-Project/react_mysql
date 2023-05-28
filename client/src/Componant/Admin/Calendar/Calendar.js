@@ -59,6 +59,7 @@ export default function Calendar() {
           </Link>
         </div>
         <div className="container calendar">
+        <form className="form shadow-lg p-3 mb-5 bg-white">
           <FullCalendar
             defaultView="dayGridMonth"
             header={{
@@ -70,6 +71,7 @@ export default function Calendar() {
             plugins={[dayGridPlugin]}
             events={events}
           />
+          </form>
         </div>
       </div>
     </>
