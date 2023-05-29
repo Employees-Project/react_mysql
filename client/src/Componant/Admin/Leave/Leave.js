@@ -32,10 +32,11 @@ const Leave = () => {
       .catch((error) => {
         console.log("Error:", error);
       });
-      getLeave()
+    getLeave();
+    deleteLeave()
   }, []);
   const [leave, setLeave] = useState([]);
-  console.log("🚀 ~ file: Leave.js:38 ~ Leave ~ leave:", leave)
+  console.log("🚀 ~ file: Leave.js:38 ~ Leave ~ leave:", leave);
   const [deleteL, setDeleteL] = useState([]);
 
   const [page, setPage] = useState(1);
@@ -46,27 +47,34 @@ const Leave = () => {
   const npage = Math.ceil(leave.length / recordsPerPage);
   const numbers = [...Array(npage + 1).keys()].slice(1);
 
+  const deleteLeave = (id) => {
+    var requestOptions = {
+      method: "DELETE",
+      redirect: "follow",
+    };
+    fetch(
+      `https://project-test-1.herokuapp.com/leave/delete/admin/${id}`,
+      requestOptions
+    )
+      .then(getLeave())
+  };
+
   async function getLeave() {
     var requestOptions = {
       method: "GET",
       redirect: "follow",
     };
 
-    await fetch("https://project-test-1.herokuapp.com/leave/admin", requestOptions)
+    await fetch(
+      "https://project-test-1.herokuapp.com/leave/admin",
+      requestOptions
+    )
       .then((response) => response.json())
       .then((result) => setLeave(result))
       .catch((error) => console.log("error", error));
   }
 
-  const deleteLeave = (id) => {
-    var requestOptions = {
-      method: "DELETE",
-      redirect: "follow",
-    };
-    fetch(`https://project-test-1.herokuapp.com/leave/delete/admin/:id${id}`, requestOptions).then(
-      (response) => setDeleteL(response.data)
-    );
-  };
+  
 
   function prePage() {
     if (page !== firstIndex) {
@@ -83,16 +91,15 @@ const Leave = () => {
   return (
     <>
       <AdminNavbar />
-      
-        <div className="container d-flex flex-row-reverse bd-highlight">
-          <Link to="/admin/addleave" className="btn btn-primary form-container">
-            เพิ่มหัวข้อการลา
-          </Link>
-        </div>
-        <br />
-        <div className="container">
+
+      <div className="container d-flex flex-row-reverse bd-highlight">
+        <Link to="/admin/addleave" className="btn btn-primary form-container">
+          เพิ่มหัวข้อการลา
+        </Link>
+      </div>
+      <br />
+      <div className="container">
         <div className="row">
-          
           {records.map((val) => {
             if (val.l_limit_m && val.l_limit_l !== null) {
               return (
@@ -122,7 +129,8 @@ const Leave = () => {
                               cancelButtonText: "ยกเลิก",
                             }).then((result) => {
                               if (result.isConfirmed) {
-                                deleteLeave(val.historyId);
+                                deleteLeave(val.historyId)
+                                getLeave()
                                 Swal.fire(
                                   "ลบสำเร็จ!",
                                   "คุณได้ลบทีมสำเร็จ",
@@ -148,30 +156,33 @@ const Leave = () => {
                 </div>
               );
             } else {
-              return null
+              return null;
             }
           })}
           <nav>
-          <ul className="pagination justify-content-end">
-            <li className="page-item">
-              <a className="page-link" onClick={prePage}>
-                &laquo;
-              </a>
-            </li>
-            {numbers.map((n, i) => (
-              <li className={`page-item ${page === n ? "active" : ""}`} key={i}>
-                <a className="page-link" onClick={() => setPage(n)}>
-                  {n}
+            <ul className="pagination justify-content-end">
+              <li className="page-item">
+                <a className="page-link" onClick={prePage}>
+                  &laquo;
                 </a>
               </li>
-            ))}
-            <li className="page-item">
-              <a  className="page-link" onClick={nextPage}>
-                &raquo;
-              </a>
-            </li>
-          </ul>
-        </nav>
+              {numbers.map((n, i) => (
+                <li
+                  className={`page-item ${page === n ? "active" : ""}`}
+                  key={i}
+                >
+                  <a className="page-link" onClick={() => setPage(n)}>
+                    {n}
+                  </a>
+                </li>
+              ))}
+              <li className="page-item">
+                <a className="page-link" onClick={nextPage}>
+                  &raquo;
+                </a>
+              </li>
+            </ul>
+          </nav>
         </div>
         <div />
       </div>

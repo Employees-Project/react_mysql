@@ -207,8 +207,13 @@ const EditE = () => {
               }}
             >
               <option hidden >กรุณาเลือก</option>
-              <option>Devepoler</option>
-              <option>System Analysis</option>
+              <option>HR</option>
+              <option>Recruiter </option>
+              <option>IT (Business Analyst)</option>
+              <option>IT (Project Manager)</option>
+              <option>IT (Software Engineer)</option>
+              <option>IT (System Analyst)</option>
+              <option>ฝ่ายบัญชี</option>
             </select>
           </div>
           <div className="col-md-6">

@@ -81,7 +81,7 @@ const Employees = () => {
       </div>
       <br/>
       <div className="form-container">
-        <form className="form-signin shadow-lg p-3 mb-5 bg-white">
+        <form className="form-signin1 shadow-lg p-3 mb-5 bg-white">
           <table className="table" key="table">
             <thead>
               <tr>

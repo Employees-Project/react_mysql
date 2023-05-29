@@ -7,12 +7,12 @@ const AddT = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [teamname, setTeamname] = useState("");
-  const [leadername, setLeadername] = useState(0);
-  const [member1, setMember1] = useState(0);
-  const [member2, setMember2] = useState(0);
-  const [member3, setMember3] = useState(0);
-  const [member4, setMember4] = useState(0);
-  const [member5, setMember5] = useState(0);
+  const [leadername, setLeadername] = useState(null);
+  const [member1, setMember1] = useState(null);
+  const [member2, setMember2] = useState(null);
+  const [member3, setMember3] = useState(null);
+  const [member4, setMember4] = useState(null);
+  const [member5, setMember5] = useState(null);
   const [selectMember1, setSelectMember1] = useState(true);
   const [selectMember2, setSelectMember2] = useState(true);
   const [selectMember3, setSelectMember3] = useState(true);
@@ -56,23 +56,103 @@ const AddT = () => {
       redirect: "follow",
     };
 
-    fetch(
-      "https://project-test-1.herokuapp.com/add/team",
-      requestOptions
-    )
-      .then((response) => response.json())
-      .then((result) => {
-        if (result.status === "ok") {
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "เพิ่มทีมสำเร็จ",
-            timer: 2500,
-          });
-          navigate("/admin/team");
-        }
-      })
-      .catch((error) => console.log("error", error));
+    if (teamname === "") {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "เพิ่มทีมไม่สำเร็จ",
+        text: "กรุณาใส่ชื่อทีม"
+      });
+    } else if (leadername === member1 || leadername === member2 || leadername === member3 || leadername === member4 || leadername === member5) {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "เพิ่มทีมไม่สำเร็จ",
+        text: "ไม่สามารถเพิ่มหัวหน้าทีมในสมาชิกได้"
+      });
+    } else if (member1 === null) {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "เพิ่มทีมไม่สำเร็จ",
+        text: "กรุณาเลือกสมาชิกในทีมอย่างน้อย 2 คน"
+      });
+    } else if (member2 === null) {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "เพิ่มทีมไม่สำเร็จ",
+        text: "กรุณาเลือกสมาชิกในทีมอย่างน้อย 2 คน"
+      });
+    } else if (member1 === member2 || member1 === member3 || member1 === member4 || member1 === member5) {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "เพิ่มทีมไม่สำเร็จ",
+        text: "ไม่สามารถเพิ่มสมาชิกในทีมคนเดียวกันได้"
+      });
+    } else if (member2 === member1 || member2 === member3 || member2 === member4 || member2 === member5) {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "เพิ่มทีมไม่สำเร็จ",
+        text: "ไม่สามารถเพิ่มสมาชิกในทีมคนเดียวกันได้"
+      });
+    } else if (member3 !== null) {
+      if (member3 === member1 || member3 === member2 || member3 === member4 || member3 === member5) {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "เพิ่มทีมไม่สำเร็จ",
+          text: "ไม่สามารถเพิ่มสมาชิกในทีมคนเดียวกันได้"
+        });
+      }
+    } else if (member4 !== null) {
+      if (member4 === member1 || member4 === member2 || member4 === member3 || member4 === member5) {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "เพิ่มทีมไม่สำเร็จ",
+          text: "ไม่สามารถเพิ่มสมาชิกในทีมคนเดียวกันได้"
+        });
+      }
+    } else if (member5 !== null) {
+      if (member5 === member1 || member5 === member2 || member5 === member3 || member5 === member4) {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "เพิ่มทีมไม่สำเร็จ",
+          text: "ไม่สามารถเพิ่มสมาชิกในทีมคนเดียวกันได้"
+        });
+      }
+    } else {
+      fetch(
+        "https://project-test-1.herokuapp.com/add/team",
+        requestOptions
+      )
+        .then((response) => response.json())
+        .then((result) => {
+          if (result.status === "error") {
+            Swal.fire({
+              position: "center",
+              icon: "error",
+              title: "ชื่อทีมนี้ถูกใช้ไปแล้ว",
+            });
+          }
+          if (result.status === "ok") {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "เพิ่มทีมสำเร็จ",
+              showConfirmButton: false,
+              timer: 2500,
+            });
+            navigate("/admin/team");
+          }
+        })
+        .catch((error) => console.log("error", error));
+    }
+    
   };
 
   useEffect(() => {
@@ -134,12 +214,15 @@ const AddT = () => {
               htmlFor="leadername"
               required
               onChange={(event) => {
+                
                 setLeadername(event.target.value);
               }}
             >
               <option hidden>กรุณาเลือกหัวหน้าทีม</option>
               {data.map((val) => {
+                if (val.active === 1) {
                 return <option value={val.employeeid} key={val.employeeid}>{val.employeeName}</option>;
+              }
               })}
             </select>
           </div>
@@ -156,7 +239,9 @@ const AddT = () => {
             >
               <option hidden>กรุณาเลือกสมาชิกในทีม 1</option>
               {data.map((val) => {
-                return <option value={val.employeeid} key={val.employeeid}>{val.employeeName}</option>;
+                if (val.active === 1) {
+                  return <option value={val.employeeid} key={val.employeeid}>{val.employeeName}</option>;
+                }
               })}
             </select>
           </div>
@@ -172,7 +257,9 @@ const AddT = () => {
             >
               <option hidden>กรุณาเลือกสมาชิกในทีม 2</option>
               {data.map((val) => {
-                return <option value={val.employeeid} key={val.employeeid}>{val.employeeName}</option>;
+                if (val.active === 1) {
+                  return <option value={val.employeeid} key={val.employeeid}>{val.employeeName}</option>;
+                }
               })}
             </select>
           </div>
@@ -188,7 +275,9 @@ const AddT = () => {
             >
               <option hidden>กรุณาเลือกสมาชิกในทีม 3</option>
               {data.map((val) => {
-                return <option value={val.employeeid} key={val.employeeid}>{val.employeeName}</option>;
+                if (val.active === 1) {
+                  return <option value={val.employeeid} key={val.employeeid}>{val.employeeName}</option>;
+                }
               })}
             </select>
           </div>
@@ -205,7 +294,9 @@ const AddT = () => {
             >
               <option hidden>กรุณาเลือกสมาชิกในทีม 4</option>
               {data.map((val) => {
-                return <option value={val.employeeid} key={val.employeeid}>{val.employeeName}</option>;
+                if (val.active === 1) {
+                  return <option value={val.employeeid} key={val.employeeid}>{val.employeeName}</option>;
+                }
               })}
             </select>
           </div>
@@ -220,7 +311,9 @@ const AddT = () => {
             >
               <option hidden>กรุณาเลือกสมาชิกในทีม 5</option>
               {data.map((val) => {
-                return <option value={val.employeeid} key={val.employeeid}>{val.employeeName}</option>;
+                if (val.active === 1) {
+                  return <option value={val.employeeid} key={val.employeeid}>{val.employeeName}</option>;
+                }
               })}
             </select>
           </div>
