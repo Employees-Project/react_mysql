@@ -32,8 +32,8 @@ const Leave = () => {
       .catch((error) => {
         console.log("Error:", error);
       });
+    deleteLeave();
     getLeave();
-    deleteLeave()
   }, []);
   const [leave, setLeave] = useState([]);
   console.log("🚀 ~ file: Leave.js:38 ~ Leave ~ leave:", leave);
@@ -55,8 +55,7 @@ const Leave = () => {
     fetch(
       `https://project-test-1.herokuapp.com/leave/delete/admin/${id}`,
       requestOptions
-    )
-      .then(getLeave())
+    ).then(getLeave());
   };
 
   async function getLeave() {
@@ -73,8 +72,6 @@ const Leave = () => {
       .then((result) => setLeave(result))
       .catch((error) => console.log("error", error));
   }
-
-  
 
   function prePage() {
     if (page !== firstIndex) {
@@ -129,13 +126,13 @@ const Leave = () => {
                               cancelButtonText: "ยกเลิก",
                             }).then((result) => {
                               if (result.isConfirmed) {
-                                deleteLeave(val.historyId)
-                                getLeave()
+                                deleteLeave(val.historyId);
                                 Swal.fire(
                                   "ลบสำเร็จ!",
                                   "คุณได้ลบทีมสำเร็จ",
                                   "success"
                                 );
+                                getLeave();
                               }
                             })
                           }
