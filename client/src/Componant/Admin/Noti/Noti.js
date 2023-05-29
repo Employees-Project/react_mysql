@@ -1186,7 +1186,7 @@ export default function Noti1() {
                   </li>
                   { numbersCertificate.map((n, i) => (
                     <li className={`page-item ${pageRollcall === n ? "active" : ""}`} key={i}>
-                      <a  className="page-link" onClick={() => setPageRollcall(n)}>{n}</a>
+                      <a  className="page-link" onClick={() => setPageCertificate(n)}>{n}</a>
                     </li>
                   ))}
                   <li className="page-item">
