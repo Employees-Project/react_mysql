@@ -67,6 +67,15 @@ const EditAdmin = () => {
   const [zipCode, setZipCode] = useState("");
   const [active, setActive] = useState("");
 
+  const [error, setError] = useState(null);
+  const handleChnage = (val) => {
+    if (val.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+      setError(false);
+    } else {
+      setError(true);
+    }
+  };
+
   const navigate = useNavigate();
 
   async function getUsers() {
@@ -135,18 +144,19 @@ const EditAdmin = () => {
         title: "ไม่สามารถเพิ่มข้อมูลได้",
         text: "กรุณากรอกข้อมูลให้ครบ",
       });
-    } else if (
-      jobPosition !== "" ||
-      position !== "" ||
-      employeeName !== "" ||
-      phoneNo !== "" ||
-      email !== "" ||
-      address !== "" ||
-      disdrict !== "" ||
-      amphur !== "" ||
-      province !== "" ||
-      zipCode !== ""
-    ) {
+    } else if (phoneNo.length < 10) {
+      Swal.fire({
+        icon: "error",
+        title: "ไม่สามารถเพิ่มหนักงานได้",
+        text: "กรุณากรอกเบอร์โทรศัพท์ให้ครบ",
+      });
+    } else if (error === true) {
+      Swal.fire({
+        icon: "error",
+        title: "ไม่สามารถเพิ่มหนักงานได้",
+        text: "กรุณากรอกอีเมลให้ถูกต้อง",
+      });
+    } else{
       fetch(
         `https://project-test-1.herokuapp.com/update/users/${id}`,
         requestOptions
@@ -173,7 +183,7 @@ const EditAdmin = () => {
           </div>
           <div className="col-md-6">
             <label className="form-label" htmlFor="employeeName">
-              ชื่อ - นามสกุล:
+              ชื่อ - นามสกุล
             </label>
             <input
               type="text"
@@ -186,7 +196,7 @@ const EditAdmin = () => {
           </div>
           <div className="col-md-6">
             <label className="form-label" htmlFor="phoneNo">
-              เบอร์โทร:
+              เบอร์โทร
             </label>
             <input
               type="text"
@@ -197,8 +207,8 @@ const EditAdmin = () => {
               }}
             />
           </div>
-          <div className="col-md-6">
-            <label className="form-label">ตำแหน่งงาน:</label>
+          {/* <div className="col-md-6">
+            <label className="form-label">ตำแหน่งงาน</label>
             <select
               className="form-select"
               value={jobPosition}
@@ -208,12 +218,18 @@ const EditAdmin = () => {
               }}
             >
               <option hidden>กรุณาเลือก</option>
-              <option>Devepoler</option>
-              <option>System Analysis</option>
+              <option>Admin</option>
+              <option>HR</option>
+              <option>Recruiter </option>
+              <option>IT (Business Analyst)</option>
+              <option>IT (Project Manager)</option>
+              <option>IT (Software Engineer)</option>
+              <option>IT (System Analyst)</option>
+              <option>ฝ่ายบัญชี</option>
             </select>
           </div>
           <div className="col-md-6">
-            <label className="form-label">ตำแหน่ง:</label>
+            <label className="form-label">ตำแหน่ง</label>
             <select
               className="form-select"
               htmlFor="position"
@@ -223,26 +239,28 @@ const EditAdmin = () => {
               }}
             >
               <option hidden>กรุณาเลือก</option>
+              <option>Admin</option>
               <option>หัวหน้าพนักงาน</option>
               <option>พนักงาน</option>
             </select>
-          </div>
+          </div> */}
           <div className="col-md-12">
             <label className="form-label" htmlFor="email">
-              อีเมล:
+              อีเมล
             </label>
             <input
               type="email"
               className="form-control"
               value={email}
-              onChange={(event) => {
-                setEmail(event.target.value);
+              onChange={(e) => {
+                handleChnage(e.target.value);
+                setEmail(e.target.value);
               }}
             />
           </div>
           <div className="col-md-2">
             <label className="form-label" htmlFor="address">
-              ที่อยู่:
+              ที่อยู่
             </label>
             <input
               type="text"
@@ -254,7 +272,7 @@ const EditAdmin = () => {
             />
           </div>
           <div className="col-md-2">
-            <label className="form-label">จังหวัด:</label>
+            <label className="form-label">จังหวัด</label>
             <select
               className="form-select"
               value={province}
@@ -279,7 +297,7 @@ const EditAdmin = () => {
             </select>
           </div>
           <div className="col-md-2">
-            <label className="form-label">อำเภอ/เขต:</label>
+            <label className="form-label">อำเภอ/เขต</label>
             <select
               className="form-select"
               value={amphur}
@@ -301,7 +319,7 @@ const EditAdmin = () => {
             </select>
           </div>
           <div className="col-md-2">
-            <label className="form-label">ตำบล/แขวง:</label>
+            <label className="form-label">ตำบล/แขวง</label>
             <select
               className="form-select"
               value={disdrict}
@@ -323,7 +341,7 @@ const EditAdmin = () => {
             </select>
           </div>
           <div className="col-md-2">
-            <label className="form-label">รหัสไปรษณีย์:</label>
+            <label className="form-label">รหัสไปรษณีย์</label>
             <input
               type="text"
               className="form-control"

@@ -172,7 +172,7 @@ const Info = () => {
             />
           </div>
           <div className="col-md-4">
-            <label className="form-label">ตำแหน่งงาน:</label>
+            <label className="form-label">ตำแหน่งงาน</label>
             <input
               htmlFor="jobPosition"
               className="form-control"
@@ -181,7 +181,7 @@ const Info = () => {
             />
           </div>
           <div className="col-md-4">
-            <label className="form-label">ตำแหน่ง:</label>
+            <label className="form-label">ตำแหน่ง</label>
             <input
               htmlFor="position"
               className="form-control"
@@ -191,7 +191,7 @@ const Info = () => {
           </div>
           <div className="col-md-4">
             <label className="form-label" htmlFor="email">
-              อีเมล:
+              อีเมล
             </label>
             <input
               type="email"
@@ -202,7 +202,7 @@ const Info = () => {
           </div>
           <div className="col-md-4">
             <label className="form-label" htmlFor="address">
-              ที่อยู่:
+              ที่อยู่
             </label>
             <input
               type="text"
@@ -213,7 +213,7 @@ const Info = () => {
           </div>
           <div className="col-md-2">
             <label className="form-label" htmlFor="address">
-              จังหวัด:
+              จังหวัด
             </label>
             <input
               type="text"
@@ -224,7 +224,7 @@ const Info = () => {
           </div>
           <div className="col-md-2">
             <label className="form-label" htmlFor="address">
-              อำเภอ/เขต:
+              อำเภอ/เขต
             </label>
             <input
               type="text"
@@ -235,7 +235,7 @@ const Info = () => {
           </div>
           <div className="col-md-2">
             <label className="form-label" htmlFor="address">
-              ตำบล/แขวง:
+              ตำบล/แขวง
             </label>
             <input
               type="text"
@@ -245,7 +245,7 @@ const Info = () => {
             />
           </div>
           <div className="col-md-2">
-            <label className="form-label">รหัสไปรษณีย์:</label>
+            <label className="form-label">รหัสไปรษณีย์</label>
             <input
               type="text"
               className="form-control"

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams, Link} from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import AdminNavbar from "../AdminNavbar/AdminNavbar";
 import Swal from "sweetalert2";
 
 const EditE = () => {
-
   useEffect(() => {
     const token = localStorage.getItem("Admin");
     fetch("https://project-test-1.herokuapp.com/authen", {
@@ -32,19 +31,19 @@ const EditE = () => {
       .catch((error) => {
         console.log("Error:", error);
       });
-      thailand()
+    thailand();
   }, []);
 
   const [data, setData] = useState([]);
   const [data2, setData2] = useState([]);
   const [data3, setData3] = useState([]);
-  
+
   async function thailand() {
     var requestOptions = {
       method: "GET",
       redirect: "follow",
     };
-  
+
     await fetch(
       "https://raw.githubusercontent.com/kongvut/thai-province-data/master/api_province_with_amphure_tambon.json",
       requestOptions
@@ -67,6 +66,15 @@ const EditE = () => {
   const [zipCode, setZipCode] = useState("");
   const [active, setActive] = useState("");
 
+  const [error, setError] = useState(null);
+  const handleChnage = (val) => {
+    if (val.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+      setError(false);
+    } else {
+      setError(true);
+    }
+  };
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -74,23 +82,25 @@ const EditE = () => {
   }, []);
 
   async function getUsers() {
-    await fetch(`https://project-test-1.herokuapp.com/users/${id}`).then((result) => {
-      result.json().then((resp) => {
-        // console.warn(resp)
-        // setData(resp);
-        setEmployeeName(resp[0].employeeName);
-        setPhoneNo(resp[0].phoneNo);
-        setJobPosition(resp[0].jobPosition);
-        setPosition(resp[0].position);
-        setEmail(resp[0].email);
-        setAddress(resp[0].address);
-        setDisdrict(resp[0].disdrict);
-        setAmphur(resp[0].amphur);
-        setProvince(resp[0].province);
-        setZipCode(resp[0].zipCode);
-        setActive(resp[0].active);
-      });
-    });
+    await fetch(`https://project-test-1.herokuapp.com/users/${id}`).then(
+      (result) => {
+        result.json().then((resp) => {
+          // console.warn(resp)
+          // setData(resp);
+          setEmployeeName(resp[0].employeeName);
+          setPhoneNo(resp[0].phoneNo);
+          setJobPosition(resp[0].jobPosition);
+          setPosition(resp[0].position);
+          setEmail(resp[0].email);
+          setAddress(resp[0].address);
+          setDisdrict(resp[0].disdrict);
+          setAmphur(resp[0].amphur);
+          setProvince(resp[0].province);
+          setZipCode(resp[0].zipCode);
+          setActive(resp[0].active);
+        });
+      }
+    );
   }
 
   const updateEmployee = (event) => {
@@ -125,10 +135,10 @@ const EditE = () => {
       employeeName === "" ||
       phoneNo === "" ||
       email === "" ||
-      address === ""||
-      disdrict === ""||
-      amphur === ""||
-      province === ""||
+      address === "" ||
+      disdrict === "" ||
+      amphur === "" ||
+      province === "" ||
       zipCode === ""
     ) {
       console.log("Enter all information");
@@ -137,19 +147,23 @@ const EditE = () => {
         title: "ไม่สามารถเพิ่มข้อมูลได้",
         text: "กรุณากรอกข้อมูลให้ครบ",
       });
-    } else if (
-      jobPosition !== "" ||
-      position !== "" ||
-      employeeName !== "" ||
-      phoneNo !== "" ||
-      email !== "" ||
-      address !== "" ||
-      disdrict !== ""||
-      amphur !== ""||
-      province !== ""||
-      zipCode !== ""
-    ) {
-      fetch(`https://project-test-1.herokuapp.com/update/users/${id}`, requestOptions).then(
+    } else if (phoneNo.length < 10) {
+      Swal.fire({
+        icon: "error",
+        title: "ไม่สามารถเพิ่มหนักงานได้",
+        text: "กรุณากรอกเบอร์โทรศัพท์ให้ครบ",
+      });
+    } else if (error === true) {
+      Swal.fire({
+        icon: "error",
+        title: "ไม่สามารถเพิ่มหนักงานได้",
+        text: "กรุณากรอกอีเมลให้ถูกต้อง",
+      });
+    } else {
+      fetch(
+        `https://project-test-1.herokuapp.com/update/users/${id}`,
+        requestOptions
+      ).then(
         Swal.fire({
           position: "center",
           icon: "success",
@@ -172,7 +186,7 @@ const EditE = () => {
           </div>
           <div className="col-md-6">
             <label className="form-label" htmlFor="employeeName">
-              ชื่อ - นามสกุล:
+              ชื่อ - นามสกุล
             </label>
             <input
               type="text"
@@ -185,11 +199,12 @@ const EditE = () => {
           </div>
           <div className="col-md-6">
             <label className="form-label" htmlFor="phoneNo">
-              เบอร์โทร:
+              เบอร์โทร
             </label>
             <input
               type="text"
               className="form-control"
+              maxLength={10}
               value={phoneNo}
               onChange={(event) => {
                 setPhoneNo(event.target.value);
@@ -197,7 +212,7 @@ const EditE = () => {
             />
           </div>
           <div className="col-md-6">
-            <label className="form-label">ตำแหน่งงาน:</label>
+            <label className="form-label">ตำแหน่งงาน</label>
             <select
               className="form-select"
               value={jobPosition}
@@ -206,7 +221,7 @@ const EditE = () => {
                 setJobPosition(event.target.value);
               }}
             >
-              <option hidden >กรุณาเลือก</option>
+              <option hidden>กรุณาเลือก</option>
               <option>HR</option>
               <option>Recruiter </option>
               <option>IT (Business Analyst)</option>
@@ -217,7 +232,7 @@ const EditE = () => {
             </select>
           </div>
           <div className="col-md-6">
-            <label className="form-label">ตำแหน่ง:</label>
+            <label className="form-label">ตำแหน่ง</label>
             <select
               className="form-select"
               htmlFor="position"
@@ -226,27 +241,28 @@ const EditE = () => {
                 setPosition(event.target.value);
               }}
             >
-              <option hidden >กรุณาเลือก</option>
+              <option hidden>กรุณาเลือก</option>
               <option>หัวหน้าพนักงาน</option>
               <option>พนักงาน</option>
             </select>
           </div>
           <div className="col-md-12">
             <label className="form-label" htmlFor="email">
-              อีเมล:
+              อีเมล
             </label>
             <input
               type="email"
               className="form-control"
               value={email}
-              onChange={(event) => {
-                setEmail(event.target.value);
+              onChange={(e) => {
+                handleChnage(e.target.value);
+                setEmail(e.target.value);
               }}
             />
           </div>
           <div className="col-md-2">
             <label className="form-label" htmlFor="address">
-              ที่อยู่:
+              ที่อยู่
             </label>
             <input
               type="text"
@@ -258,7 +274,7 @@ const EditE = () => {
             />
           </div>
           <div className="col-md-2">
-            <label className="form-label">จังหวัด:</label>
+            <label className="form-label">จังหวัด</label>
             <select
               className="form-select"
               value={province}
@@ -275,15 +291,15 @@ const EditE = () => {
                 setProvince(event.target.value);
               }}
             >
-              <option hidden >กรุณาเลือกจังหวัด</option>
+              <option hidden>กรุณาเลือกจังหวัด</option>
               {data.map((val) => {
                 // console.log(val.amphure[1].tambon[1].name_th);
-                return <option key={val.id} >{val.name_th}</option>;
+                return <option key={val.id}>{val.name_th}</option>;
               })}
             </select>
           </div>
           <div className="col-md-2">
-            <label className="form-label">อำเภอ/เขต:</label>
+            <label className="form-label">อำเภอ/เขต</label>
             <select
               className="form-select"
               value={amphur}
@@ -305,7 +321,7 @@ const EditE = () => {
             </select>
           </div>
           <div className="col-md-2">
-            <label className="form-label">ตำบล/แขวง:</label>
+            <label className="form-label">ตำบล/แขวง</label>
             <select
               className="form-select"
               value={disdrict}
@@ -327,7 +343,7 @@ const EditE = () => {
             </select>
           </div>
           <div className="col-md-2">
-            <label className="form-label">รหัสไปรษณีย์:</label>
+            <label className="form-label">รหัสไปรษณีย์</label>
             <input
               type="text"
               className="form-control"
@@ -352,7 +368,7 @@ const EditE = () => {
             </select>
           </div>
           <button onClick={updateEmployee} className="btn btn-success">
-          บันทึกข้อมูลพนักงาน
+            บันทึกข้อมูลพนักงาน
           </button>
           <Link to="/admin/employee" className="btn btn-primary">
             ย้อนกลับ

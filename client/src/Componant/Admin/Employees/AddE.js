@@ -5,7 +5,6 @@ import Swal from "sweetalert2";
 import AdminNavbar from "../AdminNavbar/AdminNavbar";
 
 export default function AddE() {
-
   useEffect(() => {
     const token = localStorage.getItem("Admin");
     fetch("https://project-test-1.herokuapp.com/authen", {
@@ -33,18 +32,18 @@ export default function AddE() {
       .catch((error) => {
         console.log("Error:", error);
       });
-      thailand()
+    thailand();
   }, []);
   const [data, setData] = useState([]);
   const [data2, setData2] = useState([]);
   const [data3, setData3] = useState([]);
-  
+
   async function thailand() {
     var requestOptions = {
       method: "GET",
       redirect: "follow",
     };
-  
+
     fetch(
       "https://raw.githubusercontent.com/kongvut/thai-province-data/master/api_province_with_amphure_tambon.json",
       requestOptions
@@ -71,65 +70,107 @@ export default function AddE() {
   const [amphur, setAmphur] = useState("");
   const [province, setProvince] = useState("");
   const [zipCode, setZipCode] = useState("");
-  // const [pic, setPic] = useState("");s
 
-  // const handleFile = (e) => {
-  //   setPic(e.target.files[0]);
-  // };
+  const [error, setError] = useState(null);
+  const handleChnage = (val) => {
+    if (val.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+      setError(false);
+    } else {
+      setError(true);
+    }
+  };
+
+  const jsonData = {
+    username: username,
+    password: password,
+    identityNo: identityNo,
+    employeeName: employeeName,
+    gender: gender,
+    birthday: birthday,
+    jobPosition: jobPosition,
+    position: position,
+    phoneNo: phoneNo,
+    email: email,
+    address: address,
+    province: province,
+    amphur: amphur,
+    disdrict: disdrict,
+    zipCode: zipCode,
+  };
 
   const addEmployee = (event) => {
     event.preventDefault();
-
-    // Swal.fire({
-    //   icon: "error",
-    //   title: "ไม่สามารถเพิ่มข้อมูลได้",
-    //   text: "กรุณากรอกข้อมูลให้ครบ",
-    // });
-
     try {
-      // const formdata = new FormData();
-      // formdata.append("image", pic);
-      const jsonData = {
-        username: username,
-        password: password,
-        identityNo: identityNo,
-        employeeName: employeeName,
-        gender: gender,
-        birthday: birthday,
-        jobPosition: jobPosition,
-        position: position,
-        phoneNo: phoneNo,
-        email: email,
-        address: address,
-        province: province,
-        amphur: amphur,
-        disdrict: disdrict,
-        zipCode: zipCode,
-        // certificateName: certificateName,
-        // certificatePic: certificatePic,
-      };
-      fetch("https://project-test-1.herokuapp.com/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(jsonData),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.status === "ok") {
-            Swal.fire({
-              position: "center",
-              icon: "success",
-              title: "เพิ่มข้อมูลสำเร็จ",
-              showConfirmButton: false,
-              timer: 2500,
-            }).then(navigate("/admin/employee"));
-          }
-        })
-        .catch((error) => {
-          console.log("Error:", error);
+      if (
+        username === "" ||
+        password === "" ||
+        identityNo === "" ||
+        employeeName === "" ||
+        gender === "" ||
+        birthday === "" ||
+        jobPosition === "" ||
+        position === "" ||
+        phoneNo === "" ||
+        email === "" ||
+        address === "" ||
+        province === "" ||
+        amphur === "" ||
+        disdrict === "" ||
+        zipCode === ""
+      ) {
+        Swal.fire({
+          icon: "error",
+          title: "ไม่สามารถเพิ่มหนักงานได้",
+          text: "กรุณากรอกข้อมูลให้ครบ",
         });
+      } else if (identityNo.length < 13 && phoneNo.length < 10) {
+        Swal.fire({
+          icon: "error",
+          title: "ไม่สามารถเพิ่มหนักงานได้",
+          text: "กรุณากรอกรหัสบัตรประชาชนและเบอร์โทรศัพท์ให้ครบ",
+        });
+      } else if (phoneNo.length < 10) {
+        Swal.fire({
+          icon: "error",
+          title: "ไม่สามารถเพิ่มหนักงานได้",
+          text: "กรุณากรอกเบอร์โทรศัพท์ให้ครบ",
+        });
+      } else if (identityNo.length < 13) {
+        Swal.fire({
+          icon: "error",
+          title: "ไม่สามารถเพิ่มหนักงานได้",
+          text: "กรุณากรอกรหัสบัตรประชาชนให้ครบ",
+        });
+      } else if (error === true) {
+        Swal.fire({
+          icon: "error",
+          title: "ไม่สามารถเพิ่มหนักงานได้",
+          text: "กรุณากรอกอีเมลให้ถูกต้อง",
+        });
+      } else {
+        fetch("https://project-test-1.herokuapp.com/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(jsonData),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.status === "ok") {
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "เพิ่มข้อมูลสำเร็จ",
+                showConfirmButton: false,
+                timer: 2500,
+              }).then(navigate("/admin/employee"));
+            }
+          })
+          .catch((error) => {
+            console.log("Error:", error);
+          });
+      }
     } catch (error) {
       console.log(error);
     }
@@ -140,13 +181,16 @@ export default function AddE() {
       <AdminNavbar />
       <br />
       <div className="form-container">
-        <form className="form-signin row g-3 shadow-lg p-3 mb-5 bg-white" encType="multipart/form-data">
+        <form
+          className="form-signin row g-3 shadow-lg p-3 mb-5 bg-white"
+          encType="multipart/form-data"
+        >
           <div>
             <h2>เพิ่มพนักงาน</h2>
           </div>
           <div className="col-md-6">
             <label className="form-label" htmlFor="username">
-              รหัสผู้ใช้งาน:
+              รหัสผู้ใช้งาน
             </label>
             <input
               type="text"
@@ -159,7 +203,7 @@ export default function AddE() {
           </div>
           <div className="col-md-6">
             <label className="form-label" htmlFor="password">
-              รหัสผ่าน:
+              รหัสผ่าน
             </label>
             <input
               type="password"
@@ -172,7 +216,7 @@ export default function AddE() {
           </div>
           <div className="col-md-12">
             <label className="form-label" htmlFor="identityNo">
-              รหัสบัตรประชาชน:
+              รหัสบัตรประชาชน
             </label>
             <input
               type="text"
@@ -185,7 +229,7 @@ export default function AddE() {
             />
           </div>
           <div className="col-md-6">
-            <label className="form-label">ตำแหน่งงาน:</label>
+            <label className="form-label">ตำแหน่งงาน</label>
             <select
               className="form-select"
               htmlFor="jobPosition"
@@ -205,7 +249,7 @@ export default function AddE() {
             </select>
           </div>
           <div className="col-md-6">
-            <label className="form-label">ตำแหน่ง:</label>
+            <label className="form-label">ตำแหน่ง</label>
             <select
               className="form-select"
               htmlFor="position"
@@ -221,7 +265,7 @@ export default function AddE() {
           </div>
           <div className="col-md-3">
             <label className="form-label" htmlFor="employeeName">
-              ชื่อ - นามสกุล:
+              ชื่อ - นามสกุล
             </label>
             <input
               type="text"
@@ -267,7 +311,7 @@ export default function AddE() {
           </div>
           <div className="col-md-3">
             <label className="form-label" htmlFor="phoneNo">
-              เบอร์โทร:
+              เบอร์โทร
             </label>
             <input
               type="text"
@@ -281,20 +325,21 @@ export default function AddE() {
           </div>
           <div className="col-md-12">
             <label className="form-label" htmlFor="email">
-              อีเมล:
+              อีเมล
             </label>
             <input
               type="email"
               className="form-control"
               required
-              onChange={(event) => {
-                setEmail(event.target.value);
+              onChange={(e) => {
+                handleChnage(e.target.value);
+                setEmail(e.target.value);
               }}
             />
           </div>
           <div className="col-md-4">
             <label className="form-label" htmlFor="address">
-              ที่อยู่:
+              ที่อยู่
             </label>
             <input
               type="text"
@@ -306,7 +351,7 @@ export default function AddE() {
             />
           </div>
           <div className="col-md-2">
-            <label className="form-label">จังหวัด:</label>
+            <label className="form-label">จังหวัด</label>
             <select
               className="form-select"
               htmlFor="province"
@@ -328,7 +373,7 @@ export default function AddE() {
             </select>
           </div>
           <div className="col-md-2">
-            <label className="form-label">อำเภอ/เขต:</label>
+            <label className="form-label">อำเภอ/เขต</label>
             <select
               className="form-select"
               htmlFor="amphur"
@@ -349,7 +394,7 @@ export default function AddE() {
             </select>
           </div>
           <div className="col-md-2">
-            <label className="form-label">ตำบล/แขวง:</label>
+            <label className="form-label">ตำบล/แขวง</label>
             <select
               className="form-select"
               htmlFor="districts"
@@ -370,7 +415,7 @@ export default function AddE() {
             </select>
           </div>
           <div className="col-md-2">
-            <label className="form-label">รหัสไปรษณีย์:</label>
+            <label className="form-label">รหัสไปรษณีย์</label>
             <input
               type="text"
               className="form-control"
@@ -379,18 +424,6 @@ export default function AddE() {
               required
             />
           </div>
-          {/* <div className="col-md-12">
-            <label className="form-label" htmlFor="pic">
-              อัพโหลดรูปภาพ:
-            </label>
-            <input
-              type="file"
-              className="form-control"
-              htmlFor="pic"
-              requires
-              onChange={handleFile}
-            />
-          </div> */}
           <button onClick={addEmployee} className="btn btn-success">
             เพิ่มข้อมูลพนักงาน
           </button>
