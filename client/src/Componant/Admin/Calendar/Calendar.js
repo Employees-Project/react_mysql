@@ -1,51 +1,61 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./Calendar.css";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import AdminNavbar from "../AdminNavbar/AdminNavbar";
+import Swal from "sweetalert2";
 
 export default function Calendar() {
-  const [data, setData] = useState([]);
-  const [subject, setSubject] = useState("");
-  const [s_time, setS_time] = useState("");
-  const [e_time, setE_time] = useState("");
-  var requestOptions = {
-    method: "GET",
-    redirect: "follow",
-  };
+  const navigate = useNavigate();
 
-  fetch("https://project-test-1.herokuapp.com/events", requestOptions)
-    .then((response) => response.json())
-    .then((result) => {
-      setData(result);
-      data.map((events) => {
-        setSubject(events.subject);
-        setS_time(events.s_time);
-        setE_time(events.e_time);
-      });
+  useEffect(() => {
+    const token = localStorage.getItem("Admin");
+    fetch("https://project-test-1.herokuapp.com/authen", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
     })
-    .catch((error) => console.log("error", error));
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === "ok") {
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "ไม่สามารถเข้าใช้งานได้",
+            text: "กรุณาลงชื่อก่อนเข้าใช้งาน",
+            showConfirmButton: false,
+            timer: 3500,
+          });
+          localStorage.removeItem("Admin");
+          navigate("/Login");
+        }
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+      });
+    getEvents();
+  }, []);
 
-  const events = [
-    {
-      title: subject,
-      start: getDate(s_time),
-      end: getDate(e_time),
-    },
-  ];
+  const [data, setData] = useState([]);
+  console.log("🚀 ~ file: Calendar.js:44 ~ Calendar ~ data:", data);
 
-  function getDate(dayString) {
-    const today = new Date();
-    const year = today.getFullYear().toString();
-    let month = (today.getMonth() + 1).toString();
+  async function getEvents() {
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
 
-    if (month.length === 1) {
-      month = "0" + month;
-    }
-
-    return dayString.replace("YEAR", year).replace("MONTH", month);
+    await fetch("https://project-test-1.herokuapp.com/events", requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        setData(result);
+      })
+      .catch((error) => console.log("error", error));
   }
+
   return (
     <>
       <AdminNavbar />
@@ -59,18 +69,85 @@ export default function Calendar() {
           </Link>
         </div>
         <div className="container calendar">
-        <form className="form shadow-lg p-3 mb-5 bg-white">
-          <FullCalendar
-            defaultView="dayGridMonth"
-            header={{
-              left: "prev,next",
-              center: "title",
-              right: "dayGridMonth,timeGridWeek,timeGridDay",
-            }}
-            themeSystem="Simplex"
-            plugins={[dayGridPlugin]}
-            events={events}
-          />
+          <form className="form shadow-lg p-3 mb-5 bg-white">
+            <FullCalendar
+              locale="th"
+              timeZone="th"
+              eventClick={function (info) {
+                var eventObj = info.event;
+                if (eventObj) {
+                  Swal.fire({
+                    className: "font-size",
+                    title: "หัวข้อ" + " " + eventObj.title,
+                    text: "รายละเอียดงาน" + " " + eventObj.groupId,
+                    footer: `เริ่มงาน ${eventObj.textColor} - เลิกงาน ${eventObj.backgroundColor}`,
+                    // icon: "info",
+                    showCancelButton: true,
+                    confirmButtonColor: "#fcb103",
+                    cancelButtonColor: "#3085d6",
+                    confirmButtonText: "แก้ไข",
+                    cancelButtonText: "ย้อนกลับ",
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      navigate("/admin/calendar/edit/" + eventObj.id);
+                    }
+                  });
+                }
+              }}
+              eventTimeFormat={{
+                hour: "numeric",
+                minute: "2-digit",
+                meridiem: false,
+              }}
+              buttonText={{ today: "วันนี้" }}
+              defaultView="dayGridMonth"
+              header={{
+                left: "prev,next",
+                center: "title",
+                right: "dayGridMonth,timeGridWeek,timeGridDay",
+              }}
+              themeSystem="Simplex"
+              plugins={[dayGridPlugin]}
+              events={data.map((val) => {
+                var date = new Date(val.s_time);
+
+                const S_time = date.toLocaleTimeString(
+                  "th-TH",
+                  { timeZone: "Atlantic/St_Helena" },
+                  {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  }
+                );
+
+                var date1 = new Date(val.e_time);
+
+                const E_time = date1.toLocaleTimeString(
+                  "th-TH",
+                  { timeZone: "Atlantic/St_Helena" },
+                  {
+                    hour: "numeric",
+                    minute: "2-digit",
+                  }
+                );
+                return {
+                  title: `${val.subject}`,
+                  start: `${val.s_time}`,
+                  end: `${val.e_time}`,
+                  textColor: S_time,
+                  backgroundColor: E_time,
+                  groupId: val.detail,
+                  id: val.calendarID,
+                  // canEdit = null เป็นวันทำงาน, canEdit = 0 เป็นวันหยุด, canEdit = 1 วันที่ลาล่วงหน้าได้
+                  borderColor:
+                    val.canEdit === 1
+                      ? "#fcb103"
+                      : val.canEdit === 0
+                      ? "red"
+                      : "green",
+                };
+              })}
+            />
           </form>
         </div>
       </div>

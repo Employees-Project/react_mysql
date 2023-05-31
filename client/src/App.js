@@ -27,6 +27,7 @@ import InfoAdmin from "./Componant/Admin/Employees/InfoAdmin";
 import EditAdmin from "./Componant/Admin/Employees/EditAdmin";
 import EditPassword from "./Componant/Admin/Employees/EditPassword";
 import InfoC from "./Componant/Admin/Noti/InfoC";
+import EditEvent from "./Componant/Admin/Calendar/EditEvent";
 
 function App() {
   const LoggedInAdmin = localStorage.getItem("Admin");
@@ -57,6 +58,7 @@ function App() {
             <Route path="employee/uploadpic/:id" element={<UploadPic />} />
             <Route path="calendar" element={<Calendar />} />
             <Route path="addevent" element={<AddEvent />} />
+            <Route path="calendar/edit/:id" element={<EditEvent />} />
             <Route path="team" element={<Team />} />
             <Route path="addteam" element={<AddT />} />
             <Route path="team/edit/:id" element={<EditT />} />

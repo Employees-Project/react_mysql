@@ -15,3 +15,22 @@
 .form { 
   border-radius: 1rem;
 }
+
+.swal2-popup {
+  font-size: 20px;
+  font-family: 'Pridi', serif;
+}
+
+.swal2-footer {
+  font-size: 30px;
+  font-family: 'Pridi', serif;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 80%;
+  padding: 2rem;
+  border-radius: 2rem;
+  /* margin: auto; */
+  background-color: #f3f3f3;
+}
