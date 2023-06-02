@@ -221,7 +221,7 @@ const AddT = () => {
               <option hidden>กรุณาเลือกหัวหน้าทีม</option>
               {data.map((val) => {
                 if (val.active === 1) {
-                return <option value={val.employeeid} key={val.employeeid}>{val.employeeName}</option>;
+                return <option value={val.employeeId} key={val.employeeId}>{val.employeeName}</option>;
               }
               })}
             </select>
@@ -240,7 +240,7 @@ const AddT = () => {
               <option hidden>กรุณาเลือกสมาชิกในทีม 1</option>
               {data.map((val) => {
                 if (val.active === 1) {
-                  return <option value={val.employeeid} key={val.employeeid}>{val.employeeName}</option>;
+                  return <option value={val.employeeId} key={val.employeeId}>{val.employeeName}</option>;
                 }
               })}
             </select>
@@ -258,7 +258,7 @@ const AddT = () => {
               <option hidden>กรุณาเลือกสมาชิกในทีม 2</option>
               {data.map((val) => {
                 if (val.active === 1) {
-                  return <option value={val.employeeid} key={val.employeeid}>{val.employeeName}</option>;
+                  return <option value={val.employeeId} key={val.employeeId}>{val.employeeName}</option>;
                 }
               })}
             </select>
@@ -276,7 +276,7 @@ const AddT = () => {
               <option hidden>กรุณาเลือกสมาชิกในทีม 3</option>
               {data.map((val) => {
                 if (val.active === 1) {
-                  return <option value={val.employeeid} key={val.employeeid}>{val.employeeName}</option>;
+                  return <option value={val.employeeId} key={val.employeeId}>{val.employeeName}</option>;
                 }
               })}
             </select>
@@ -295,7 +295,7 @@ const AddT = () => {
               <option hidden>กรุณาเลือกสมาชิกในทีม 4</option>
               {data.map((val) => {
                 if (val.active === 1) {
-                  return <option value={val.employeeid} key={val.employeeid}>{val.employeeName}</option>;
+                  return <option value={val.employeeId} key={val.employeeId}>{val.employeeName}</option>;
                 }
               })}
             </select>
@@ -312,7 +312,7 @@ const AddT = () => {
               <option hidden>กรุณาเลือกสมาชิกในทีม 5</option>
               {data.map((val) => {
                 if (val.active === 1) {
-                  return <option value={val.employeeid} key={val.employeeid}>{val.employeeName}</option>;
+                  return <option value={val.employeeId} key={val.employeeId}>{val.employeeName}</option>;
                 }
               })}
             </select>

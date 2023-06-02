@@ -28,6 +28,8 @@ import EditAdmin from "./Componant/Admin/Employees/EditAdmin";
 import EditPassword from "./Componant/Admin/Employees/EditPassword";
 import InfoC from "./Componant/Admin/Noti/InfoC";
 import EditEvent from "./Componant/Admin/Calendar/EditEvent";
+import CerInfo from "./Componant/Admin/Dashboard/CerInfo";
+import CerInfoT from "./Componant/Admin/Dashboard/CerInfoT";
 
 function App() {
   const LoggedInAdmin = localStorage.getItem("Admin");
@@ -48,6 +50,8 @@ function App() {
           <Route path="employee/uploadpic/:id" element={<HRUploadPic />} />
           <Route path="/admin">
             <Route index element={<Admin />} />
+            <Route path="cer/info/:id" element={<CerInfo />} />
+            <Route path="cer/info/team/:id" element={<CerInfoT />} />
             <Route path="employee" element={<Employees />} />
             <Route path="addemployee" element={<AddE />} />
             <Route path="employee/edit/:id" element={<EditE />} />
@@ -65,7 +69,7 @@ function App() {
             <Route path="leave" element={<Leave />} />
             <Route path="addleave" element={<AddL />} />
             <Route path="leave/edit/:id" element={<EditL />} />
-            edit/team/undefined
+            edit/team/undefined  
             <Route path="noti" element={<Noti />} />
             <Route path="noti/info/leave/:id" element={<ReadN />} />
             <Route path="noti/info/certificate/:id" element={<InfoC />} />

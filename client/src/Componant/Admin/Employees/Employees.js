@@ -108,11 +108,11 @@ const Employees = () => {
                   // });
                 if(val.isadmin !== 1) {
                   return (
-                    <tr key={val.employeeid}>
-                      {/* <th scope="row">{val.isadmin ? null : `${val.employeeid}`}</th> */}
-                      <th scope="row">{val.employeeid - 1}</th>
+                    <tr key={val.employeeId}>
+                      {/* <th scope="row">{val.isadmin ? null : `${val.employeeId}`}</th> */}
+                      <th scope="row">{val.employeeId - 1}</th>
                       <td>
-                        <Link to={"/admin/employee/uploadpic/" + val.employeeid}>
+                        <Link to={"/admin/employee/uploadpic/" + val.employeeId}>
                           {val.pic ? (
                             <img
                               src={`https://project-test-1.herokuapp.com/image/` + val.pic}
@@ -140,19 +140,19 @@ const Employees = () => {
                       <td>
                         <Link
                           className="btn btn-success me-2"
-                          to={"/admin/employee/info/" + val.employeeid}
+                          to={"/admin/employee/info/" + val.employeeId}
                         >
                           ดูข้อมูล
                         </Link>
                         <Link
                           className="btn btn-warning me-2"
-                          to={"/admin/employee/edit/" + val.employeeid}
+                          to={"/admin/employee/edit/" + val.employeeId}
                         >
                           แก้ไข
                         </Link>
                         <Link
                           className="btn btn-warning"
-                          to={"/admin/employee/edit/password/" + val.employeeid}
+                          to={"/admin/employee/edit/password/" + val.employeeId}
                         >
                           แก้ไขรหัสผ่าน
                         </Link>

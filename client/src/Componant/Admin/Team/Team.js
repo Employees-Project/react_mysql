@@ -116,8 +116,8 @@ const Team = () => {
                   </h4>
                   {data.map((leader) => {
                     return (
-                      <h4 className="card-text" key={leader.employeeid}>
-                        {val.leadername === leader.employeeid
+                      <h4 className="card-text" key={leader.employeeId}>
+                        {val.leadername === leader.employeeId
                           ? leader.employeeName
                           : null}
                       </h4>
@@ -129,8 +129,8 @@ const Team = () => {
                   </h4>
                   {data.map((member1) => {
                     return (
-                      <h4 className="card-text" key={member1.employeeid}>
-                        {val.member1 === member1.employeeid
+                      <h4 className="card-text" key={member1.employeeId}>
+                        {val.member1 === member1.employeeId
                           ? `1. ${member1.employeeName}`
                           : null}
                       </h4>
@@ -138,8 +138,8 @@ const Team = () => {
                   })}
                   {data.map((member2) => {
                     return (
-                      <h4 className="card-text" key={member2.employeeid}>
-                        {val.member2 === member2.employeeid
+                      <h4 className="card-text" key={member2.employeeId}>
+                        {val.member2 === member2.employeeId
                           ? `2. ${member2.employeeName}`
                           : null}
                       </h4>
@@ -147,8 +147,8 @@ const Team = () => {
                   })}
                   {data.map((member3) => {
                     return (
-                      <h4 className="card-text" key={member3.employeeid}>
-                        {val.member3 === member3.employeeid
+                      <h4 className="card-text" key={member3.employeeId}>
+                        {val.member3 === member3.employeeId
                           ? `3. ${member3.employeeName}`
                           : null}
                       </h4>
@@ -156,8 +156,8 @@ const Team = () => {
                   })}
                   {data.map((member4) => {
                     return (
-                      <h4 className="card-text" key={member4.employeeid}>
-                        {val.member4 === member4.employeeid
+                      <h4 className="card-text" key={member4.employeeId}>
+                        {val.member4 === member4.employeeId
                           ? `4. ${member4.employeeName}`
                           : null}
                       </h4>
@@ -165,8 +165,8 @@ const Team = () => {
                   })}
                   {data.map((member5) => {
                     return (
-                      <h4 className="card-text" key={member5.employeeid}>
-                        {val.member5 === member5.employeeid
+                      <h4 className="card-text" key={member5.employeeId}>
+                        {val.member5 === member5.employeeId
                           ? `5. ${member5.employeeName}`
                           : null}
                       </h4>
@@ -215,19 +215,19 @@ const Team = () => {
         <nav>
           <ul className="pagination justify-content-end">
             <li className="page-item">
-              <a href="#" className="page-link" onClick={prePage}>
+              <a className="page-link" onClick={prePage}>
                 &laquo;
               </a>
             </li>
             {numbers.map((n, i) => (
               <li className={`page-item ${page === n ? "active" : ""}`} key={i}>
-                <a href="#" className="page-link" onClick={() => setPage(n)}>
+                <a className="page-link" onClick={() => setPage(n)}>
                   {n}
                 </a>
               </li>
             ))}
             <li className="page-item">
-              <a href="#" className="page-link" onClick={nextPage}>
+              <a className="page-link" onClick={nextPage}>
                 &raquo;
               </a>
             </li>

@@ -48,10 +48,13 @@
     background-color: #c83232;
 }
 .card3{
-    background-color: #d0d0d0;
+    background-color: #fcad03;
 }
 .card4{
     background-color: #ffffff;
+}
+.card5{
+    background-color: #68cbf1;
 }
 
 .item-lish{
@@ -61,5 +64,14 @@
 
 .iconselect{
     position: absolute;
-    
+}
+
+.pie1 {
+	font-family: 'Pridi', serif;
+    font-size: 18px;
+    color: #000000;
+}
+
+.krob {
+    border:3px solid rgb(0, 0, 0);
 }

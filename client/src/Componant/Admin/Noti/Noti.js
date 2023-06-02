@@ -325,7 +325,7 @@ export default function Noti1() {
               <br /> */}
               {recordsAll.map((val) => {
                 if (val.employeeName !== null) {
-                  if (val.status === "Read" && val.certificateName === null) {
+                  if (val.status === "Read" && val.certificateName === null && val.leader_approve === 1) {
                     var rawDate = new Date(val.date);
 
                     const date = rawDate.toLocaleDateString("th-TH", {
@@ -364,7 +364,7 @@ export default function Noti1() {
                         </div>
                       </div>
                     );
-                  } else if (val.status === "Not Read" && val.certificateName === null) {
+                  } else if (val.status === "Not Read" && val.certificateName === null && val.leader_approve === 1) {
                     var rawDate = new Date(val.date);
 
                     const date = rawDate.toLocaleDateString("th-TH", {
@@ -557,7 +557,7 @@ export default function Noti1() {
                         </div>
                       </div>
                     );
-                  } else if (val.certificateName !== null && val.status === "Read") {
+                  } else if (val.certificateName !== null && val.status === "Read" && val.leader_approve === 1) {
                     var rawDate = new Date(val.date);
 
                     const date = rawDate.toLocaleDateString("th-TH", {
@@ -597,7 +597,7 @@ export default function Noti1() {
                         </div>
                       </div>
                     );
-                  } else if (val.certificateName !== null && val.status === "Not Read") {
+                  } else if (val.certificateName !== null && val.status === "Not Read" && val.leader_approve === 1) {
                     var rawDate = new Date(val.date);
 
                     const date = rawDate.toLocaleDateString("th-TH", {
@@ -739,7 +739,7 @@ export default function Noti1() {
             <TabPanel value={value} index={1}>
               {recordsLeave.map((leave) => {
                 if (leave.l_subject !== null) {
-                  if (leave.status === "Read") {
+                  if (leave.status === "Read" && leave.leader_approve === 1) {
                     var rawDate = new Date(leave.date);
 
                     const date = rawDate.toLocaleDateString("th-TH", {
@@ -777,7 +777,7 @@ export default function Noti1() {
                         </div>
                       </div>
                     );
-                  } else if (leave.status === "Not Read") {
+                  } else if (leave.status === "Not Read" && leave.leader_approve === 1) {
                     var rawDate = new Date(leave.date);
 
                     const date = rawDate.toLocaleDateString("th-TH", {
@@ -1014,10 +1014,10 @@ export default function Noti1() {
               </nav>
             </TabPanel>
             <TabPanel value={value} index={3}>
-            {recordsCertificate.map((val) => {
-                if (val.employeeName !== null) {
-                  if (val.certificateName !== null && val.status === "Read") {
-                    var rawDate = new Date(val.date);
+            {recordsCertificate.map((cer) => {
+                if (cer.employeeName !== null) {
+                  if (cer.certificateName !== null && cer.status === "Read" && cer.leader_approve === 1) {
+                    var rawDate = new Date(cer.date);
 
                     const date = rawDate.toLocaleDateString("th-TH", {
                       hour: "2-digit",
@@ -1032,10 +1032,10 @@ export default function Noti1() {
                           <div className="card leaveR">
                             <div className="row g-3">
                               <h3 className="card-header col-md-6">
-                                <b>หัวข้ออบรม:</b> {val.certificateName}
+                                <b>หัวข้ออบรม:</b> {cer.certificateName}
                               </h3>
                               <h5 className="card-header col-md-6 d-flex flex-row-reverse">
-                                ชื่อ: {val.employeeName} {date}
+                                ชื่อ: {cer.employeeName} {date}
                               </h5>
                             </div>
                             <div className="card-body">
@@ -1044,7 +1044,7 @@ export default function Noti1() {
                               <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                                 ตรวจสอบแล้ว
                                 <Link
-                                  to={"/admin/noti/info/certificate/" + val.historyId}
+                                  to={"/admin/noti/info/certificate/" + cer.historyId}
                                   className="btn btn-warning"
                                 >
                                   ดูข้อมูล
@@ -1056,8 +1056,8 @@ export default function Noti1() {
                         </div>
                       </div>
                     );
-                  } else if (val.certificateName !== null && val.status === "Not Read") {
-                    var rawDate = new Date(val.date);
+                  } else if (cer.certificateName !== null && cer.status === "Not Read" && cer.leader_approve === 1) {
+                    var rawDate = new Date(cer.date);
 
                     const date = rawDate.toLocaleDateString("th-TH", {
                       hour: "2-digit",
@@ -1071,10 +1071,10 @@ export default function Noti1() {
                           <div className="card leaveN">
                             <div className="row g-3">
                               <h3 className="card-header col-md-6">
-                                <b>หัวข้ออบรม:</b> {val.certificateName}
+                                <b>หัวข้ออบรม:</b> {cer.certificateName}
                               </h3>
                               <h5 className="card-header col-md-6 d-flex flex-row-reverse">
-                                ชื่อ: {val.employeeName} {date}
+                                ชื่อ: {cer.employeeName} {date}
                               </h5>
                             </div>
                             <div className="card-body">
@@ -1083,9 +1083,9 @@ export default function Noti1() {
                               <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                                 ยังไม่ได้ตรวจสอบ
                                 <Link
-                                  to={"/admin/noti/info/certificate/" + val.historyId}
+                                  to={"/admin/noti/info/certificate/" + cer.historyId}
                                   className="btn btn-warning"
-                                  onClick={() => readStatus(val.historyId)}
+                                  onClick={() => readStatus(cer.historyId)}
                                 >
                                   ดูข้อมูล
                                 </Link>
@@ -1096,8 +1096,8 @@ export default function Noti1() {
                         </div>
                       </div>
                     );
-                  } else if (val.certificateName !== null && val.status === "Approve") {
-                    var rawDate = new Date(val.date);
+                  } else if (cer.certificateName !== null && cer.status === "Approve") {
+                    var rawDate = new Date(cer.date);
 
                     const date = rawDate.toLocaleDateString("th-TH", {
                       hour: "2-digit",
@@ -1111,10 +1111,10 @@ export default function Noti1() {
                           <div className="card approve1">
                             <div className="row g-3">
                               <h3 className="card-header col-md-6">
-                                <b>หัวข้ออบรม:</b> {val.certificateName}
+                                <b>หัวข้ออบรม:</b> {cer.certificateName}
                               </h3>
                               <h5 className="card-header col-md-6 d-flex flex-row-reverse">
-                                ชื่อ: {val.employeeName} {date}
+                                ชื่อ: {cer.employeeName} {date}
                               </h5>
                             </div>
                             <div className="card-body">
@@ -1123,9 +1123,9 @@ export default function Noti1() {
                               <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                                 ยังไม่ได้ตรวจสอบ
                                 <Link
-                                  to={"/admin/noti/info/certificate/" + val.historyId}
+                                  to={"/admin/noti/info/certificate/" + cer.historyId}
                                   className="btn btn-warning"
-                                  onClick={() => readStatus(val.historyId)}
+                                  onClick={() => readStatus(cer.historyId)}
                                 >
                                   ดูข้อมูล
                                 </Link>
@@ -1136,8 +1136,8 @@ export default function Noti1() {
                         </div>
                       </div>
                     );
-                  } else if (val.certificateName !== null && val.status === "Not Approve") {
-                    var rawDate = new Date(val.date);
+                  } else if (cer.certificateName !== null && cer.status === "Not Approve") {
+                    var rawDate = new Date(cer.date);
 
                     const date = rawDate.toLocaleDateString("th-TH", {
                       hour: "2-digit",
@@ -1151,10 +1151,10 @@ export default function Noti1() {
                           <div className="card approve0">
                             <div className="row g-3">
                               <h3 className="card-header col-md-6">
-                                <b>หัวข้ออบรม:</b> {val.certificateName}
+                                <b>หัวข้ออบรม:</b> {cer.certificateName}
                               </h3>
                               <h5 className="card-header col-md-6 d-flex flex-row-reverse">
-                                ชื่อ: {val.employeeName} {date}
+                                ชื่อ: {cer.employeeName} {date}
                               </h5>
                             </div>
                             <div className="card-body">
@@ -1163,9 +1163,9 @@ export default function Noti1() {
                               <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                                 ยังไม่ได้ตรวจสอบ
                                 <Link
-                                  to={"/admin/noti/info/certificate/" + val.historyId}
+                                  to={"/admin/noti/info/certificate/" + cer.historyId}
                                   className="btn btn-warning"
-                                  onClick={() => readStatus(val.historyId)}
+                                  onClick={() => readStatus(cer.historyId)}
                                 >
                                   ดูข้อมูล
                                 </Link>

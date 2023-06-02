@@ -10,11 +10,8 @@ const EditT = () => {
   const [data2, setData2] = useState([]);
   const [teamname, setTeamname] = useState("");
   const [leadername, setLeadername] = useState(null);
-  console.log("🚀 ~ file: EditT.js:13 ~ EditT ~ leadername:", leadername)
   const [member1, setMember1] = useState(null);
-  console.log("🚀 ~ file: EditT.js:15 ~ EditT ~ member1:", member1)
   const [member2, setMember2] = useState(null);
-  console.log("🚀 ~ file: EditT.js:17 ~ EditT ~ member2:", member2)
   const [member3, setMember3] = useState(null);
   const [member4, setMember4] = useState(null);
   const [member5, setMember5] = useState(null);
@@ -273,7 +270,7 @@ const EditT = () => {
               <option hidden>กรุณาเลือกหัวหน้าทีม</option>
               {data.map((val) => {
                 if (val.active === 1) {
-                  return <option value={val.employeeid} key={val.employeeid}>{val.employeeName}</option>;
+                  return <option value={val.employeeId} key={val.employeeId}>{val.employeeName}</option>;
                 }
               })}
             </select>
@@ -293,7 +290,7 @@ const EditT = () => {
               <option hidden>กรุณาเลือกสมาชิกในทีม 1</option>
               {data.map((val) => {
                 if (val.active === 1) {
-                  return <option value={val.employeeid} key={val.employeeid}>{val.employeeName}</option>;
+                  return <option value={val.employeeId} key={val.employeeId}>{val.employeeName}</option>;
                 }
               })}
             </select>
@@ -316,7 +313,7 @@ const EditT = () => {
               <option hidden>กรุณาเลือกสมาชิกในทีม 2</option>
               {data.map((val) => {
                 if (val.active === 1) {
-                  return <option value={val.employeeid} key={val.employeeid}>{val.employeeName}</option>;
+                  return <option value={val.employeeId} key={val.employeeId}>{val.employeeName}</option>;
                 }
               })}
             </select>
@@ -335,7 +332,7 @@ const EditT = () => {
               <option hidden>กรุณาเลือกสมาชิกในทีม 3</option>
               {data.map((val) => {
                 if (val.active === 1) {
-                  return <option value={val.employeeid} key={val.employeeid}>{val.employeeName}</option>;
+                  return <option value={val.employeeId} key={val.employeeId}>{val.employeeName}</option>;
                 }
               })}
             </select>
@@ -357,7 +354,7 @@ const EditT = () => {
               </option>
               {data.map((val) => {
                 if (val.active === 1) {
-                  return <option value={val.employeeid} key={val.employeeid}>{val.employeeName}</option>;
+                  return <option value={val.employeeId} key={val.employeeId}>{val.employeeName}</option>;
                 }
               })}
             </select>
@@ -377,7 +374,7 @@ const EditT = () => {
               </option>
               {data.map((val) => {
                 if (val.active === 1) {
-                  return <option value={val.employeeid} key={val.employeeid}>{val.employeeName}</option>;
+                  return <option value={val.employeeId} key={val.employeeId}>{val.employeeName}</option>;
                 }
               })}
             </select>

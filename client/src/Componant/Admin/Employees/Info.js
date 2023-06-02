@@ -255,23 +255,12 @@ const Info = () => {
             />
             <br />
           </div>
-          <hr />
-          <br />
-          <div>
-            ข้อมูลใบประกาศนียบัตร
-            <br />
-          </div>
-          <div className="card w">
-            <img
-              className="card-img-top"
-              src={`https://project-test-1.herokuapp.com/image/${pic}`}
-              width="400"
-              height="170"
-            />
-            <div className="card-body">
-              <p className="card-text f-size">ข้อแตกต่างระหว่างใบประกาศนียบัตร อนุปริญญา และปริญญา เลือกเรียนแบบไหนให้เหมาะเอาใบไปใช้จริง</p>
-            </div>
-          </div>
+          <Link
+            to={`/admin/cer/info/${id}`}
+            className="btn btn-success"
+          >
+            ข้อมูลการผ่านการอบรม
+          </Link>
           <Link to="/admin/employee" className="btn btn-primary">
             ย้อนกลับ
           </Link>
