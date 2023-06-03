@@ -214,7 +214,6 @@ const AddT = () => {
               htmlFor="leadername"
               required
               onChange={(event) => {
-                
                 setLeadername(event.target.value);
               }}
             >

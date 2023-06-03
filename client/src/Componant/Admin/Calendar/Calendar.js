@@ -90,8 +90,8 @@ export default function Calendar() {
                   Swal.fire({
                     className: "font-size",
                     title: "หัวข้อ" + " " + eventObj.title,
-                    text: "รายละเอียดงาน" + " " + eventObj.groupId,
-                    footer: `เริ่มงาน ${eventObj.textColor} - เลิกงาน ${eventObj.backgroundColor}`,
+                    text: "รายละเอียด" + " " + eventObj.groupId,
+                    footer: `เวลา ${eventObj.textColor} - เวลา ${eventObj.backgroundColor}`,
                     // icon: "info",
                     showCancelButton: true,
                     confirmButtonColor: "#fcb103",
@@ -170,13 +170,13 @@ export default function Calendar() {
                   backgroundColor: E_time,
                   groupId: val.detail,
                   id: val.calendarID,
-                  // canEdit = null เป็นวันทำงาน, canEdit = 0 เป็นวันหยุด, canEdit = 1 วันที่ลาล่วงหน้าได้
+                  // canEdit = 0 เป็นวันทำงาน, canEdit = 1 เป็นวันหยุด, canEdit = 2 วันที่ลาล่วงหน้าได้
                   borderColor:
-                    val.canEdit === 1
+                    val.canEdit === 0
                       ? "#fcb103"
-                      : val.canEdit === 0
+                      : val.canEdit === 1
                       ? "red"
-                      : "green",
+                      : val.canEdit === 2 ? "green" : null
                 };
               })}
             />

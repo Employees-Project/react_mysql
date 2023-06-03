@@ -9,40 +9,62 @@ const EditEvent = () => {
 
   const { id } = useParams();
   const [subject, setSubject] = useState("");
-  const [date, setDate] = useState("");
+  const [team, setTeam] = useState(0);
+  const [teamList, setTeamList] = useState([]);
   const [s_time, setS_time] = useState("");
   const [e_time, setE_time] = useState("");
   const [detail, setDetail] = useState("");
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
 
-  const getDateS_time = (val) => {
-    if (date) {
-      setS_time(date + " " + val);
-    }
-  };
-  const getDateE_time = (val) => {
-    if (date) {
-      setE_time(date + " " + val);
-    }
-  };
+  const S_TIME = s_time.toString().slice(0, -8)
+  const E_TIME = e_time.toString().slice(0, -8)
+  
 
   const updateEvent = (event) => {
     event.preventDefault();
 
-    fetch(
-      `https://project-test-1.herokuapp.com/update/event/${id}`,
-      requestOptions
-    ).then(
+    if (
+      subject === "" ||
+      s_time === "" ||
+      e_time === "" ||
+      detail === "" ||
+      latitude === "" ||
+      longitude === ""
+    ) {
+      console.log("Enter all information");
       Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "เพิ่มข้อมูลสำเร็จ",
-        showConfirmButton: false,
-        timer: 2500,
-      })
-    );
-    navigate("/admin/calendar");
+        icon: "error",
+        title: "ไม่สามารถเพิ่ม Event ได้",
+        text: "กรุณากรอกข้อมูลให้ครบ",
+      });
+    } else if (s_time > e_time) {
+      Swal.fire({
+        icon: "error",
+        title: "ไม่สามารถเพิ่ม Event ได้",
+        text: "วัน/เวลาเริ่มงานและเลิกงานไม่ถูกต้อง",
+      });
+    } else if (s_time === e_time) {
+      Swal.fire({
+        icon: "error",
+        title: "ไม่สามารถเพิ่ม Event ได้",
+        text: "วัน/เวลาเริ่มงานและเลิกงานไม่ถูกต้อง",
+      });
+    } else {
+      fetch(
+        `https://project-test-1.herokuapp.com/update/event/${id}`,
+        requestOptions
+      ).then(
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "เพิ่มข้อมูลสำเร็จ",
+          showConfirmButton: false,
+          timer: 2500,
+        })
+      );
+      navigate("/admin/calendar");
+    }
   };
 
   useEffect(() => {
@@ -73,14 +95,27 @@ const EditEvent = () => {
         console.log("Error:", error);
       });
     getEvent();
+    getTeam()
   }, []);
+
+  async function getTeam() {
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
+
+    await fetch("https://project-test-1.herokuapp.com/teams", requestOptions)
+      .then((response) => response.json())
+      .then((result) => setTeamList(result))
+      .catch((error) => console.log("error", error));
+  }
 
   function getEvent() {
     fetch(`https://project-test-1.herokuapp.com/event/${id}`).then((result) => {
       result.json().then((resp) => {
         // console.warn(resp)
         setSubject(resp[0].subject);
-        setDate(resp[0].date);
+        setTeam(resp[0].teamID);
         setS_time(resp[0].s_time);
         setE_time(resp[0].e_time);
         setDetail(resp[0].detail);
@@ -95,7 +130,7 @@ const EditEvent = () => {
 
   var raw = JSON.stringify({
     subject: subject,
-    date: date,
+    teamID: team,
     s_time: s_time,
     e_time: e_time,
     detail: detail,
@@ -133,23 +168,21 @@ const EditEvent = () => {
             />
           </div>
           <div className="col-md-6">
-            <label htmlfor="" class="form-label">
-              วันที่
-            </label>
-            <input
-              className="form-control"
-              id="date"
-              type="date"
-              name="date"
-              defaultValue={date}
-              sx={{ width: 220 }}
-              InputLabelProps={{
-                shrink: true,
-              }}
+            <label className="form-label">ทีมในการทำงาน</label>
+            <select
+              className="form-select"
+              htmlFor="team"
+              value={team}
+              required
               onChange={(event) => {
-                setDate(event.target.value);
+                setTeam(event.target.value);
               }}
-            />
+            >
+              <option hidden>กรุณาเลือกทีมในการทำงาน</option>
+              {teamList.map((val) => {
+                return <option value={val.teamID} key={val.teamID}>{val.teamname}</option>;
+              })}
+            </select>
           </div>
           <div class="col-md-6">
             <label htmlfor="" className="form-label">
@@ -159,9 +192,9 @@ const EditEvent = () => {
               className="form-control"
               id="time"
               label=""
-              type="time"
+              type="datetime-local"
               name="s_time"
-              defaultValue="00:00"
+              defaultValue={S_TIME}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -170,7 +203,7 @@ const EditEvent = () => {
               }}
               sx={{ width: 476 }}
               onChange={(e) => {
-                getDateS_time(e.target.value);
+                setS_time(e.target.value);
               }}
             />
           </div>
@@ -181,9 +214,9 @@ const EditEvent = () => {
             <input
               className="form-control"
               id="time"
-              type="time"
+              type="datetime-local"
               name="e_time"
-              defaultValue="00:00"
+              defaultValue={E_TIME}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -192,7 +225,7 @@ const EditEvent = () => {
               }}
               sx={{ width: 476 }}
               onChange={(e) => {
-                getDateE_time(e.target.value);
+                setE_time(e.target.value);
               }}
             />
           </div>

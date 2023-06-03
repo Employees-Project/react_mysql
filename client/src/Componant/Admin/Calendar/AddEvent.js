@@ -34,34 +34,37 @@ const AddEvent = () => {
       .catch((error) => {
         console.log("Error:", error);
       });
+      getTeam()
   }, []);
+  
 
   const [subject, setSubject] = useState("");
   // const [location, setLocation] = useState("");
-  const [date, setDate] = useState("");
+  const [team, setTeam] = useState(0);
+  const [teamList, setTeamList] = useState([]);
+  const [canEdit, setCanEdit] = useState(null);
   const [s_time, setS_time] = useState("");
   const [e_time, setE_time] = useState("");
   const [detail, setDetail] = useState("");
-  const [latitude, setLatitude] = useState("");
-  const [longitude, setLongitude] = useState("");
+  const [latitude, setLatitude] = useState(13.9647757032);
+  const [longitude, setLongitude] = useState(100.59594388181007);
 
-  const getDateS_time = (val) => {
-    if (date) {
-      setS_time(date + " " + val)
-    }
-  }
-  const getDateE_time = (val) => {
-    if (date) {
-      setE_time(date + " " + val)
-    }
+  async function getTeam() {
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
+
+    await fetch("https://project-test-1.herokuapp.com/teams", requestOptions)
+      .then((response) => response.json())
+      .then((result) => setTeamList(result))
+      .catch((error) => console.log("error", error));
   }
 
   const addEvent = (event) => {
     event.preventDefault();
     if (
       subject === "" ||
-      //   location === "" ||
-      date === "" ||
       s_time === "" ||
       e_time === "" ||
       detail === "" ||
@@ -73,6 +76,18 @@ const AddEvent = () => {
         icon: "error",
         title: "ไม่สามารถเพิ่ม Event ได้",
         text: "กรุณากรอกข้อมูลให้ครบ",
+      });
+    } else if (s_time > e_time) {
+      Swal.fire({
+        icon: "error",
+        title: "ไม่สามารถเพิ่ม Event ได้",
+        text: "วัน/เวลาเริ่มงานและเลิกงานไม่ถูกต้อง",
+      });
+    } else if (s_time === e_time) {
+      Swal.fire({
+        icon: "error",
+        title: "ไม่สามารถเพิ่ม Event ได้",
+        text: "วัน/เวลาเริ่มงานและเลิกงานไม่ถูกต้อง",
       });
     } else {
       Swal.fire({
@@ -88,12 +103,13 @@ const AddEvent = () => {
 
       var raw = JSON.stringify({
         subject: subject,
-        date: date,
+        teamID: team,
         s_time: s_time,
         e_time: e_time,
         detail: detail,
         latitude: latitude,
         longitude: longitude,
+        canEdit: canEdit
       });
 
       var requestOptions = {
@@ -130,7 +146,23 @@ const AddEvent = () => {
           <div>
             <h2>Add Event</h2>
           </div>
-          <div className="col-md-6">
+          <div className="col-md-3">
+            <label className="form-label">หัวข้อวัน</label>
+            <select
+              className="form-select"
+              htmlFor="jobPosition"
+              required
+              onChange={(event) => {
+                setCanEdit(event.target.value);
+              }}
+            >
+              <option hidden>กรุณาเลือก</option>
+              <option value={0}>วันทำงาน</option>
+              <option value={1}>วันหยุด</option>
+              <option value={2}>วันที่ลาล่วงหน้าได้</option>
+            </select>
+          </div>
+          {canEdit === "0" ? <div className="col-md-3">
             <label htmlfor="" className="form-label">
               หัวข้อ
             </label>
@@ -141,7 +173,19 @@ const AddEvent = () => {
                 setSubject(event.target.value);
               }}
             />
-          </div>
+          </div> : <div className="col-md-9">
+            <label htmlfor="" className="form-label">
+              หัวข้อ
+            </label>
+            <input
+              className="form-control"
+              name="subject"
+              onChange={(event) => {
+                setSubject(event.target.value);
+              }}
+            />
+          </div>}
+          
           {/* <div className="col-md-6">
             <label htmlfor="" className="form-label">
               สถานที่ทำงาน
@@ -154,26 +198,45 @@ const AddEvent = () => {
               }}
             />
           </div> */}
-          <div className="col-md-6">
-            <label htmlfor="" class="form-label">
-              วันที่
+          {canEdit === "0" ? <div className="col-md-6">
+            <label className="form-label">ทีมในการทำงาน</label>
+            <select
+              className="form-select"
+              htmlFor="team"
+              required
+              onChange={(event) => {
+                setTeam(event.target.value);
+              }}
+            >
+              <option hidden>กรุณาเลือกทีมในการทำงาน</option>
+              {teamList.map((val) => {
+                return <option value={val.teamID} key={val.teamID}>{val.teamname}</option>;
+              })}
+            </select>
+          </div> : null}
+          {canEdit === "1" ||  canEdit === "2" ? <div class="col-md-6">
+            <label htmlfor="" className="form-label">
+              วัน/เวลา
             </label>
             <input
               className="form-control"
-              id="date"
-              type="date"
-              name="date"
-              defaultValue="today"
-              sx={{ width: 220 }}
+              id="time"
+              label=""
+              type="datetime-local"
+              name="s_time"
+              defaultValue=""
               InputLabelProps={{
                 shrink: true,
               }}
-              onChange={(event) => {
-                setDate(event.target.value);
+              inputProps={{
+                step: 300, // 5 min
+              }}
+              sx={{ width: 476 }}
+              onChange={(e) => {
+                setS_time(e.target.value)
               }}
             />
-          </div>
-          <div class="col-md-6">
+          </div> : <div class="col-md-6">
             <label htmlfor="" className="form-label">
               เวลาเริ่มงาน
             </label>
@@ -181,9 +244,9 @@ const AddEvent = () => {
               className="form-control"
               id="time"
               label=""
-              type="time"
+              type="datetime-local"
               name="s_time"
-              defaultValue="00:00"
+              defaultValue=""
               InputLabelProps={{
                 shrink: true,
               }}
@@ -192,37 +255,41 @@ const AddEvent = () => {
               }}
               sx={{ width: 476 }}
               onChange={(e) => {
-                getDateS_time(e.target.value)
+                setS_time(e.target.value)
               }}
             />
-            {/* <TextField
-                    className="form-control"
-                    id="time"
-                    label=""
-                    type="time"
-                    defaultValue="00:00"
-                    InputLabelProps={{
-                    shrink: true,
-                    }}
-                    inputProps={{
-                    step: 300, // 5 min
-                    }}
-                    sx={{ width: 476 }}
-                /> */}
-            {/* <label htmlfor="" className="form-label">เวลาเริ่มงาน</label>
-                <input className="form-control" name="s_time" /> */}
-          </div>
-          <div className="col-md-6">
+          </div>}
+          { canEdit === "1" ||  canEdit === "2" ? <div className="col-md-6">
+            <label htmlfor="" className="form-label">
+              ถึงวัน/เวลา
+            </label>
+            <input
+              className="form-control"
+              id="time"
+              type="datetime-local"
+              name="e_time"
+              defaultValue=""
+              InputLabelProps={{
+                shrink: true,
+              }}
+              inputProps={{
+                step: 300, // 5 min
+              }}
+              sx={{ width: 476 }}
+              onChange={(e) => {
+                setE_time(e.target.value)
+              }}
+            />
+          </div> : <div className="col-md-6">
             <label htmlfor="" className="form-label">
               เวลาเลิกงาน
             </label>
             <input
               className="form-control"
               id="time"
-              label=""
-              type="time"
+              type="datetime-local"
               name="e_time"
-              defaultValue="00:00"
+              defaultValue=""
               InputLabelProps={{
                 shrink: true,
               }}
@@ -231,11 +298,22 @@ const AddEvent = () => {
               }}
               sx={{ width: 476 }}
               onChange={(e) => {
-                getDateE_time(e.target.value)
+                setE_time(e.target.value)
               }}
             />
-          </div>
-          <div className="col-md-12">
+          </div>}
+          { canEdit === "1" ||  canEdit === "2" ? <div className="col-md-12">
+            <label htmlfor="" className="form-label">
+              รายละเอียด
+            </label>
+            <input
+              className="form-control"
+              name="detail"
+              onChange={(event) => {
+                setDetail(event.target.value);
+              }}
+            />
+          </div> : <div className="col-md-12">
             <label htmlfor="" className="form-label">
               รายละเอียดงาน
             </label>
@@ -246,8 +324,9 @@ const AddEvent = () => {
                 setDetail(event.target.value);
               }}
             />
-          </div>
-          <div className="col-md-6">
+          </div>}
+          
+          {canEdit === "0" ? <div className="col-md-6">
             <label htmlfor="" className="form-label">
               ละจิจูด
             </label>
@@ -259,8 +338,8 @@ const AddEvent = () => {
                 setLatitude(event.target.value);
               }}
             />
-          </div>
-          <div className="col-md-6">
+          </div> : null}
+          {canEdit === "0" ? <div className="col-md-6">
             <label htmlfor="" className="form-label">
               ลองจิจูด
             </label>
@@ -272,7 +351,8 @@ const AddEvent = () => {
                 setLongitude(event.target.value);
               }}
             />
-          </div>
+          </div> : null}
+          
           <button className="btn btn-success btn-block" onClick={addEvent}>
             เพิ่มข้อมูล
           </button>
