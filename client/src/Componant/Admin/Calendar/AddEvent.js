@@ -254,6 +254,7 @@ const AddEvent = () => {
             <input
               className="form-control"
               name="latitude"
+              defaultValue={13.9647757032}
               onChange={(event) => {
                 setLatitude(event.target.value);
               }}
@@ -266,6 +267,7 @@ const AddEvent = () => {
             <input
               className="form-control"
               name="longitude"
+              defaultValue={100.59594388181007}
               onChange={(event) => {
                 setLongitude(event.target.value);
               }}

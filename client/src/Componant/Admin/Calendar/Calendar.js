@@ -36,11 +36,11 @@ export default function Calendar() {
       .catch((error) => {
         console.log("Error:", error);
       });
+    deleteEvent();
     getEvents();
   }, []);
 
   const [data, setData] = useState([]);
-  console.log("🚀 ~ file: Calendar.js:44 ~ Calendar ~ data:", data);
 
   async function getEvents() {
     var requestOptions = {
@@ -54,6 +54,17 @@ export default function Calendar() {
         setData(result);
       })
       .catch((error) => console.log("error", error));
+  }
+
+  async function deleteEvent(id) {
+    var requestOptions = {
+      method: "DELETE",
+    };
+    await fetch(
+      `https://project-test-1.herokuapp.com/event/delete/${id}`,
+      requestOptions
+    )
+    await getEvents()
   }
 
   return (
@@ -84,12 +95,33 @@ export default function Calendar() {
                     // icon: "info",
                     showCancelButton: true,
                     confirmButtonColor: "#fcb103",
-                    cancelButtonColor: "#3085d6",
+                    cancelButtonColor: "#f53d3d",
                     confirmButtonText: "แก้ไข",
-                    cancelButtonText: "ย้อนกลับ",
+                    cancelButtonText: "ลบข้อมูล",
                   }).then((result) => {
                     if (result.isConfirmed) {
                       navigate("/admin/calendar/edit/" + eventObj.id);
+                    } else {
+                      Swal.fire({
+                        title: "คุณต้องการลบข้อมูลใช่หรือไม่?",
+                        // text: "You won't be able to revert this!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "ใช่! ฉันต้องการลบ",
+                        cancelButtonText: "ยกเลิก",
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                          deleteEvent(eventObj.id);
+                          Swal.fire(
+                            "ลบสำเร็จ!",
+                            "คุณได้ลบทีมสำเร็จ",
+                            "success"
+                          );
+                        }
+                      })
+                      
                     }
                   });
                 }
