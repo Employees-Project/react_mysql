@@ -30,6 +30,7 @@ import InfoC from "./Componant/Admin/Noti/InfoC";
 import EditEvent from "./Componant/Admin/Calendar/EditEvent";
 import CerInfo from "./Componant/Admin/Dashboard/CerInfo";
 import CerInfoT from "./Componant/Admin/Dashboard/CerInfoT";
+import CSV from "./Componant/CSV";
 
 function App() {
   const LoggedInAdmin = localStorage.getItem("Admin");
@@ -51,6 +52,7 @@ function App() {
           <Route path="/admin">
             <Route index element={<Admin />} />
             <Route path="cer/info/:id" element={<CerInfo />} />
+            <Route path="csv" element={<CSV />} />
             <Route path="cer/info/team/:id" element={<CerInfoT />} />
             <Route path="employee" element={<Employees />} />
             <Route path="addemployee" element={<AddE />} />

@@ -36,6 +36,7 @@ const EditE = () => {
 
   const [data, setData] = useState([]);
   const [data2, setData2] = useState([]);
+  console.log("🚀 ~ file: EditE.js:40 ~ EditE ~ data2:", data2)
   const [data3, setData3] = useState([]);
 
   async function thailand() {

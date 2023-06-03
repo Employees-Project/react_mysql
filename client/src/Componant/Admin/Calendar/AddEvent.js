@@ -185,19 +185,6 @@ const AddEvent = () => {
               }}
             />
           </div>}
-          
-          {/* <div className="col-md-6">
-            <label htmlfor="" className="form-label">
-              สถานที่ทำงาน
-            </label>
-            <input
-              className="form-control"
-              name="location"
-              onChange={(event) => {
-                setLocation(event.target.value);
-              }}
-            />
-          </div> */}
           {canEdit === "0" ? <div className="col-md-6">
             <label className="form-label">ทีมในการทำงาน</label>
             <select
